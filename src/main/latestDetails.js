@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import { toggleEditDetailsAct } from '../actions/uiActions';
 import { watchLaterAct, recommAct, commentAct, delCommentAct } from '../actions/detailsActions';
 
+import closedCap from '../images/details/baseline_closed_caption_white_24dp.png';
+import imdb from '../images/details/imdb.svg';
+import douban from '../images/details/douban.png';
+import mtime from '../images/details/mtime.png';
+
 class LatestDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -97,7 +102,9 @@ class LatestDetails extends React.Component {
                 <div className="watch-later" title="Watch later" onClick={e => this.props.watchLaterDispatch(item.id)}></div>
                 <div className="recomm" title="Recommend to friends" onClick={e => this.toggleRecomm()}></div>
                 {/* <div className="edit" title="Edit details" onClick={e => this.props.editDetailsDispatch(true, false)}></div> */}
-                <a target="_blank" title="Search for subtitles on Subscene" href={'https://subscene.com/subtitles/title?q=' + item.eng_title.replace(' ', '+')}></a>
+                <a target="_blank" title="Search for subtitles on Subscene" href={'https://subscene.com/subtitles/title?q=' + item.eng_title.replace(' ', '+')}>
+                  <img src={closedCap} className="closed-cap" alt="CC" onClick={e => this.toggleRecomm()} />
+                </a>
                 {recomm && <ul>{this.friends(item.id)}</ul>}
               </div>
             </div>
@@ -105,15 +112,18 @@ class LatestDetails extends React.Component {
             <div className="plot">
               <div className="plot-txt">{item.plot || 'Plot unavailable.'}</div>
               <div className="sites">
-                <a className="imdb" target="_blank" title="Search on IMDB" href={item.imdb_id ?
-                  'http://www.imdb.com/title/' + item.imdb_id :
-                  'https://www.imdb.com/find?ref_=nv_sr_fn&q=' + item.eng_title.replace(' ', '+')}></a>
-                <a className="douban" target="_blank" title="Search on Douban" href={item.douban ?
-                  'https://movie.douban.com/subject/' + item.douban :
-                  'https://movie.douban.com/subject_search?search_text=' + item.eng_title.replace(' ', '+')}></a>
-                <a className="mtime" target="_blank" title="Search on Mtime" href={item.mtime ?
-                  'http://movie.mtime.com/' + item.mtime :
-                  'http://search.mtime.com/search/?q=' + item.eng_title}></a>
+                <a target="_blank" title="Search on IMDB" href={item.imdb_id ?
+                  'http://www.imdb.com/title/' + item.imdb_id : 'https://www.imdb.com/find?ref_=nv_sr_fn&q=' + item.eng_title.replace(' ', '+')}>
+                  <img src={imdb} className="imdb" alt="IMDB Link" />
+                </a>
+                <a target="_blank" title="Search on Douban" href={item.douban ?
+                  'https://movie.douban.com/subject/' + item.douban : 'https://movie.douban.com/subject_search?search_text=' + item.eng_title.replace(' ', '+')}>
+                  <img src={douban} className="douban" alt="Douban Link" />
+                </a>
+                <a target="_blank" title="Search on Mtime" href={item.mtime ?
+                  'http://movie.mtime.com/' + item.mtime : 'http://search.mtime.com/search/?q=' + item.eng_title}>
+                  <img src={mtime} className="mtime" alt="Mtime Link" />
+                </a>
               </div>
             </div>
           </div>

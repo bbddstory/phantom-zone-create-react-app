@@ -5,6 +5,8 @@ import { setKeyAct } from '../actions/dataActions';
 import { loadDetailsAct } from '../actions/detailsActions';
 import Pages from '../components/pages';
 
+import posterPrefix from '../images/posters/Movies.png';
+
 class CardList extends React.Component {
   constructor(props) {
     super(props);
@@ -27,7 +29,8 @@ class CardList extends React.Component {
             <Link to={'/main/details'} onClick={e => this.loadDetails(key, 'main')}>
               {buffer[key].poster && buffer[key].poster !== 'N/A' ?
                 <img alt="Poster" src={buffer[key].poster} /> :
-                <img alt="Poster" src={"ui/images/posters/" + buffer[key].category + ".png"} />
+                <img alt="Poster" src={posterPrefix} />
+                // <img alt="Poster" src={"ui/images/posters/" + buffer[key].category + ".png"} />
               }
             </Link>
             <h2 className="title">{buffer[key].eng_title}</h2>

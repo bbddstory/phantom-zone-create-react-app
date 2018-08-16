@@ -7,8 +7,8 @@
     .logo {
         width: 200px;
         height: 100px;
-        background: url("../images/login/brand.png") no-repeat;
-        background-size: contain;
+        // background: url("../images/login/brand.png") no-repeat;
+        // background-size: contain;
     }
     .nav-opts {
         display: flex;
@@ -16,10 +16,16 @@
         width: calc(100% - 200px);
         padding-right: 5px;
         a {
+            position: relative;
             width: 30px;
             height: 42px;
             margin-left: 10px;
             cursor: pointer;
+            img {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+            }
         }
         span {
             width: 30px;
@@ -29,12 +35,12 @@
         .opt-home {
             background: url("../images/header/ic_home_white_24px.svg") 50% no-repeat;
         }
-        .opt-quick {
-            background: url("../images/header/ic_cast_white_24px.svg") 50% no-repeat;
-        }
-        .opt-add {
-            background: url("../images/header/ic_add_box_white_24px.svg") 50% no-repeat;
-        }
+        // .opt-quick {
+        //     background: url("../images/header/ic_cast_white_24px.svg") 50% no-repeat;
+        // }
+        // .opt-add {
+        //     background: url("../images/header/ic_add_box_white_24px.svg") 50% no-repeat;
+        // }
         .opt-notice {
             background: url("../images/header/ic_notifications_none_white_24px.svg") 50% no-repeat;
         }

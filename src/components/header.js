@@ -1,5 +1,11 @@
-import axios from 'axios';
-import { NODE_URL } from '../util/utils';
+// import axios from 'axios';
+// import { NODE_URL } from '../util/utils';
+
+import logo from '../images/login/brand.png';
+// import optHome from '../images/header/ic_home_white_24px.svg';
+import optAdd from '../images/header/ic_add_box_white_24px.svg';
+import optQuick from '../images/header/ic_cast_white_24px.svg';
+// import optMe from '../images/header/ic_account_circle_white_24px.svg';
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -35,12 +41,18 @@ class Header extends React.Component {
         {Object.keys(imgArr).map((i) => {
           return <img src={"data:image/png;base64," + imgArr[i]} key={i} alt="" />
         })}
-        <a target="_blank" href="http://localhost:5000" rel="noopener noreferrer" className="logo" title="Local NAS Shortcut"></a>
+        <a target="_blank" href="http://localhost:5000" rel="noopener noreferrer">
+          <img src={logo} className="logo" alt="Local NAS Shortcut" />
+        </a>
         <div className="nav-opts">
           <Search />
-          <Link to="/main/home" className="opt-home" title="Home" onClick={e => this.props.switchCatDispatch(cats.HOME)}></Link>
-          <a className="opt-add" title="Add video" onClick={e => this.props.editDetailsDispatch(true, true)}></a>
-          <a target="_blank" rel="noopener noreferrer" href="http://quickconnect.to/phantomzone" className="opt-quick" title="Quick connect" ></a>
+          <Link to="/main/home" className="opt-home" title="Home" onClick={e => this.props.switchCatDispatch(cats.HOME)} />
+          <a onClick={e => this.props.editDetailsDispatch(true, true)} title="Add video">
+            <img src={optAdd} alt="Add video" />
+          </a>
+          <a target="_blank" rel="noopener noreferrer" href="http://quickconnect.to/phantomzone" title="Quick connect">
+            <img src={optQuick} alt="Quick connect" />
+          </a>
           {/* <Link to="/main/notices" className="opt-notice" title="Notifications"></Link> */}
           {/* <Link to="/main/messages" className="opt-msg" title="Messages"></Link> */}
           <Link to="/main/me" className="opt-me" title="Me">{this.props.loginState.user}</Link>
