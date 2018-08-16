@@ -1,0 +1,23 @@
+// Vendor
+@import '../../node_modules/reset.css/reset.css';
+// @import '../../node_modules/reveal.js/css/reveal.css';
+// @import '../../node_modules/reveal.js/css/theme/reveal.css';
+// Views
+@import './app';
+@import './views/login';
+@import './views/main';
+// Main
+@import './main/home';
+@import './main/tileList';
+@import './main/cardList';
+@import './main/details';
+@import './main/latestDetails';
+@import './main/recommDetails';
+@import './main/editDetails';
+// Components
+@import './components/loader';
+@import './components/header';
+@import './components/search';
+@import './components/categories';
+@import './components/pages';
+@import './components/footer';

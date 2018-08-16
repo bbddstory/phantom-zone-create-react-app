@@ -1,0 +1,81 @@
+#pages {
+    display: flex;
+    justify-content: center;
+    height: 42px;
+    #controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 360px;
+        button {
+            width: 60px;
+            padding: 0 25px;
+            font-size: 18px;
+            background: #f2f2f2;
+            &:hover {
+                color: #fff;
+                background: #00a651;
+            }
+        }
+        .first {
+            border-right: 1px solid #f2f2f2;
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+        }
+        .last {
+            border-left: 1px solid #f2f2f2;
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+        }
+        .page-no {
+            height: 42px;
+            width: 100%;
+            text-align: center;
+            line-height: 42px;
+            font-size: 16px;
+            background: #f2f2f2;
+            .page-no-input {
+                vertical-align: top;
+                width: 50%;
+                background: #f2f2f2;
+                margin: 0;
+                padding: 0 5px 0 0;
+                box-sizing: border-box;
+                text-align: right;
+            }
+            .page-cnt {
+                display: inline-block;
+                width: 50%;
+                height: 42px;
+                text-align: left;
+            }
+        }
+    }
+    // @keyframes resetControls {
+    //     from {
+    //         opacity: 0;
+    //     }
+    //     to {
+    //         opacity: 1;
+    //     }
+    // }
+    .controls-fixed {
+        position: absolute;
+        bottom: 0;
+        opacity: 1;
+        -webkit-box-shadow: 0px -3px 5px 0px rgba(#000, .5);
+        -moz-box-shadow: 0px -3px 5px 0px rgba(#000, .5);
+        box-shadow: 0px -3px 5px 0px rgba(#000, .5);
+        // animation-name: resetControls;
+        // animation-duration: .2s;
+        // animation-fill-mode: forwards;
+        .first {
+            border-top-left-radius: 5px !important;
+            border-bottom-left-radius: 0 !important;
+        }
+        .last {
+            border-top-right-radius: 5px !important;
+            border-bottom-right-radius: 0 !important;
+        }
+    }
+}
