@@ -119,18 +119,20 @@ class Details extends React.Component {
             </div>
           </div>
 
-          {item.trailer && <div>
+          {<div>
             <h1>Trailer and featurette</h1>
-            <div className="trailer">
-              <iframe title="trailer" width="49%" height="275" src={item.trailer} frameBorder="0" allowFullScreen></iframe>
-              <iframe title="featurette" width="49%" height="275" src={item.featurette} frameBorder="0" allowFullScreen></iframe>
+            <div className="videos">
+              {item.trailer === 'null' || item.trailer === '' || item.trailer === null ?
+                <div className="no-video">No video</div> : <iframe title="trailer" width="49%" height="275" src={item.trailer} frameBorder="0" allowFullScreen></iframe>}
+              {item.trailer === 'null' || item.trailer === '' || item.trailer === null ?
+                <div className="no-video">No video</div> : <iframe title="featurette" width="49%" height="275" src={item.featurette} frameBorder="0" allowFullScreen></iframe>}
             </div>
-            <div className="youtube">
+            <div className="youtube-lnk">
               <a target="_blank" href={'https://www.youtube.com/results?search_query=' + item.eng_title}>More videos on YouTube</a>
             </div>
           </div>}
 
-          <h1>Comments</h1>
+          {/* <h1>Comments</h1>
 
           <div className="add-comment">
             <input className={showComment ? "comment-title" : "comment-title-lt"} type="text" placeholder={showComment ? "Title" : "Add a public comment..."} value={this.state.title} onChange={e => this.titleChange(e)} onFocus={e => this.commentFocus()} />
@@ -139,7 +141,7 @@ class Details extends React.Component {
               <button className="btn-cancel" onClick={e => this.cancelComment()}>Cancel</button>
               <button className="btn-main" type="submit" onClick={e => this.submitComment()}>Publish</button>
             </div>}
-          </div>
+          </div> */}
 
           {/* {item.comments && Object.keys(item.comments).map((id) => {
             return <div className="comment" key={id}>

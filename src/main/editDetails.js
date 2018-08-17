@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { toggleEditDetailsAct } from '../actions/uiActions';
 import { saveDetailsAct } from '../actions/detailsActions';
 import cats from '../util/cats';
+import { formValid } from '../util/utils';
 
 class EditDetails extends React.Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class EditDetails extends React.Component {
         plot: '',
         imdb: '', rating: '', douban: '', mtime: '',
         trailer: '', featurette: '',
-        status: '', cat: '',
+        status: '', category: '',
         poster: '',
         subtitle: ''
       }
@@ -32,12 +33,12 @@ class EditDetails extends React.Component {
     });
   }
 
-  onSubmit(e, values) {
+  onSubmit(e, item) {
     e.preventDefault();
     // console.log(this.state);
 
-    if (true) {
-      this.props.saveDetailsDispatch(values);
+    if (formValid(item)) {
+      this.props.saveDetailsDispatch(item);
     }
   }
 
@@ -181,7 +182,7 @@ class EditDetails extends React.Component {
                 </div>
                 <div className="input-padding width-25">
                   <label>Category</label>
-                  <select ref="catSel" name="cat" defaultValue={item.cat} disabled={!this.props.uiState.newRec} onChange={e => this.onChange(e)} >
+                  <select ref="catSel" name="cat" defaultValue={item.category} disabled={!this.props.uiState.newRec} onChange={e => this.onChange(e)} >
                     <option value={cats.MOVIE}>Movie</option>
                     <option value={cats.TV}>TV</option>
                     <option value={cats.DOC}>Documentary</option>

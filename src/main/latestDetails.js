@@ -89,7 +89,7 @@ class LatestDetails extends React.Component {
             <div className="info">
               <span className="title">{item.eng_title}</span>
               <span className="orig-title">
-                {item.orig_title === null || item.orig_title === '' || item.orig_title === 'N/A' || item.eng_title === item.orig_title ?
+                {item.orig_title === null || item.orig_title === '' || item.orig_title === 'N/A'|| item.orig_title === 'null' || item.eng_title === item.orig_title ?
                   '' : item.orig_title + ' (original title)'}
               </span>
               <span className="misc">

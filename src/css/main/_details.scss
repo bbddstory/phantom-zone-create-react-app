@@ -122,15 +122,25 @@ $posterHeight: 268px;
     }
 }
 
-.trailer {
+.videos {
     display: flex;
     justify-content: space-between;
+    .no-video {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 49%;
+        height: 275px;
+        border: 1px solid #555;
+        color: #888;
+        border-radius: 3px;
+    }
     iframe {
         border-radius: 3px;
     }
 }
 
-.youtube {
+.youtube-lnk {
     display: flex;
     justify-content: flex-end;
     padding-top: 10px;

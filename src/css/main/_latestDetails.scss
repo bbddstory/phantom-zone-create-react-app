@@ -140,16 +140,15 @@ $infoWidth: 230px;
             a {
                 display: block;
                 height: 30px;
+                margin-right: 6px;
             }
             .imdb {
                 width: 67px;
-                margin-right: 6px;
                 // background: url('../images/details/imdb.svg') no-repeat;
                 background-size: contain;
             }
             .douban {
                 width: 100px;
-                margin-right: 6px;
                 // background: url('../images/details/douban.png') no-repeat;
                 background-size: contain;
             }
