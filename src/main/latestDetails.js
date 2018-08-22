@@ -127,8 +127,10 @@ class LatestDetails extends React.Component {
             </div>
           </div>
           {item.trailer ? <div className="latest-trailer">
-            <iframe title="trailer" width="224" height="125" src={item.trailer} frameBorder="0" allowFullScreen></iframe>
-            <iframe title="featurette" width="224" height="125" src={item.featurette} frameBorder="0" allowFullScreen></iframe>
+            <iframe title="trailer" width="224" height="125" 
+                src={'https://www.youtube.com/embed/' + item.trailer + '?rel=0&amp;showinfo=0'} frameBorder="0" allowFullScreen></iframe>
+            <iframe title="featurette" width="224" height="125" 
+                src={'https://www.youtube.com/embed/' + item.featurette + '?rel=0&amp;showinfo=0'} frameBorder="0" allowFullScreen></iframe>
           </div> : <div className="no-vid-latest">No videos</div>}
         </React.Fragment>
       )

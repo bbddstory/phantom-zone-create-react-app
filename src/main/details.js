@@ -134,12 +134,10 @@ class Details extends React.Component {
             <div className="videos">
               {item.trailer === 'null' || item.trailer === '' || item.trailer === null ?
                 <div className="no-video">No video</div> : <iframe title="trailer" width="49%" height="275" 
-                src={'https://www.youtube.com/embed/' + item.trailer + '?rel=0&amp;showinfo=0'} 
-                frameBorder="0" allowFullScreen></iframe>}
+                src={'https://www.youtube.com/embed/' + item.trailer + '?rel=0&amp;showinfo=0'} frameBorder="0" allowFullScreen></iframe>}
               {item.trailer === 'null' || item.trailer === '' || item.trailer === null ?
                 <div className="no-video">No video</div> : <iframe title="featurette" width="49%" height="275" 
-                src={'https://www.youtube.com/embed/' + item.featurette + '?rel=0&amp;showinfo=0'} 
-                frameBorder="0" allowFullScreen></iframe>}
+                src={'https://www.youtube.com/embed/' + item.featurette + '?rel=0&amp;showinfo=0'} frameBorder="0" allowFullScreen></iframe>}
             </div>
             <div className="youtube-lnk">
               <a target="_blank" href={'https://www.youtube.com/results?search_query=' + item.eng_title}>More videos on YouTube</a>
