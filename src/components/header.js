@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import { switchCatAct } from '../actions/categoriesActions';
 import { toggleEditDetailsAct } from '../actions/uiActions';
 import Search from '../components/search';
-import cats from '../util/cats';
+import { CATS } from '../util/utils';
 
 class Header extends React.Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class Header extends React.Component {
         </a>
         <div className="nav-opts">
           <Search />
-          <Link to="/main/home" className="opt-home" title="Home" onClick={e => this.props.switchCatDispatch(cats.HOME)} />
+          <Link to="/main/home" className="opt-home" title="Home" onClick={e => this.props.switchCatDispatch(CATS.HOME)} />
           <a onClick={e => this.props.editDetailsDispatch(true, true)} title="Add video">
             <img src={optAdd} alt="Add video" />
           </a>

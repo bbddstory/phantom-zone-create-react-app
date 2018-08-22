@@ -73,8 +73,10 @@ $videoWidth: 380px;
                 display: flex;
                 div, a {
                     width: 30px;
+                    height: 30px;
                     border-radius: 3px;
-                    margin-right: 5px;
+                    margin-right: 6px;
+                    background-color: rgba(#717171, .6);
                     cursor: pointer;
                 }
                 .watch-later {
@@ -83,11 +85,10 @@ $videoWidth: 380px;
                 .recomm {
                     background: rgba(#717171, .6) url("../images/details/ic_thumb_up_white_24px.svg") 50% no-repeat;
                 }
-                .edit {
-                    background: rgba(#717171, .6) url("../images/details/ic_edit_white_24px.svg") 50% no-repeat;
-                }
                 a {
-                    background: rgba(#717171, .6) url("../images/details/baseline_closed_caption_white_24dp.png") 50% no-repeat;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
             }
         }
@@ -99,6 +100,7 @@ $videoWidth: 380px;
         color: #f2f2f2;
         line-height: 1.5;
         overflow-y: auto;
+        font-size: 14px;
     }
     .sites {
         display: flex;
@@ -107,20 +109,20 @@ $videoWidth: 380px;
         a {
             display: block;
             height: 30px;
-            margin-right: 5px;
+            margin-right: 6px;
         }
         .imdb {
-            width: 69px;
+            width: 67px;
             background: url('../images/details/imdb.svg') no-repeat;
             background-size: contain;
         }
         .douban {
-            width: 102px;
+            width: 100px;
             background: url('../images/details/douban.png') no-repeat;
             background-size: contain;
         }
         .mtime {
-            width: 100px;
+            width: 98px;
             border-radius: 3px;
             background: url('../images/details/mtime.png') no-repeat;
             background-size: contain;

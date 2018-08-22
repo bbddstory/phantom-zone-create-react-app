@@ -1,4 +1,45 @@
-const regex = {
+// sleep(ms) {
+//   new Promise(resolve => setTimeout(resolve, ms))
+// };
+// sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+// submitFn = async (values) => {
+//   await this.sleep(800); // simulate server latency
+//   window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
+// };
+
+// validationSchema={object().shape({
+//   eng_title: string().required().min(1).max(200),
+//   orig_title: string().min(1).max(200),
+//   year: number().integer().moreThan(1900).lessThan(2099),
+//   runtime: string().matches(/^([0-9]{1,2}min|[1-9]{1}h|[1-9]{1}h[\s]{1}[0-9]{1,2}min)$/),
+//   stars: string().notRequired().min(1).max(200),
+//   director: string().required().min(1).max(100),
+//   creator: string().min(1).max(100),
+//   plot: string().min(1).max(800),
+//   imdb: string().matches(/^[t]{2}[0-9]{7}$/),
+//   rating: string().matches(/^[0-9]{1}.[0-9]{1}$/),
+//   douban: string().matches(/^[0-9]{1,10}$/),
+//   mtime: string().matches(/^[0-9]{1,10}$/),
+//   trailer: string().url(),
+//   featurette: string().url(),
+//   status: number().integer().moreThan(-1).lessThan(10),
+//   category: string().matches(/^[a-zA-Z]{1,20}$/),
+//   poster: string().url(),
+//   subtitle: string().url()
+// })}
+
+export const CATS = {
+    HOME: 'Home',
+    MOVIE: 'Movies',
+    TV: 'TV',
+    DOC: 'Documentaries',
+    ANIME: 'Animations',
+    XXX: 'XXX',
+    JAV: 'JAV'
+}
+
+export const REGEX = {
     id: /^[0-9]{1,20}$/,
     eng_title: /^[a-zA-Z0-9,.'-\s]{1,200}$/,
     orig_title: /^([a-zA-Z\s,']|[^\x00-\x7F]){1,200}$/, // ([^\x00-\x7F]|\w){1,200}
@@ -13,36 +54,19 @@ const regex = {
     rating: /^[0-9]{1}.[0-9]{1}$/,
     douban: /^[0-9]{1,10}$/,
     mtime: /^[0-9]{1,10}$/,
-    trailer: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/, // /^[a-zA-Z0-9]{1,100}$/
-    featurette: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/, // /^[a-zA-Z0-9]{1,100}$/
+    trailer: /^[a-zA-Z0-9]{11}$/,
+    featurette: /^[a-zA-Z0-9]{11}$/,
     status: /^[0-9]{1}$/,
     category: /^[a-zA-Z]{1,20}$/,
-    poster: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/,
-    subtitle: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/,
+    poster: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[.!/\\\w]*))?)/,
+    subtitle: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[.!/\\\w]*))?)/,
     comments: /^[a-zA-Z0-9,."'()!?-\s]{1,300}$/,
-}
-
-export const formValid = (values) => {
-    let result = true;
-
-    for (let p in values) {
-        if (values[p] && !new RegExp(regex[p]).test(values[p])) {
-            result = false;
-            console.log(p);
-        }
-    }
-    console.log(result);
-
-    return false;
 }
 
 // The port number corresponds to the port on which NodeJS backend (cemetery) is listening
 export const NODE_URL = () => {
-    // For local development
-    return 'http://localhost:49995';
-
-    // For deploying on a hosting service
-    // return 'http://pzone.foreverjuniordev.com:49995';
+    return 'http://localhost:49995'; // For local development
+    // return 'http://pzone.foreverjuniordev.com:49995'; // For deploying on a hosting service
 }
 
 export const parseCookie = (ca) => {

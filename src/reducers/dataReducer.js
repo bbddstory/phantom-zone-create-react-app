@@ -3,7 +3,7 @@ import { SWITCH_CAT } from '../actions/categoriesActions';
 import { SEARCH_RETURN } from '../actions/searchActions';
 import { LOAD_HOME_LISTS, REMOVE_HOME_LIST_ITEM } from '../actions/homeActions';
 import { LOAD_DETAILS, SAVE_COMMENT, DEL_COMMENT, SAVE_NEW, UPDATE_BUFFER_DETAILS } from '../actions/detailsActions';
-import cats from '../util/cats';
+import { CATS } from '../util/utils';
 
 let init = {
   key: '',
@@ -13,8 +13,8 @@ let init = {
   latest: {},
   watchLater: {},
   recomm: {},
-  prevCat: cats.HOME,
-  category: cats.HOME,
+  prevCat: CATS.HOME,
+  category: CATS.HOME,
   itemCnt: 0, // Total number of records in designated category
   ipp: 20, // itemPerPage
   pageCnt: 1,

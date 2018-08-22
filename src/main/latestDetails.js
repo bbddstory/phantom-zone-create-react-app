@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { toggleEditDetailsAct } from '../actions/uiActions';
-import { watchLaterAct, recommAct, commentAct, delCommentAct } from '../actions/detailsActions';
+// import { toggleEditDetailsAct } from '../actions/uiActions';
+import { watchLaterAct, recommAct, commentAct } from '../actions/detailsActions';
 
 import closedCap from '../images/details/baseline_closed_caption_white_24dp.png';
 import imdb from '../images/details/imdb.svg';
@@ -101,9 +101,8 @@ class LatestDetails extends React.Component {
               <div className="actions">
                 <div className="watch-later" title="Watch later" onClick={e => this.props.watchLaterDispatch(item.id)}></div>
                 <div className="recomm" title="Recommend to friends" onClick={e => this.toggleRecomm()}></div>
-                {/* <div className="edit" title="Edit details" onClick={e => this.props.editDetailsDispatch(true, false)}></div> */}
                 <a target="_blank" title="Search for subtitles on Subscene" href={'https://subscene.com/subtitles/title?q=' + item.eng_title.replace(' ', '+')}>
-                  <img src={closedCap} className="closed-cap" alt="CC" onClick={e => this.toggleRecomm()} />
+                  <img src={closedCap} alt="CC" />
                 </a>
                 {recomm && <ul>{this.friends(item.id)}</ul>}
               </div>
@@ -149,8 +148,8 @@ const mapDispatchToProps = (dispatch) => ({
   watchLaterDispatch: (id) => dispatch(watchLaterAct(id)),
   recommDispatch: (vid, friendEmail) => dispatch(recommAct(vid, friendEmail)),
   commentDispatch: (values) => dispatch(commentAct(values)),
-  delCommentDispatch: (id) => dispatch(delCommentAct(id)),
-  editDetailsDispatch: (status, newRec) => dispatch(toggleEditDetailsAct(status, newRec))
+  // delCommentDispatch: (id) => dispatch(delCommentAct(id)),
+  // editDetailsDispatch: (status, newRec) => dispatch(toggleEditDetailsAct(status, newRec))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LatestDetails);

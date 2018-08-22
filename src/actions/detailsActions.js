@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { NODE_URL } from '../util/utils';
-
 import { TOGGLE_LOADER } from './uiActions';
 
 // Action types
@@ -94,16 +93,15 @@ export function delCommentAct(id) {
 }
 
 export function saveDetailsAct(values) {
-  console.log(values);
-  
   return (dispatch, getState) => {
+    dispatch({ type: TOGGLE_LOADER, status: true });
     axios.post(NODE_URL() + '/videos/update', {
       token: getState().loginReducer.token,
       details: values
     }).then(res => {
-      if (res.status === 201) {
+      if (res.status === 200) {
         // dispatch({ type: LOAD_DETAILS, list: list, details: res.data.details });
-        // dispatch({ type: TOGGLE_LOADER, status: false });
+        dispatch({ type: TOGGLE_LOADER, status: false });
       }
     }).catch(err => console.log(err));
     // dispatch({ type: WATCH_LATER });

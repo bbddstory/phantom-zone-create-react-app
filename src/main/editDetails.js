@@ -2,60 +2,17 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { toggleEditDetailsAct } from '../actions/uiActions';
 import { saveDetailsAct } from '../actions/detailsActions';
-import cats from '../util/cats';
-import { formValid } from '../util/utils';
+import { CATS, REGEX } from '../util/utils';
+import { Formik, Form } from 'formik';
 
 class EditDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      details: {
-        eng_title: '', orig_title: '',
-        year: '', runtime: '',
-        stars: '', director: '', creator: '',
-        plot: '',
-        imdb: '', rating: '', douban: '', mtime: '',
-        trailer: '', featurette: '',
-        status: '', category: '',
-        poster: '',
-        subtitle: ''
-      }
-    }
+    this.state = {}
   }
-
-  onChange(e) {
-    // console.log(e.target.name, e.target.value);
-    
-    this.setState({
-      details: {
-        ...this.state.details, [e.target.name]: e.target.value
-      }
-    });
-  }
-
-  onSubmit(e, item) {
-    e.preventDefault();
-    // console.log(this.state);
-
-    if (formValid(item)) {
-      this.props.saveDetailsDispatch(item);
-    }
-  }
-
-  // sleep(ms) {
-  //   new Promise(resolve => setTimeout(resolve, ms))
-  // };
-
-  sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-  submitFn = async (values) => {
-    await this.sleep(800); // simulate server latency
-    window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`);
-  };
 
   componentWillMount() {
-    // let cp = Object.assign({}, this.props.dataState.mainDetails);
-    this.setState({ details: Object.assign({}, this.props.dataState.mainDetails) });
+    this.setState({details: Object.assign({}, this.props.dataState.mainDetails)})
   }
 
   render() {
@@ -65,152 +22,170 @@ class EditDetails extends React.Component {
     if (this.props.uiState.newRec) { // New record
       item = {}
     } else { // Existing record
-      // let key = this.props.dataState.key;
-
-      item = this.state.details;
+      item = this.state.details
     }
 
-    // const d = this.state.details;
-
     return (
-      <div className="popup-bg">
-        <form onChange={(values) => this.onChange(values)} onSubmit={e => this.onSubmit(e, item)}>
-          <div className="popup-panel">
-            <div className="panel-body">
+      <Formik
+        initialValues = {item}
+        validate = {values => {
+          let errors = {};
+          for (let p in values) {
+              if (values[p] && !new RegExp(REGEX[p]).test(values[p])) {
+                errors[p] = 1; // or set to 'true'
+              }
+          }
+          return errors;
+        }}
+        onSubmit={values => {
+          // console.log(values);
+          values.plot = values.plot.replace(/'/g, "\\'");
+          values.plot = values.plot.replace(/"/g, '\\"');
+          this.props.saveDetailsDispatch(values);
+          this.props.editDetailsDispatch(false, false);
+        }}
+        render = {
+          ({touched, errors, values, handleChange, handleBlur, handleSubmit}) => (
+            <Form onSubmit={handleSubmit}>
+              <div className="popup-bg">
+                <div className="popup-panel">
+                    <div className="panel-body">
 
-              <div className="flex">
-                <div className="input-padding width-50">
-                  <label>English Title</label>
-                  <input type="text" name="eng_title" placeholder="N/A" defaultValue={item.eng_title} onChange={e => this.onChange(e)} />
-                  {this.state.eng_title && <span>Contains invalid characters</span>}
-                </div>
-                <div className="input-padding width-50">
-                  <label>Original Title</label>
-                  <input type="text" name="orig_title" placeholder="N/A" defaultValue={item.orig_title} onChange={e => this.onChange(e)} />
-                  {this.state.orig_title && <span>Contains invalid characters</span>}
+                      <div className="flex">
+                        <div className="input-padding width-50">
+                          <label>English Title</label>
+                          <input type="text" name="eng_title" width="200" value={values.eng_title || ''} onChange={handleChange} onBlur={handleBlur} />
+                          {touched.eng_title && errors.eng_title && <span style={{color: 'red', marginTop: '0'}}>Contains invalid characters</span>}
+                        </div>
+                        <div className="input-padding width-50">
+                          <label>Original Title</label>
+                          <input type="text" name="orig_title" width="200" value={values.orig_title || ''} onChange={handleChange} onBlur={handleBlur} />
+                          {touched.orig_title && errors.orig_title && <span style={{color: 'red', marginTop: '0'}}>Contains invalid characters</span>}
+                        </div>
+                      </div>
+
+                      <div className="flex">
+                        <div className="input-padding flex width-50">
+                          <div className="width-50" style={{ padding: '0 10px 0 0' }}>
+                            <label>Year</label>
+                            <input type="text" name="year" width="4" value={values.year || ''} onChange={handleChange} onBlur={handleBlur} />
+                            {touched.year && errors.year && <span style={{color: 'red', marginTop: '0'}}>Must be between 1900 and 2099</span>}
+                          </div>
+                          <div className="width-50" style={{ padding: '0 0 0 10px' }}>
+                            <label>Runtime</label>
+                            <input type="text" name="runtime" width="10" placeholder="1h 30min" value={values.runtime || ''} onChange={handleChange} onBlur={handleBlur} />
+                            {touched.runtime && errors.runtime && <span style={{color: 'red', marginTop: '0'}}>Format incorrect</span>}
+                          </div>
+                        </div>
+
+                        <div className="input-padding width-50">
+                          <label>Stars</label>
+                          <input type="text" name="stars" width="200" value={values.stars || ''} onChange={handleChange} />
+                          {touched.stars && errors.stars && <span style={{color: 'red', marginTop: '0'}}>One or more names separated by comma</span>}
+                        </div>
+                      </div>
+
+                      <div className="flex">
+                        <div className="input-padding width-50">
+                          <label>Director</label>
+                          <input type="text" name="director" value={values.director || ''} onChange={handleChange} onBlur={handleBlur} />
+                          {touched.director && errors.director && <span style={{color: 'red', marginTop: '0'}}>One or more names separated by comma</span>}
+                        </div>
+                        <div className="input-padding width-50">
+                          <label>Creator</label>
+                          <input type="text" name="creator" value={values.creator || ''} onChange={handleChange} onBlur={handleBlur} />
+                          {touched.creator && errors.creator && <span style={{color: 'red', marginTop: '0'}}>One or more names separated by comma</span>}
+                        </div>
+                      </div>
+
+                      <div className="input-padding">
+                        <label className="textarea-lbl">Plot</label>
+                        <textarea name="plot" value={values.plot || ''} onChange={handleChange} onBlur={handleBlur} />
+                        {touched.plot && errors.plot && <span style={{color: 'red', marginTop: '0'}}>Contains invalid characters</span>}
+                      </div>
+
+                      <div className="flex">
+                        <div className="input-padding width-25">
+                          <label>IMDB ID</label>
+                          <input type="text" name="imdb" placeholder="tt1234567" value={values.imdb || ''} onChange={handleChange} onBlur={handleBlur} />
+                          {touched.imdb && errors.imdb && <span style={{color: 'red', marginTop: '0'}}>Format incorrect</span>}
+                        </div>
+                        <div className="input-padding width-25">
+                          <label>Rating</label>
+                          <input type="text" name="rating" placeholder="9.9" value={values.rating || ''} onChange={handleChange} onBlur={handleBlur} />
+                          {touched.rating && errors.rating && <span style={{color: 'red', marginTop: '0'}}>Format incorrect</span>}
+                        </div>
+                        <div className="input-padding width-25">
+                          <label>Douban</label>
+                          <input type="text" name="douban" value={values.douban || ''} onChange={handleChange} onBlur={handleBlur} />
+                          {touched.douban && errors.douban && <span style={{color: 'red', marginTop: '0'}}>Format incorrect</span>}
+                        </div>
+                        <div className="input-padding width-25">
+                          <label>Mtime</label>
+                          <input type="text" name="mtime" value={values.mtime || ''} onChange={handleChange} onBlur={handleBlur} />
+                          {touched.mtime && errors.mtime && <span style={{color: 'red', marginTop: '0'}}>Format incorrect</span>}
+                        </div>
+                      </div>
+
+                      <div className="flex">
+                        <div className="input-padding width-25">
+                          <label>Trailer</label>
+                          <input type="text" name="trailer" value={values.trailer || ''} onChange={handleChange} onBlur={handleBlur} />
+                          {touched.trailer && errors.trailer && <span style={{color: 'red', marginTop: '0'}}>Format incorrect</span>}
+                        </div>
+                        <div className="input-padding width-25">
+                          <label>Featurette</label>
+                          <input type="text" name="featurette" value={values.featurette || ''} onChange={handleChange} onBlur={handleBlur} />
+                          {touched.featurette && errors.featurette && <span style={{color: 'red', marginTop: '0'}}>Format incorrect</span>}
+                        </div>
+                        <div className="input-padding width-25">
+                          <label>Status</label>
+                          <select name="status" value={values.status || 0} onChange={handleChange} onBlur={handleBlur}>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                          </select>
+                        </div>
+                        <div className="input-padding width-25">
+                          <label>Category</label>
+                          <select ref="catSel" name="cat" value={values.category || 'Movie'} disabled={!this.props.uiState.newRec} onChange={handleChange} onBlur={handleBlur}>
+                            <option value={CATS.MOVIE}>Movie</option>
+                            <option value={CATS.TV}>TV</option>
+                            <option value={CATS.DOC}>Documentary</option>
+                            <option value={CATS.ANIME}>Animation</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="input-padding">
+                        <label>Poster</label>
+                        <textarea name="poster" className="poster" value={values.poster || ''} onChange={handleChange} onBlur={handleBlur} />
+                        {touched.poster && errors.poster && <span style={{color: 'red', marginTop: '0'}}>Not a valid URL</span>}
+                      </div>
+
+                      <div className="input-padding">
+                        <label>Subtitle</label>
+                        <input type="text" name="subtitle" value={values.subtitle || ''} onChange={handleChange} onBlur={handleBlur} />
+                        {touched.subtitle && errors.subtitle && <span style={{color: 'red', marginTop: '0'}}>Not a valid URL</span>}
+                      </div>
+
+                    </div>
+                    <div className="panel-footer">
+                      <button className="btn-cancel" onClick={e => this.props.editDetailsDispatch(false, false)}>Cancel</button>
+                      <button className="btn-main" type="submit">Save</button>
+                    </div>
                 </div>
               </div>
-
-              <div className="flex">
-                <div className="input-padding flex width-50">
-                  <div className="width-50" style={{ padding: '0 10px 0 0' }}>
-                    <label>Year</label>
-                    <input type="text" name="year" placeholder="N/A" defaultValue={item.year} onChange={e => this.onChange(e)} />
-                    {this.state.year && <span>Must be 4 digits</span>}
-                  </div>
-                  <div className="width-50" style={{ padding: '0 0 0 10px' }}>
-                    <label>Runtime</label>
-                    <input type="text" name="runtime" placeholder="N/A" defaultValue={item.runtime} onChange={e => this.onChange(e)} />
-                    {this.state.runtime && <span>Format: 1h 30min</span>}
-                  </div>
-                </div>
-
-                <div className="input-padding width-50">
-                  <label>Stars</label>
-                  <input type="text" name="stars" placeholder="N/A" defaultValue={item.stars} onChange={e => this.onChange(e)} />
-                  {this.state.director && <span>One or more names separated by comma</span>}
-                </div>
-              </div>
-
-              <div className="flex">
-                <div className="input-padding width-50">
-                  <label>Director</label>
-                  <input type="text" name="director" placeholder="N/A" defaultValue={item.director} onChange={e => this.onChange(e)} />
-                  {this.state.director && <span>One or more names separated by comma</span>}
-                </div>
-                <div className="input-padding width-50">
-                  <label>Creator</label>
-                  <input type="text" name="creator" placeholder="N/A" defaultValue={item.creator} onChange={e => this.onChange(e)} />
-                  {this.state.director && <span>One or more names separated by comma</span>}
-                </div>
-              </div>
-
-              <div className="input-padding">
-                <label className="textarea-lbl">Plot</label>
-                <textarea name="plot" placeholder="N/A" defaultValue={item.plot} onChange={e => this.onChange(e)} />
-                {this.state.plot && <span>Contains invalid characters</span>}
-              </div>
-
-              <div className="flex">
-                <div className="input-padding width-25">
-                  <label>IMDB ID</label>
-                  <input type="text" name="imdb" placeholder="N/A" defaultValue={item.imdb} onChange={e => this.onChange(e)} />
-                  {this.state.imdb && <span>Format: tt1234567</span>}
-                </div>
-                <div className="input-padding width-25">
-                  <label>Rating</label>
-                  <input type="text" name="rating" placeholder="N/A" defaultValue={item.rating} onChange={e => this.onChange(e)} />
-                  {this.state.rating && <span>Format: 9.9</span>}
-                </div>
-                <div className="input-padding width-25">
-                  <label>Douban</label>
-                  <input type="text" name="douban" placeholder="N/A" defaultValue={item.douban} onChange={e => this.onChange(e)} />
-                  {this.state.imdb_id && <span>Format: tt1234567</span>}
-                </div>
-                <div className="input-padding width-25">
-                  <label>Mtime</label>
-                  <input type="text" name="mtime" placeholder="N/A" defaultValue={item.mtime} onChange={e => this.onChange(e)} />
-                  {this.state.rating && <span>Format: 9.9</span>}
-                </div>
-              </div>
-
-              <div className="flex">
-                <div className="input-padding width-25">
-                  <label>Trailer</label>
-                  <input type="text" name="trailer" placeholder="N/A" defaultValue={item.trailer} onChange={e => this.onChange(e)} />
-                  {this.state.imdb_id && <span>Format: tt1234567</span>}
-                </div>
-                <div className="input-padding width-25">
-                  <label>Featurette</label>
-                  <input type="text" name="featurette" placeholder="N/A" defaultValue={item.featurette} onChange={e => this.onChange(e)} />
-                  {this.state.rating && <span>Format: 9.9</span>}
-                </div>
-                <div className="input-padding width-25">
-                  <label>Status</label>
-                  <select name="status" defaultValue={item.status} onChange={e => this.onChange(e)}>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                  </select>
-                </div>
-                <div className="input-padding width-25">
-                  <label>Category</label>
-                  <select ref="catSel" name="cat" defaultValue={item.category} disabled={!this.props.uiState.newRec} onChange={e => this.onChange(e)} >
-                    <option value={cats.MOVIE}>Movie</option>
-                    <option value={cats.TV}>TV</option>
-                    <option value={cats.DOC}>Documentary</option>
-                    <option value={cats.ANIME}>Animation</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="input-padding">
-                <label>Poster</label>
-                <textarea name="poster" className="poster" placeholder="N/A" defaultValue={item.poster} onChange={e => this.onChange(e)} />
-                {this.state.poster && <span>Must be a valid URL</span>}
-              </div>
-
-              <div className="input-padding">
-                <label>Subtitle</label>
-                <input type="text" name="subtitle" placeholder="N/A" defaultValue={item.subtitle} onChange={e => this.onChange(e)} />
-                {this.state.subtitle && <span>Must be a valid URL</span>}
-              </div>
-
-            </div>
-            <div className="panel-footer">
-              <button className="btn-cancel" onClick={e => this.props.editDetailsDispatch(false, false)}>Cancel</button>
-              <button className="btn-main" type="submit">Save</button>
-            </div>
-          </div>
-        </form>
-      </div>
+            </Form>
+          )}
+      />
     )
   }
 }
