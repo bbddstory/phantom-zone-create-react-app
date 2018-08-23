@@ -111,8 +111,8 @@ class LatestDetails extends React.Component {
             <div className="plot">
               <div className="plot-txt">{item.plot || 'Plot unavailable.'}</div>
               <div className="sites">
-                <a target="_blank" title="Search on IMDB" href={item.imdb_id ?
-                  'http://www.imdb.com/title/' + item.imdb_id : 'https://www.imdb.com/find?ref_=nv_sr_fn&q=' + item.eng_title.replace(' ', '+')}>
+                <a target="_blank" title="Search on IMDB" href={item.imdb ?
+                  'http://www.imdb.com/title/' + item.imdb : 'https://www.imdb.com/find?ref_=nv_sr_fn&q=' + item.eng_title.replace(' ', '+')}>
                   <img src={imdb} className="imdb" alt="IMDB Link" />
                 </a>
                 <a target="_blank" title="Search on Douban" href={item.douban ?

@@ -104,7 +104,6 @@ export function saveDetailsAct(values) {
         dispatch({ type: TOGGLE_LOADER, status: false });
       }
     }).catch(err => console.log(err));
-    // dispatch({ type: WATCH_LATER });
   }
 
   // return async (dispatch, getState) => {

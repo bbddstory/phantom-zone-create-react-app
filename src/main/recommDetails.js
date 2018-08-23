@@ -110,8 +110,8 @@ class RecommDetails extends React.Component {
  
               <div className="plot-txt">{item.plot || 'Plot unavailable.'}</div>
               <div className="sites">
-                <a target="_blank" title="Search on IMDB" href={item.imdb_id ?
-                  'http://www.imdb.com/title/' + item.imdb_id : 'https://www.imdb.com/find?ref_=nv_sr_fn&q=' + item.eng_title.replace(' ', '+')}>
+                <a target="_blank" title="Search on IMDB" href={item.imdb ?
+                  'http://www.imdb.com/title/' + item.imdb : 'https://www.imdb.com/find?ref_=nv_sr_fn&q=' + item.eng_title.replace(' ', '+')}>
                   <img src={imdb} className="imdb" alt="IMDB Link" />
                 </a>
                 <a target="_blank" title="Search on Douban" href={item.douban ?
@@ -126,8 +126,10 @@ class RecommDetails extends React.Component {
             </div>
 
             {item.trailer ? <div className="recomm-trailer">
-              <iframe title="trailer" width="350" height="47.3%" src={item.trailer} frameBorder="0" allowFullScreen></iframe>
-              <iframe title="featurette" width="350" height="47.3%" src={item.featurette} frameBorder="0" allowFullScreen></iframe>
+              <iframe title="trailer" width="350" height="47.3%" 
+                src={'https://www.youtube.com/embed/' + item.trailer + '?rel=0&amp;showinfo=0'} frameBorder="0" allowFullScreen></iframe>
+              <iframe title="featurette" width="350" height="47.3%" 
+                src={'https://www.youtube.com/embed/' + item.featurette + '?rel=0&amp;showinfo=0'} frameBorder="0" allowFullScreen></iframe>
             </div> : <div className="no-vid-recomm">No videos</div>}
           </div>
         </React.Fragment>

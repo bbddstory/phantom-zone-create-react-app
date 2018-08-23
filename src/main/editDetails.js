@@ -34,6 +34,9 @@ class EditDetails extends React.Component {
               if (values[p] && !new RegExp(REGEX[p]).test(values[p])) {
                 errors[p] = 1; // or set to 'true'
               }
+              if (values[p] === null) {
+                values[p] = ''
+              }
           }
           return errors;
         }}
