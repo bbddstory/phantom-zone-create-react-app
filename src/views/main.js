@@ -113,7 +113,7 @@ class Main extends React.Component {
             <Route path='/main/tv' component={CatList} />
             <Route path='/main/docs' component={CatList} />
             <Route path='/main/anime' component={CatList} />
-            <Route path='/main/details' component={Details} />
+            <Route path='/main/details/:id' component={Details} />
           </Switch>
           {uiState.editDetails && <EditDetails />}
           <Footer />

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setKeyAct } from '../../actions/dataActions';
 import { removeHomeListItemAct } from '../../actions/homeActions';
 import { loadDetailsAct } from '../../actions/detailsActions';
 import Pages from '../components/pages';
@@ -17,14 +16,12 @@ class TileList extends React.Component {
     this.props.removeHomeListItemDispatch(this.props.list, key);
   }
 
-  loadDetails(key, ref) {
-    this.props.setKeyDispatch(key);
-    this.props.loadDetailsDispatch(ref);
+  loadDetails(key, list) {
+    this.props.loadDetailsDispatch(key, list);
   }
 
   render() {
     const buffer = this.props.dataRef;
-    // const { dataState } = this.props;
 
     return (
       <div className="tile-list">
@@ -58,9 +55,6 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => ({
   loadDetailsDispatch: (list) => {
     dispatch(loadDetailsAct(list))
-  },
-  setKeyDispatch: (key) => {
-    dispatch(setKeyAct(key))
   },
   removeHomeListItemDispatch: (list, key) => {
     dispatch(removeHomeListItemAct(list, key))

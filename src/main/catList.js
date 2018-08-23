@@ -14,9 +14,9 @@ class CatList extends React.Component {
       this.props.syncCat();
       this.props.loadDataDispatch(
         this.props.dataState.category,
-        this.props.dataState.currPage,
-        this.props.dataState.startAt,
-        this.props.dataState.endAt
+        this.props.dataState.pages.currPage,
+        this.props.dataState.pages.startAt,
+        this.props.dataState.pages.endAt
       )
     }
   }

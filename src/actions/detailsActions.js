@@ -12,12 +12,12 @@ export const UPDATE_BUFFER_DETAILS = 'UPDATE_BUFFER_DETAILS';
 export const SAVE_NEW = 'SAVE_NEW';
 
 // Action creators
-export function loadDetailsAct(list) {
+export function loadDetailsAct(key, list) {
   return (dispatch, getState) => {
     dispatch({ type: TOGGLE_LOADER, status: true });
     axios.post(NODE_URL() + '/details/load', {
       token: getState().loginReducer.token,
-      key: getState().dataReducer.key
+      key: key
     }).then(res => {
       if (res.status === 200) {
         dispatch({ type: LOAD_DETAILS, list: list, details: res.data.details });

@@ -34,9 +34,7 @@ export const CATS = {
     MOVIE: 'Movies',
     TV: 'TV',
     DOC: 'Documentaries',
-    ANIME: 'Animations',
-    XXX: 'XXX',
-    JAV: 'JAV'
+    ANIME: 'Animations'
 }
 
 // For matching any words from any language

@@ -71,11 +71,10 @@ class RecommDetails extends React.Component {
   }
 
   render() {
-    const { dataState } = this.props;
     const { recomm } = this.state;
-    const item = this.props.dataState.recommDetails;
+    const item = this.props.dataState.details.recomm;
 
-    if (dataState.recommDetails) {
+    if (item) {
       return (
         <React.Fragment>
           <div className="recomm-details">
@@ -142,8 +141,8 @@ class RecommDetails extends React.Component {
 
 const mapStateToProps = (store) => ({
   loginState: store.loginReducer,
-  dataState: store.dataReducer,
-  uiState: store.uiReducer
+  dataState: store.dataReducer
+  // uiState: store.uiReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({

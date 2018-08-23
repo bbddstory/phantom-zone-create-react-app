@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { setKeyAct } from '../actions/dataActions';
 import { removeHomeListItemAct } from '../actions/homeActions';
 import { loadDetailsAct } from '../actions/detailsActions';
 
@@ -15,12 +14,11 @@ class SlidesList extends React.Component {
         this.props.removeHomeListItemDispatch(this.props.list, key);
     }
 
-    loadDetails(key, ref, jump) {
-        this.props.setKeyDispatch(key);
-        this.props.loadDetailsDispatch(ref);
+    loadDetails(key, list, jump) {
+        this.props.loadDetailsDispatch(key, list);
 
         if (jump) {
-            window.location.hash = '#/main/details';
+            window.location.hash = '#/main/details/' + key;
         }
     }
 
@@ -92,8 +90,7 @@ class SlidesList extends React.Component {
 
     componentWillMount() {
         if(this.props.load) {
-            this.props.setKeyDispatch(this.props.dataRef[0].id);
-            this.props.loadDetailsDispatch(this.props.list);
+            this.props.loadDetailsDispatch(this.props.dataRef[0].id, this.props.list);
         }
     }
 
@@ -112,11 +109,8 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    loadDetailsDispatch: (list) => {
-        dispatch(loadDetailsAct(list))
-    },
-    setKeyDispatch: (key) => {
-        dispatch(setKeyAct(key))
+    loadDetailsDispatch: (key, list) => {
+        dispatch(loadDetailsAct(key, list))
     },
     removeHomeListItemDispatch: (list, key) => {
         dispatch(removeHomeListItemAct(list, key))

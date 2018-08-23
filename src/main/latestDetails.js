@@ -71,10 +71,8 @@ class LatestDetails extends React.Component {
   }
 
   render() {
-    // const { loginState, dataState, uiState } = this.props;
-    // const key = this.props.dataState.key;
     const { recomm } = this.state;
-    const item = this.props.dataState.latestDetails;
+    const item = this.props.dataState.details.latest;
 
     if (item) {
       return (
@@ -142,8 +140,8 @@ class LatestDetails extends React.Component {
 
 const mapStateToProps = (store) => ({
   loginState: store.loginReducer,
-  dataState: store.dataReducer,
-  uiState: store.uiReducer
+  dataState: store.dataReducer
+  // uiState: store.uiReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({

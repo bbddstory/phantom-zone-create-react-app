@@ -20,6 +20,12 @@ class Details extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const { match: { params } } = this.props;
+    
+    console.log(params);
+  }
+
   toggleRecomm() {
     this.setState({ recomm: !this.state.recomm });
   }

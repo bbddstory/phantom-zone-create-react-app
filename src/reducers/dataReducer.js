@@ -7,20 +7,22 @@ import { CATS } from '../util/utils';
 
 let init = {
   key: '',
+  category: CATS.HOME,
+  prevCat: CATS.HOME, // Previous category
+  details: {},
   buffer: {},
   search: {},
-  // mainDetails: {},
   latest: {},
   watchLater: {},
   recomm: {},
-  prevCat: CATS.HOME,
-  category: CATS.HOME,
-  itemCnt: 0, // Total number of records in designated category
-  ipp: 20, // itemPerPage
-  pageCnt: 1,
-  currPage: 1,
-  startAt: 0, // Start index of items on current page
-  endAt: 11 // End index of items on current page
+  pages: {
+    itemCnt: 0, // Total number of records in selected category
+    ipp: 20, // Items per page
+    pageCnt: 1,
+    currPage: 1,
+    startAt: 0, // Start index of items on current page
+    endAt: 11 // End index of items on current page
+  }
 }
 
 export function dataReducer(state = init, action) {
@@ -51,11 +53,11 @@ export function dataReducer(state = init, action) {
       ns.category = action.cat;
 
       if (state.prevCat !== action.cat) { // Reset all pagination related values
-        ns.itemCnt = 0;
-        ns.pageCnt = 1;
-        ns.currPage = 1;
-        ns.startAt = 0;
-        ns.endAt = 11;
+        ns.pages.itemCnt = 0;
+        ns.pages.pageCnt = 1;
+        ns.pages.currPage = 1;
+        ns.pages.startAt = 0;
+        ns.pages.endAt = 11;
       }
 
       return ns;
@@ -67,11 +69,11 @@ export function dataReducer(state = init, action) {
       }
       ns.buffer = bufferObj;
 
-      ns.itemCnt = action.itemCnt;
-      ns.pageCnt = Math.ceil(action.itemCnt / init.ipp);
-      ns.currPage = action.currPage;
-      ns.startAt = action.startAt;
-      ns.endAt = action.endAt;
+      ns.pages.itemCnt = action.itemCnt;
+      ns.pages.pageCnt = Math.ceil(action.itemCnt / init.pages.ipp);
+      ns.pages.currPage = action.currPage;
+      ns.pages.startAt = action.startAt;
+      ns.pages.endAt = action.endAt;
 
       return ns;
     case SET_KEY:
@@ -79,7 +81,7 @@ export function dataReducer(state = init, action) {
 
       return ns;
     case LOAD_DETAILS:
-      ns[action.list + 'Details'] = action.details;
+      ns.details[action.list] = action.details;
 
       return ns;
     case SYNC_CAT:

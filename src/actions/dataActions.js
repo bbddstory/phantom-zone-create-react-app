@@ -28,7 +28,7 @@ export function loadDataAct(category, currPage, startAt, endAt) {
 
     axios.post(NODE_URL() + '/videos/load_cat', {
       token: getState().loginReducer.token,
-      ipp: getState().dataReducer.ipp,
+      ipp: getState().dataReducer.pages.ipp,
       category, currPage
     }).then(res => {
       if (res.status === 200) {

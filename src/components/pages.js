@@ -13,39 +13,39 @@ class Pages extends React.Component {
 
         switch (page) {
             case 'FIRST':
-                if (this.props.dataState.currPage > 1) {
+                if (this.props.dataState.pages.currPage > 1) {
                     currPage = 1;
                     startAt = 0;
-                    endAt = this.props.dataState.ipp - 1;
+                    endAt = this.props.dataState.pages.ipp - 1;
                 } else {
                     return
                 }
                 break;
             case 'LAST':
-                if (this.props.dataState.currPage < this.props.dataState.pageCnt) {
-                    currPage = this.props.dataState.pageCnt;
-                    startAt = this.props.dataState.ipp * (this.props.dataState.pageCnt - 1);
-                    endAt = this.props.dataState.itemCnt - 1;
+                if (this.props.dataState.pages.currPage < this.props.dataState.pages.pageCnt) {
+                    currPage = this.props.dataState.pages.pageCnt;
+                    startAt = this.props.dataState.pages.ipp * (this.props.dataState.pages.pageCnt - 1);
+                    endAt = this.props.dataState.pages.itemCnt - 1;
                 } else {
                     return
                 }
                 break;
             case 'PREV':
-                if (this.props.dataState.currPage > 1) {
-                    currPage = this.props.dataState.currPage - 1;
-                    startAt = this.props.dataState.startAt - this.props.dataState.ipp;
-                    endAt = startAt + this.props.dataState.ipp - 1;
+                if (this.props.dataState.pages.currPage > 1) {
+                    currPage = this.props.dataState.pages.currPage - 1;
+                    startAt = this.props.dataState.pages.startAt - this.props.dataState.pages.ipp;
+                    endAt = startAt + this.props.dataState.pages.ipp - 1;
                 } else {
                     return
                 }
                 break;
             case 'NEXT':
-                if (this.props.dataState.currPage < this.props.dataState.pageCnt) {
-                    currPage = this.props.dataState.currPage + 1;
-                    startAt = this.props.dataState.startAt + this.props.dataState.ipp;
-                    endAt = this.props.dataState.endAt + this.props.dataState.ipp;
-                    if (endAt > (this.props.dataState.itemCnt - 1)) {
-                        endAt = this.props.dataState.itemCnt - 1
+                if (this.props.dataState.pages.currPage < this.props.dataState.pages.pageCnt) {
+                    currPage = this.props.dataState.pages.currPage + 1;
+                    startAt = this.props.dataState.pages.startAt + this.props.dataState.pages.ipp;
+                    endAt = this.props.dataState.pages.endAt + this.props.dataState.pages.ipp;
+                    if (endAt > (this.props.dataState.pages.itemCnt - 1)) {
+                        endAt = this.props.dataState.pages.itemCnt - 1
                     }
                 } else {
                     return
@@ -58,7 +58,7 @@ class Pages extends React.Component {
     }
 
     currPage = () => {
-        return this.props.dataState.currPage
+        return this.props.dataState.pages.currPage
     }
 
     onKeyUp(e) {
@@ -89,7 +89,8 @@ class Pages extends React.Component {
                     <button className="first" onClick={e => this.gotoPage('FIRST')}>❬❬</button>
                     <button onClick={e => this.gotoPage('PREV')}>❬</button>
                     <div className="page-no">
-                        <input type="text" className="page-no-input" placeholder={this.currPage()} onKeyUp={e => this.onKeyUp(e)} /><span className="page-cnt">/&nbsp;{this.props.dataState.pageCnt}</span>
+                        <input type="text" className="page-no-input" placeholder={this.currPage()} onKeyUp={e => this.onKeyUp(e)} />
+                        <span className="page-cnt">/&nbsp;{this.props.dataState.pages.pageCnt}</span>
                     </div>
                     <button onClick={e => this.gotoPage('NEXT')}>❭</button>
                     <button className="last" onClick={e => this.gotoPage('LAST')}>❭❭</button>
