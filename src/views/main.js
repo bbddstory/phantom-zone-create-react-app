@@ -1,9 +1,7 @@
 import axios from 'axios';
-
 import * as React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { parseCookie, resetPages } from '../util/utils';
 import { setTokenAct, friendsAct } from '../actions/loginActions';
 
@@ -109,11 +107,8 @@ class Main extends React.Component {
           <Switch>
             <Route path='/main/home' component={Home} />
             <Route path='/main/search' component={SearchList} />
-            <Route path='/main/movies' component={CatList} />
-            <Route path='/main/tv' component={CatList} />
-            <Route path='/main/docs' component={CatList} />
-            <Route path='/main/anime' component={CatList} />
             <Route path='/main/details/:id' component={Details} />
+            <Route path='/main/:cat' component={CatList} />
           </Switch>
           {uiState.editDetails && <EditDetails />}
           <Footer />

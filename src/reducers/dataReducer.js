@@ -1,12 +1,10 @@
-import { GOTO_PAGE, SET_KEY, SYNC_CAT } from '../actions/dataActions';
-import { SWITCH_CAT } from '../actions/categoriesActions';
+import { GOTO_PAGE, SWITCH_CAT, SYNC_CAT } from '../actions/dataActions';
 import { SEARCH_RETURN } from '../actions/searchActions';
 import { LOAD_HOME_LISTS, REMOVE_HOME_LIST_ITEM } from '../actions/homeActions';
 import { LOAD_DETAILS, SAVE_COMMENT, DEL_COMMENT, SAVE_NEW, UPDATE_BUFFER_DETAILS } from '../actions/detailsActions';
 import { CATS } from '../util/utils';
 
 let init = {
-  key: '',
   category: CATS.HOME,
   prevCat: CATS.HOME, // Previous category
   details: {},
@@ -52,13 +50,12 @@ export function dataReducer(state = init, action) {
     case SWITCH_CAT:
       ns.category = action.cat;
 
-      if (state.prevCat !== action.cat) { // Reset all pagination related values
-        ns.pages.itemCnt = 0;
-        ns.pages.pageCnt = 1;
-        ns.pages.currPage = 1;
-        ns.pages.startAt = 0;
-        ns.pages.endAt = 11;
-      }
+      // Reset all pagination related values
+      ns.pages.itemCnt = 0;
+      ns.pages.pageCnt = 1;
+      ns.pages.currPage = 1;
+      ns.pages.startAt = 0;
+      ns.pages.endAt = 11;
 
       return ns;
     case GOTO_PAGE:
@@ -74,10 +71,6 @@ export function dataReducer(state = init, action) {
       ns.pages.currPage = action.currPage;
       ns.pages.startAt = action.startAt;
       ns.pages.endAt = action.endAt;
-
-      return ns;
-    case SET_KEY:
-      ns.key = action.key;
 
       return ns;
     case LOAD_DETAILS:

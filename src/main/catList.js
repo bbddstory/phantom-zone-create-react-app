@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { syncCatAct, loadDataAct } from '../actions/dataActions';
+import { switchCatAct, syncCatAct, loadPageAct } from '../actions/dataActions';
 import CardList from './cardList';
+import { CATS } from '../util/utils';
 
 class CatList extends React.Component {
   constructor(props) {
@@ -9,11 +10,16 @@ class CatList extends React.Component {
     this.state = { dummyPoster: 'images/posters/' + this.props.dataState.category + '.png' };
   }
   
-  loadData() {
-    if (this.props.dataState.category !== this.props.dataState.prevCat) {
+  loadPage() {
+    let hash = window.location.hash;
+    let idx = hash.lastIndexOf('/');
+    let cat = hash.substr(idx + 1, hash.length - idx);
+    
+    if (this.props.dataState.category === CATS.HOME || this.props.dataState.category !== this.props.dataState.prevCat) {
+      this.props.switchCatDispatch(cat);
       this.props.syncCat();
-      this.props.loadDataDispatch(
-        this.props.dataState.category,
+      this.props.loadPageDispatch(
+        cat,
         this.props.dataState.pages.currPage,
         this.props.dataState.pages.startAt,
         this.props.dataState.pages.endAt
@@ -22,13 +28,9 @@ class CatList extends React.Component {
   }
 
   componentDidMount() {
-    this.loadData();
+    this.loadPage();
   }
   
-  componentDidUpdate() {
-    this.loadData();
-  }
-
   render() {
     return (
       <CardList dataRef={this.props.dataState.buffer} showPages={true} category=""/>
@@ -44,8 +46,11 @@ const mapDispatchToProps = (dispatch) => ({
   syncCat: () => {
     dispatch(syncCatAct())
   },
-  loadDataDispatch: (category, currPage, startAt, endAt) => {
-    dispatch(loadDataAct(category, currPage, startAt, endAt))
+  loadPageDispatch: (category, currPage, startAt, endAt) => {
+    dispatch(loadPageAct(category, currPage, startAt, endAt))
+  },
+  switchCatDispatch: (cat) => {
+    dispatch(switchCatAct(cat));
   }
 });
 

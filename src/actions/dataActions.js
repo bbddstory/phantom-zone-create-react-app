@@ -5,14 +5,14 @@ import { TOGGLE_LOADER } from './uiActions';
 
 // Action types
 export const GOTO_PAGE = 'GOTO_PAGE';
-export const SET_KEY = 'SET_KEY';
 export const SYNC_CAT = 'SYNC_CAT';
+export const SWITCH_CAT = 'SWITCH_CAT';
 
 // Action creators
-export function setKeyAct(key) {
+export function switchCatAct(cat) {
   return {
-    type: SET_KEY,
-    key
+    type: SWITCH_CAT,
+    cat
   }
 }
 
@@ -22,7 +22,7 @@ export function syncCatAct() {
   }
 }
 
-export function loadDataAct(category, currPage, startAt, endAt) {
+export function loadPageAct(category, currPage, startAt, endAt) {
   return (dispatch, getState) => {
     dispatch({ type: TOGGLE_LOADER, status: true });
 

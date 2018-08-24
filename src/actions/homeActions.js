@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import { NODE_URL } from '../util/utils';
 
 // Action types

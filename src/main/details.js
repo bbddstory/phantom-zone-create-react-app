@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { toggleEditDetailsAct } from '../actions/uiActions';
-import { watchLaterAct, recommAct, commentAct, delCommentAct } from '../actions/detailsActions';
+import { watchLaterAct, recommAct, loadDetailsAct, commentAct, delCommentAct } from '../actions/detailsActions';
 
 import closedCap from '../images/details/baseline_closed_caption_white_24dp.png';
 import imdb from '../images/details/imdb.svg';
@@ -20,10 +20,9 @@ class Details extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { match: { params } } = this.props;
-    
-    console.log(params);
+    this.props.loadDetailsDispatch(params.id, 'main');
   }
 
   toggleRecomm() {
@@ -77,11 +76,8 @@ class Details extends React.Component {
   }
 
   render() {
-    // const { loginState, dataState, uiState } = this.props;
-    // const key = this.props.dataState.key;
-    // const { opts } = this.state;
     const { recomm } = this.state;
-    const item = this.props.dataState.mainDetails;
+    const item = this.props.dataState.details.main;
 
     if (item) {
       return (
@@ -183,16 +179,16 @@ class Details extends React.Component {
 
 const mapStateToProps = (store) => ({
   loginState: store.loginReducer,
-  dataState: store.dataReducer,
-  uiState: store.uiReducer
+  dataState: store.dataReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({
   watchLaterDispatch: (id) => dispatch(watchLaterAct(id)),
   recommDispatch: (vid, friendEmail) => dispatch(recommAct(vid, friendEmail)),
   commentDispatch: (values) => dispatch(commentAct(values)),
-  delCommentDispatch: (id) => dispatch(delCommentAct(id)),
-  editDetailsDispatch: (status, newRec) => dispatch(toggleEditDetailsAct(status, newRec))
+  // delCommentDispatch: (id) => dispatch(delCommentAct(id)),
+  editDetailsDispatch: (status, newRec) => dispatch(toggleEditDetailsAct(status, newRec)),
+  loadDetailsDispatch: (key, list) => dispatch(loadDetailsAct(key, list))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Details);

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { loadDataAct } from '../actions/dataActions';
+import { loadPageAct } from '../actions/dataActions';
 
 class Pages extends React.Component {
     constructor(props) {
@@ -54,7 +54,7 @@ class Pages extends React.Component {
             default: break;
         }
 
-        this.props.loadDataDispatch(this.props.dataState.category, currPage, startAt, endAt);
+        this.props.loadPageDispatch(this.props.dataState.category, currPage, startAt, endAt);
     }
 
     currPage = () => {
@@ -105,8 +105,8 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    loadDataDispatch: (category, currPage, startAt, endAt) => {
-        dispatch(loadDataAct(category, currPage, startAt, endAt))
+    loadPageDispatch: (category, currPage, startAt, endAt) => {
+        dispatch(loadPageAct(category, currPage, startAt, endAt))
     }
 });
 

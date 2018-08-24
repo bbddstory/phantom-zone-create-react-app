@@ -25,14 +25,10 @@ class Loader extends React.Component {
 }
 
 const mapStateToProps = (store) => ({
-  // dataState: store.dataReducer,
   uiState: store.uiReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // saveDetailsDispatch: (values) => {
-  //   dispatch(saveDetailsAct(values))
-  // }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Loader);

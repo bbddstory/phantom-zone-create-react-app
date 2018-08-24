@@ -105,16 +105,13 @@ class SlidesList extends React.Component {
 }
 
 const mapStateToProps = (store) => ({
-    dataState: store.dataReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({
     loadDetailsDispatch: (key, list) => {
         dispatch(loadDetailsAct(key, list))
     },
-    removeHomeListItemDispatch: (list, key) => {
-        dispatch(removeHomeListItemAct(list, key))
-    }
+    removeHomeListItemDispatch: (list, key) => dispatch(removeHomeListItemAct(list, key))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SlidesList);

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { syncCatAct, loadDataAct } from '../actions/dataActions';
+import { syncCatAct, loadPageAct } from '../actions/dataActions';
 import CardList from './cardList';
 
 class SearchList extends React.Component {
@@ -9,10 +9,10 @@ class SearchList extends React.Component {
     this.state = { dummyPoster: 'images/posters/' + this.props.dataState.category + '.png' };
   }
   
-  loadData() {
+  loadPage() {
     if (this.props.dataState.category !== this.props.dataState.prevCat) {
       this.props.syncCat();
-      this.props.loadDataDispatch(
+      this.props.loadPageDispatch(
         this.props.dataState.pages.category,
         this.props.dataState.pages.currPage,
         this.props.dataState.pages.startAt,
@@ -22,11 +22,11 @@ class SearchList extends React.Component {
   }
 
   componentDidMount() {
-    this.loadData();
+    this.loadPage();
   }
   
   componentDidUpdate() {
-    this.loadData();
+    this.loadPage();
   }
 
   render() {
@@ -41,12 +41,8 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  syncCat: () => {
-    dispatch(syncCatAct())
-  },
-  loadDataDispatch: (category, currPage, startAt, endAt) => {
-    dispatch(loadDataAct(category, currPage, startAt, endAt))
-  }
+  syncCat: () => dispatch(syncCatAct()),
+  loadPageDispatch: (category, currPage, startAt, endAt) => dispatch(loadPageAct(category, currPage, startAt, endAt))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchList);

@@ -81,7 +81,7 @@ class RecommDetails extends React.Component {
             <div className="poster">
               {item.poster && item.poster !== 'N/A' ?
                 <img alt="Poster" src={item.poster} /> :
-                <div className={'dummy-poster poster-' + item.category.toLowerCase()}></div>}
+                <div className={'dummy-poster poster-' + item.category}></div>}
             </div>
 
             <div className="info">
@@ -142,15 +142,12 @@ class RecommDetails extends React.Component {
 const mapStateToProps = (store) => ({
   loginState: store.loginReducer,
   dataState: store.dataReducer
-  // uiState: store.uiReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({
   watchLaterDispatch: (id) => dispatch(watchLaterAct(id)),
   recommDispatch: (vid, friendEmail) => dispatch(recommAct(vid, friendEmail)),
-  commentDispatch: (values) => dispatch(commentAct(values)),
-  // delCommentDispatch: (id) => dispatch(delCommentAct(id)),
-  // editDetailsDispatch: (status, newRec) => dispatch(toggleEditDetailsAct(status, newRec))
+  commentDispatch: (values) => dispatch(commentAct(values))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecommDetails);

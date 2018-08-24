@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { switchCatAct } from '../actions/categoriesActions';
+import { switchCatAct, loadPageAct } from '../actions/dataActions';
 import { CATS } from '../util/utils';
 
 class Categories extends React.Component {
@@ -28,12 +28,12 @@ class Categories extends React.Component {
             </Link>
           </li>
           <li>
-            <Link to="/main/docs" className={currCat === CATS.DOC ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.DOC)}>
+            <Link to="/main/documentaries" className={currCat === CATS.DOC ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.DOC)}>
               <FormattedMessage id='CATS.docs' />
             </Link>
           </li>
           <li>
-            <Link to="/main/anime" className={currCat === CATS.ANIME ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.ANIME)}>
+            <Link to="/main/animations" className={currCat === CATS.ANIME ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.ANIME)}>
               <FormattedMessage id='CATS.anime' />
             </Link>
           </li>
@@ -44,13 +44,13 @@ class Categories extends React.Component {
 }
 
 const mapStateToProps = (store) => ({
-  uiState: store.uiReducer,
   dataState: store.dataReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({
   switchCatDispatch: (cat) => {
     dispatch(switchCatAct(cat));
+    dispatch(loadPageAct(cat, 1, 0, 11));
   }
 });
 

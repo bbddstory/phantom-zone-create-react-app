@@ -31,7 +31,7 @@ class TileList extends React.Component {
               {this.props.delBtn && <div className="del-item" title="Remove from the list" onClick={e => this.delItem(e, key)}></div>}
               {buffer[key].poster && buffer[key].poster !== 'N/A' ?
                 <img alt="Poster" src={buffer[key].poster} /> :
-                <div className={'dummy-poster poster-' + buffer[key].category.toLowerCase()}></div>}
+                <div className={'dummy-poster poster-' + buffer[key].category}></div>}
             </Link>
             <div className="info">
               <div className="title">{buffer[key].eng_title}</div>
@@ -49,7 +49,6 @@ class TileList extends React.Component {
 }
 
 const mapStateToProps = (store) => ({
-  // dataState: store.dataReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({

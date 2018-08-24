@@ -65,9 +65,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadHomeListsDispatch: () => {
-    dispatch(loadHomeListsAct())
-  }
+  loadHomeListsDispatch: () => dispatch(loadHomeListsAct())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

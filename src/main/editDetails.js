@@ -41,7 +41,6 @@ class EditDetails extends React.Component {
           return errors;
         }}
         onSubmit={values => {
-          // console.log(values);
           values.plot = values.plot.replace(/'/g, "\\'");
           values.plot = values.plot.replace(/"/g, '\\"');
           this.props.saveDetailsDispatch(values);
@@ -199,12 +198,8 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  editDetailsDispatch: (status, newRec) => {
-    dispatch(toggleEditDetailsAct(status, newRec))
-  },
-  saveDetailsDispatch: (values) => {
-    dispatch(saveDetailsAct(values))
-  }
+  editDetailsDispatch: (status, newRec) => dispatch(toggleEditDetailsAct(status, newRec)),
+  saveDetailsDispatch: (values) => dispatch(saveDetailsAct(values))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditDetails);

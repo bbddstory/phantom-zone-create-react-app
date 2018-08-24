@@ -1,16 +1,11 @@
-// import axios from 'axios';
-// import { NODE_URL } from '../util/utils';
-
 import logo from '../images/login/brand.png';
-// import optHome from '../images/header/ic_home_white_24px.svg';
 import optAdd from '../images/header/ic_add_box_white_24px.svg';
 import optQuick from '../images/header/ic_cast_white_24px.svg';
-// import optMe from '../images/header/ic_account_circle_white_24px.svg';
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { switchCatAct } from '../actions/categoriesActions';
+import { switchCatAct } from '../actions/dataActions';
 import { toggleEditDetailsAct } from '../actions/uiActions';
 import Search from '../components/search';
 import { CATS } from '../util/utils';
@@ -67,9 +62,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  switchCatDispatch: (cat) => {
-    dispatch(switchCatAct(cat))
-  },
+  switchCatDispatch: (cat) => dispatch(switchCatAct(cat)),
   editDetailsDispatch: (status, newRec) => dispatch(toggleEditDetailsAct(status, newRec))
 });
 

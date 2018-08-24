@@ -85,13 +85,8 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loginDispatch: (form) => {
-    dispatch(loginAct(form))
-  },
-  loaderDispatch: (txt) => {
-    dispatch({ type: TOGGLE_LOADER, status: true, loading: false, loaderTxt: txt });
-    // alert(txt);
-  }
+  loginDispatch: (form) => dispatch(loginAct(form)),
+  loaderDispatch: (txt) => dispatch({ type: TOGGLE_LOADER, status: true, loading: false, loaderTxt: txt })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

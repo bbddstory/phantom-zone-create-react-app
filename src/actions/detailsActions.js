@@ -66,7 +66,6 @@ export function commentAct(values) {
     if (firebase.apps) {
       dispatch({ type: TOGGLE_LOADER, status: true });
 
-      // let ck = Object.keys(values)[0];
       await firebase.database().ref(getState().dataReducer.category + '/' + getState().dataReducer.key + '/comments')
         .update(values).then((snapshot) => {
           dispatch({ type: TOGGLE_LOADER, status: false });
