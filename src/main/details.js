@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { toggleEditDetailsAct } from '../actions/uiActions';
-import { watchLaterAct, recommAct, loadDetailsAct, commentAct, delCommentAct } from '../actions/detailsActions';
+import { watchLaterAct, recommAct, loadDetailsAct, commentAct } from '../actions/detailsActions';
 
 import closedCap from '../images/details/baseline_closed_caption_white_24dp.png';
 import imdb from '../images/details/imdb.svg';

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Pages from '../components/pages';
-import posterPrefix from '../images/posters/movies.png';
+import reel from '../images/posters/reel.png';
 
 class CardList extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class CardList extends React.Component {
           return <div className="card" key={key}>
             <Link to={'/main/details/' + key}>
               {buffer[key].poster && buffer[key].poster !== 'N/A' ?
-                <img alt="Poster" src={buffer[key].poster} /> : <img alt="Poster" src={posterPrefix} />
+                <img alt="Poster" src={buffer[key].poster} /> : <img alt="No poster available" src={reel} />
               }
             </Link>
             <h2 className="title">{buffer[key].eng_title}</h2>

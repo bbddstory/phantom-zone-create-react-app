@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { removeHomeListItemAct } from '../actions/homeActions';
 import { loadDetailsAct } from '../actions/detailsActions';
+import reel from '../images/posters/reel.png';
 
 class SlidesList extends React.Component {
     constructor(props) {
@@ -47,8 +48,7 @@ class SlidesList extends React.Component {
                                 {this.props.del && <div className="del-item" title="Remove from the list" onClick={e => this.delItem(e, el.id)}></div>}
                                 {this.props.link && <div onClick={e => { e.stopPropagation(); this.loadDetails(el.id, 'main', true); }} className="link" title="Open full details"></div>}
                                 {el.poster && el.poster !== 'N/A' ?
-                                    <img alt="Poster" src={el.poster} /> :
-                                    <div className={'dummy-poster poster-' + el.category.toLowerCase()}></div>}
+                                    <img alt="Poster" src={el.poster} /> : <img alt="Poster" src={reel} />}
                             </div>
                             {this.props.info && <div className="info">
                                 <div className="title">{el.eng_title}</div>

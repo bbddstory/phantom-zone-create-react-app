@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { loadPageAct } from '../actions/dataActions';
+import Mousetrap from 'mousetrap';
 
 class Pages extends React.Component {
     constructor(props) {
@@ -61,25 +62,18 @@ class Pages extends React.Component {
         return this.props.dataState.pages.currPage
     }
 
-    onKeyUp(e) {
-        console.log(e.target.value);
-    }
-
-    turnPages = (e) => {
-        if (e.ctrlKey && e.which === 37) {
-            this.gotoPage('PREV');
-        }
-        if (e.ctrlKey && e.which === 39) {
-            this.gotoPage('NEXT');
-        }
-    }
-
     componentDidMount() {
-        window.addEventListener('keydown', this.turnPages, true);
+        Mousetrap.bind('home', e => this.gotoPage('FIRST'));
+        Mousetrap.bind('end', e => this.gotoPage('LAST'));
+        Mousetrap.bind('left', e => this.gotoPage('PREV'));
+        Mousetrap.bind('right', e => this.gotoPage('NEXT'));
     }
 
     componentWillUnmount() {
-        window.removeEventListener('keydown', this.turnPages, true);
+        Mousetrap.unbind('home', e => this.gotoPage('FIRST'));
+        Mousetrap.unbind('end', e => this.gotoPage('LAST'));
+        Mousetrap.unbind('left', e => this.gotoPage('PREV'));
+        Mousetrap.unbind('right', e => this.gotoPage('NEXT'));
     }
 
     render() {

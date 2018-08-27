@@ -28,3 +28,5 @@
 //   poster: string().url(),
 //   subtitle: string().url()
 // })}
+
+<Link to={`/users/${user.id}`}>{user.name}</Link>

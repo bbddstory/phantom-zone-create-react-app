@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { removeHomeListItemAct } from '../../actions/homeActions';
 import { loadDetailsAct } from '../../actions/detailsActions';
 import Pages from '../components/pages';
+import reel from '../images/posters/reel.png';
 
 class TileList extends React.Component {
   constructor(props) {
@@ -30,8 +31,7 @@ class TileList extends React.Component {
             <Link to={'/main/details'} onClick={e => this.loadDetails(key, 'main')}>
               {this.props.delBtn && <div className="del-item" title="Remove from the list" onClick={e => this.delItem(e, key)}></div>}
               {buffer[key].poster && buffer[key].poster !== 'N/A' ?
-                <img alt="Poster" src={buffer[key].poster} /> :
-                <div className={'dummy-poster poster-' + buffer[key].category}></div>}
+                <img alt="Poster" src={buffer[key].poster} /> : <img alt="Poster" src={reel} />}
             </Link>
             <div className="info">
               <div className="title">{buffer[key].eng_title}</div>
