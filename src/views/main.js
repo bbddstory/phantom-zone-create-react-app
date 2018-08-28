@@ -64,7 +64,6 @@ class Main extends React.Component {
 
     if (!token) {
       let cs = document.cookie.split(';');
-      // console.log(cs);
 
       if (cs[0] === '' || cs.length < 2) { // No user cookies found or not enough user info
         window.location.hash = '';

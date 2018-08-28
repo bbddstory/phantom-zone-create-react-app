@@ -1,9 +1,16 @@
+export const PAGES = {
+    ipp: 20,
+    currPage: 1,
+    startAt: 0,
+    endAt: 19
+}
+
 export const CATS = {
-    HOME: 'home',
-    MOVIE: 'movies',
-    TV: 'tv',
-    DOC: 'documentaries',
-    ANIME: 'animations'
+    home: 'home',
+    movie: 'movies',
+    tv: 'tv',
+    doc: 'documentaries',
+    anime: 'animations'
 }
 
 // For matching any words from any language
@@ -68,16 +75,16 @@ const inView = (eid) => {
     }
 }
 
-export const resetSearch = () => {
-    if (exist('search') && !inView('search') && !document.getElementById('search-box').classList.contains('search-fixed')) {
-        document.getElementById('search-box').classList.remove('search-restore');
-        document.getElementById('search-box').classList.add('search-fixed');
-    }
-    if (exist('search') && inView('search') && document.getElementById('search-box').classList.contains('search-fixed')) {
-        document.getElementById('search-box').classList.remove('search-fixed');
-        document.getElementById('search-box').classList.add('search-restore');
-    }
-}
+// export const resetSearch = () => {
+//     if (exist('search') && !inView('search') && !document.getElementById('search-box').classList.contains('search-fixed')) {
+//         document.getElementById('search-box').classList.remove('search-restore');
+//         document.getElementById('search-box').classList.add('search-fixed');
+//     }
+//     if (exist('search') && inView('search') && document.getElementById('search-box').classList.contains('search-fixed')) {
+//         document.getElementById('search-box').classList.remove('search-fixed');
+//         document.getElementById('search-box').classList.add('search-restore');
+//     }
+// }
 
 export const resetPages = () => {
     if (exist('pages') && !inView('controls') && !document.getElementById('controls').classList.contains('controls-fixed')) {

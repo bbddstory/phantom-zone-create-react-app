@@ -2,11 +2,11 @@ import { GOTO_PAGE, SWITCH_CAT, SYNC_CAT } from '../actions/dataActions';
 import { SEARCH_RETURN } from '../actions/searchActions';
 import { LOAD_HOME_LISTS, REMOVE_HOME_LIST_ITEM } from '../actions/homeActions';
 import { LOAD_DETAILS, SAVE_COMMENT, DEL_COMMENT, SAVE_NEW, UPDATE_BUFFER_DETAILS } from '../actions/detailsActions';
-import { CATS } from '../util/utils';
+import { CATS, PAGES } from '../util/utils';
 
 let init = {
-  category: CATS.HOME,
-  prevCat: CATS.HOME, // Previous category
+  category: CATS.home,
+  prevCat: CATS.home, // Previous category
   details: {},
   buffer: {},
   search: {},
@@ -15,11 +15,11 @@ let init = {
   recomm: {},
   pages: {
     itemCnt: 0, // Total number of records in selected category
-    ipp: 20, // Items per page
-    pageCnt: 1,
-    currPage: 1,
-    startAt: 0, // Start index of items on current page
-    endAt: 11 // End index of items on current page
+    pageCnt: 1, // Total number of pages is initialised as 1, so that on the UI, it will show up as '1/1'
+    ipp: PAGES.ipp, // Items per page
+    currPage: PAGES.currPage,
+    startAt: PAGES.startAt, // Start index of items on current page
+    endAt: PAGES.endAt // End index of items on current page
   }
 }
 
@@ -53,9 +53,10 @@ export function dataReducer(state = init, action) {
       // Reset all pagination related values
       ns.pages.itemCnt = 0;
       ns.pages.pageCnt = 1;
-      ns.pages.currPage = 1;
-      ns.pages.startAt = 0;
-      ns.pages.endAt = 11;
+      ns.pages.ipp = PAGES.ipp
+      ns.pages.currPage = PAGES.currPage;
+      ns.pages.startAt = PAGES.startAt;
+      ns.pages.endAt = PAGES.endAt;
 
       return ns;
     case GOTO_PAGE:

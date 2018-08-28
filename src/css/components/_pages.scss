@@ -19,13 +19,13 @@
         }
         .first {
             border-right: 1px solid #f2f2f2;
-            border-top-left-radius: 2px;
-            border-bottom-left-radius: 2px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
         }
         .last {
             border-left: 1px solid #f2f2f2;
-            border-top-right-radius: 2px;
-            border-bottom-right-radius: 2px;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
         }
         .page-no {
             height: 42px;
@@ -34,7 +34,7 @@
             line-height: 42px;
             font-size: 16px;
             background: #f2f2f2;
-            .page-no-input {
+            .page-num-input {
                 vertical-align: top;
                 width: 50%;
                 background: #f2f2f2;

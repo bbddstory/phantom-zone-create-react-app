@@ -52,12 +52,8 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadDetailsDispatch: (list) => {
-    dispatch(loadDetailsAct(list))
-  },
-  removeHomeListItemDispatch: (list, key) => {
-    dispatch(removeHomeListItemAct(list, key))
-  }
+  loadDetailsDispatch: (key, list) => dispatch(loadDetailsAct(key, list, false)),
+  removeHomeListItemDispatch: (list, key) => dispatch(removeHomeListItemAct(list, key))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TileList);

@@ -41,7 +41,7 @@ class Header extends React.Component {
         </a>
         <div className="nav-opts">
           <Search />
-          <Link to="/main/home" className="opt-home" title="Home" onClick={e => this.props.switchCatDispatch(CATS.HOME)} />
+          <Link to="/main/home" className="opt-home" title="Home" onClick={e => this.props.switchCatDispatch(CATS.home)} />
           <a onClick={e => this.props.editDetailsDispatch(true, true)} title="Add video">
             <img src={optAdd} alt="Add video" />
           </a>

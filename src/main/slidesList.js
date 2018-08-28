@@ -108,9 +108,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    loadDetailsDispatch: (key, list) => {
-        dispatch(loadDetailsAct(key, list))
-    },
+    loadDetailsDispatch: (key, list) => dispatch(loadDetailsAct(key, list, false)),
     removeHomeListItemDispatch: (list, key) => dispatch(removeHomeListItemAct(list, key))
 });
 

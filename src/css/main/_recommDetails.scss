@@ -71,6 +71,33 @@ $videoWidth: 380px;
                 bottom: 0;
                 height: 30px;
                 display: flex;
+                ul {
+                    position: absolute;
+                    right: -125px;
+                    width: 165px;
+                    padding: 6px;
+                    background: #101010;
+                    border: 1px solid #333;
+                    box-shadow: 3px 3px 5px #000;
+                    box-sizing: border-box;
+                    border-radius: 3px;
+                    li {
+                        display: flex;
+                        padding: 4px;
+                        font-size: 14px;
+                        line-height: 16px;
+                        border-radius: 3px;
+                        cursor: pointer;
+                        &:hover {
+                            background: #00a651;
+                        }
+                        span {
+                            overflow: hidden;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                }
                 div, a {
                     width: 30px;
                     height: 30px;

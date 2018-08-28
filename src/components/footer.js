@@ -35,9 +35,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  switchLocaleDispatch: (locale) => {
-    dispatch(switchLocaleAct(locale))
-  }
+  switchLocaleDispatch: (locale) => dispatch(switchLocaleAct(locale))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Footer);

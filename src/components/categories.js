@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { switchCatAct, loadPageAct } from '../actions/dataActions';
-import { CATS } from '../util/utils';
+import { CATS, PAGES } from '../util/utils';
 
 class Categories extends React.Component {
   constructor(props) {
@@ -18,23 +18,23 @@ class Categories extends React.Component {
       <div className="categories">
         <ol>
           <li>
-            <Link to="/main/movies" className={currCat === CATS.MOVIE ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.MOVIE)}>
-              <FormattedMessage id='CATS.movies' />
+            <Link to="/main/movies" className={currCat === CATS.movie ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.movie)}>
+              <FormattedMessage id='cats.movies' />
             </Link>
           </li>
           <li>
-            <Link to="/main/tv" className={currCat === CATS.TV ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.TV)}>
-              <FormattedMessage id='CATS.tv' />
+            <Link to="/main/tv" className={currCat === CATS.tv ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.tv)}>
+              <FormattedMessage id='cats.tv' />
             </Link>
           </li>
           <li>
-            <Link to="/main/documentaries" className={currCat === CATS.DOC ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.DOC)}>
-              <FormattedMessage id='CATS.docs' />
+            <Link to="/main/documentaries" className={currCat === CATS.doc ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.doc)}>
+              <FormattedMessage id='cats.docs' />
             </Link>
           </li>
           <li>
-            <Link to="/main/animations" className={currCat === CATS.ANIME ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.ANIME)}>
-              <FormattedMessage id='CATS.anime' />
+            <Link to="/main/animations" className={currCat === CATS.anime ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.anime)}>
+              <FormattedMessage id='cats.anime' />
             </Link>
           </li>
         </ol>
@@ -50,7 +50,7 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => ({
   switchCatDispatch: (cat) => {
     dispatch(switchCatAct(cat));
-    dispatch(loadPageAct(cat, 1, 0, 11));
+    dispatch(loadPageAct(cat, PAGES.currPage, PAGES.startAt, PAGES.endAt));
   }
 });
 

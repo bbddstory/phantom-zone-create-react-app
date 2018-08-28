@@ -7,6 +7,7 @@ import closedCap from '../images/details/baseline_closed_caption_white_24dp.png'
 import imdb from '../images/details/imdb.svg';
 import douban from '../images/details/douban.png';
 import mtime from '../images/details/mtime.png';
+import reel from '../images/posters/reel.png';
 
 class Details extends React.Component {
   constructor(props) {
@@ -85,8 +86,7 @@ class Details extends React.Component {
           <div className="video-details">
             <div className="poster">
               {item.poster && item.poster !== 'N/A' ?
-                <img alt="Poster" src={item.poster} /> :
-                <div className={'dummy-poster poster-' + item.category.toLowerCase()}></div>}
+                <img alt="Poster" src={item.poster} /> : <img alt="No poster available" src={reel} />}
             </div>
 
             <div className="info">
@@ -98,7 +98,7 @@ class Details extends React.Component {
               <span className="misc">
                 Year: {item.year}<br />
                 Runtime: {item.runtime || 'N/A'}<br />
-                {item.director && item.director !== 'null' ? 'Director: ' + (item.director || 'N/A') : 'Creator: ' + (item.creator || 'N/A')}<br />
+                {item.director && item.director !== 'null' ? 'Directors: ' + (item.director || 'N/A') : 'Creators: ' + (item.creator || 'N/A')}<br />
                 Stars: {item.stars || 'N/A'}
               </span>
               <div className="actions">
@@ -188,7 +188,7 @@ const mapDispatchToProps = (dispatch) => ({
   commentDispatch: (values) => dispatch(commentAct(values)),
   // delCommentDispatch: (id) => dispatch(delCommentAct(id)),
   editDetailsDispatch: (status, newRec) => dispatch(toggleEditDetailsAct(status, newRec)),
-  loadDetailsDispatch: (key, list) => dispatch(loadDetailsAct(key, list))
+  loadDetailsDispatch: (key, list) => dispatch(loadDetailsAct(key, list, true))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Details);

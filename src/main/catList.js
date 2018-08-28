@@ -15,7 +15,7 @@ class CatList extends React.Component {
     let idx = hash.lastIndexOf('/');
     let cat = hash.substr(idx + 1, hash.length - idx);
     
-    if (this.props.dataState.category === CATS.HOME || this.props.dataState.category !== this.props.dataState.prevCat) {
+    if (this.props.dataState.category === CATS.home || this.props.dataState.category !== this.props.dataState.prevCat) {
       this.props.switchCatDispatch(cat);
       this.props.syncCat();
       this.props.loadPageDispatch(
@@ -33,7 +33,7 @@ class CatList extends React.Component {
   
   render() {
     return (
-      <CardList dataRef={this.props.dataState.buffer} showPages={true} category=""/>
+      <CardList dataRef={this.props.dataState.buffer} showPages={true} />
     )
   }
 }
@@ -43,15 +43,9 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  syncCat: () => {
-    dispatch(syncCatAct())
-  },
-  loadPageDispatch: (category, currPage, startAt, endAt) => {
-    dispatch(loadPageAct(category, currPage, startAt, endAt))
-  },
-  switchCatDispatch: (cat) => {
-    dispatch(switchCatAct(cat));
-  }
+  syncCat: () => dispatch(syncCatAct()),
+  loadPageDispatch: (category, currPage, startAt, endAt) => dispatch(loadPageAct(category, currPage, startAt, endAt)),
+  switchCatDispatch: (cat) => dispatch(switchCatAct(cat))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CatList);

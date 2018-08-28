@@ -58,9 +58,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  searchDispatch: (key) => {
-    dispatch(searchAct(key))
-  }
+  searchDispatch: (key) => dispatch(searchAct(key))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

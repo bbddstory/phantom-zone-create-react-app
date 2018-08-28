@@ -12,7 +12,7 @@ class EditDetails extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({details: Object.assign({}, this.props.dataState.mainDetails)})
+    this.setState({details: Object.assign({}, this.props.dataState.details.main)})
   }
 
   render() {
@@ -25,28 +25,36 @@ class EditDetails extends React.Component {
       item = this.state.details
     }
 
+    
+    
     return (
       <Formik
-        initialValues = {item}
-        validate = {values => {
-          let errors = {};
-          for (let p in values) {
-              if (values[p] && !new RegExp(REGEX[p]).test(values[p])) {
-                errors[p] = 1; // or set to 'true'
-              }
-              if (values[p] === null) {
-                values[p] = ''
-              }
+      initialValues = {item}
+      validate = {values => {
+        let errors = {};
+        
+        for (let p in values) {
+          if (values[p] && !new RegExp(REGEX[p]).test(values[p])) {
+            errors[p] = 1; // or set to 'true'
           }
-          return errors;
-        }}
-        onSubmit={values => {
-          values.plot = values.plot.replace(/'/g, "\\'");
-          values.plot = values.plot.replace(/"/g, '\\"');
-          this.props.saveDetailsDispatch(values);
-          this.props.editDetailsDispatch(false, false);
-        }}
-        render = {
+          if (values[p] === null) {
+            values[p] = ''
+          }
+        }
+        return errors;
+      }}
+      onSubmit={values => {
+        values.plot = values.plot.replace(/'/g, "\\'");
+        values.plot = values.plot.replace(/"/g, '\\"');
+        
+        for(let p in values) {
+          values[p] = values[p].trim()
+        }
+        
+        this.props.saveDetailsDispatch(values);
+        this.props.editDetailsDispatch(false, false);
+      }}
+      render = {
           ({touched, errors, values, handleChange, handleBlur, handleSubmit}) => (
             <Form onSubmit={handleSubmit}>
               <div className="popup-bg">
@@ -89,12 +97,12 @@ class EditDetails extends React.Component {
 
                       <div className="flex">
                         <div className="input-padding width-50">
-                          <label>Director</label>
+                          <label>Directors</label>
                           <input type="text" name="director" value={values.director || ''} onChange={handleChange} onBlur={handleBlur} />
                           {touched.director && errors.director && <span style={{color: 'red', marginTop: '0'}}>One or more names separated by comma</span>}
                         </div>
                         <div className="input-padding width-50">
-                          <label>Creator</label>
+                          <label>Creators</label>
                           <input type="text" name="creator" value={values.creator || ''} onChange={handleChange} onBlur={handleBlur} />
                           {touched.creator && errors.creator && <span style={{color: 'red', marginTop: '0'}}>One or more names separated by comma</span>}
                         </div>
@@ -157,11 +165,11 @@ class EditDetails extends React.Component {
                         </div>
                         <div className="input-padding width-25">
                           <label>Category</label>
-                          <select ref="catSel" name="cat" value={values.category || 'Movie'} disabled={!this.props.uiState.newRec} onChange={handleChange} onBlur={handleBlur}>
-                            <option value={CATS.MOVIE}>Movie</option>
-                            <option value={CATS.TV}>TV</option>
-                            <option value={CATS.DOC}>Documentary</option>
-                            <option value={CATS.ANIME}>Animation</option>
+                          <select name="cat" value={values.category} disabled={!this.props.uiState.newRec} onChange={handleChange} onBlur={handleBlur}>
+                            <option value={CATS.movie}>Movies</option>
+                            <option value={CATS.tv}>TV</option>
+                            <option value={CATS.doc}>Documentaries</option>
+                            <option value={CATS.anime}>Animations</option>
                           </select>
                         </div>
                       </div>

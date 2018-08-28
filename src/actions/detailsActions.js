@@ -12,7 +12,7 @@ export const UPDATE_BUFFER_DETAILS = 'UPDATE_BUFFER_DETAILS';
 export const SAVE_NEW = 'SAVE_NEW';
 
 // Action creators
-export function loadDetailsAct(key, list) {
+export function loadDetailsAct(key, list, reload) {
   return (dispatch, getState) => {
     dispatch({ type: TOGGLE_LOADER, status: true });
     axios.post(NODE_URL() + '/details/load', {
@@ -20,6 +20,13 @@ export function loadDetailsAct(key, list) {
       key: key
     }).then(res => {
       if (res.status === 200) {
+        // This is a temporary fix as all categories names in the Db are currently capitalised
+        res.data.details.category = res.data.details.category.toLowerCase();
+        if(reload) {
+          getState().dataReducer.category = res.data.details.category;
+          // getState().dataReducer.prevCat = res.data.details.category;
+        }
+
         dispatch({ type: LOAD_DETAILS, list: list, details: res.data.details });
         dispatch({ type: TOGGLE_LOADER, status: false });
       }
@@ -100,7 +107,8 @@ export function saveDetailsAct(values) {
     }).then(res => {
       if (res.status === 200) {
         // dispatch({ type: LOAD_DETAILS, list: list, details: res.data.details });
-        dispatch({ type: TOGGLE_LOADER, status: false });
+        // dispatch({ type: TOGGLE_LOADER, status: false });
+        window.location.reload();
       }
     }).catch(err => console.log(err));
   }

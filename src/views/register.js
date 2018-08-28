@@ -55,9 +55,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  registerDispatch: (form) => {
-    dispatch(registerAct(form))
-  }
+  registerDispatch: (form) => dispatch(registerAct(form))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
