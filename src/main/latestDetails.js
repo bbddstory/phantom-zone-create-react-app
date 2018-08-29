@@ -102,7 +102,7 @@ class LatestDetails extends React.Component {
                 <a target="_blank" title="Search for subtitles on Subscene" href={'https://subscene.com/subtitles/title?q=' + item.eng_title.replace(' ', '+')}>
                   <img src={closedCap} alt="CC" />
                 </a>
-                {recomm && <ul>{this.friends(item.id)}</ul>}
+                {recomm && <ul className={recomm ? 'fadeIn' : ''}>{this.friends(item.id)}</ul>}
               </div>
             </div>
 

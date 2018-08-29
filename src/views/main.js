@@ -97,7 +97,7 @@ class Main extends React.Component {
     const { uiState } = this.props;
 
     return (
-      <IntlProvider locale={uiState.locale} messages={lang[uiState.locale]}>
+      <IntlProvider locale={uiState.locale} messages={lang[uiState.locale]} key="en">
         <div className='center'>
           <Loader />
           <Header />

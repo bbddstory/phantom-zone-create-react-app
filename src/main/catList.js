@@ -33,7 +33,7 @@ class CatList extends React.Component {
   
   render() {
     return (
-      <CardList dataRef={this.props.dataState.buffer} showPages={true} />
+      <CardList dataRef={this.props.dataState.buffer} usePages={true} />
     )
   }
 }

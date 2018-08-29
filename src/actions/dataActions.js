@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 import { NODE_URL } from '../util/utils';
-import { TOGGLE_LOADER } from './uiActions';
+import { TOGGLE_LOADER, TOGGLE_PAGES } from './uiActions';
+
+import { resetPages } from '../util/utils';
 
 // Action types
 export const GOTO_PAGE = 'GOTO_PAGE';
@@ -35,6 +37,11 @@ export function loadPageAct(category, currPage, startAt, endAt) {
         let itemCnt = res.data.cnt;
         dispatch({ type: GOTO_PAGE, buffer: res.data.data, itemCnt, currPage, startAt, endAt });
         dispatch({ type: TOGGLE_LOADER, status: false });
+        // 500ms is considered safe, or the UI may NOT finish rendering
+        setTimeout(() => {
+          dispatch({ type: TOGGLE_PAGES, status: true });
+          resetPages();
+        }, 500);
       }
     }).catch(err => console.log(err));
   }

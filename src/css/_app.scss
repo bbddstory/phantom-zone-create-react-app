@@ -90,7 +90,22 @@ button {
     background: url("../images/login/main_bg.png") repeat !important;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.fadeIn {
+    animation-name: fadeIn;
+    animation-duration: .2s;
+}
+
 .popup-bg {
+    animation-name: fadeIn;
+    animation-duration: .3s;
     position: absolute;
     z-index: 500;
     top: 0;

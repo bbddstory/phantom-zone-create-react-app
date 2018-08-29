@@ -31,7 +31,7 @@ class SearchList extends React.Component {
 
   render() {
     return (
-      <CardList dataRef={this.props.dataState.search} showPages={false} />
+      <CardList dataRef={this.props.dataState.search} usePages={false} />
     )
   }
 }

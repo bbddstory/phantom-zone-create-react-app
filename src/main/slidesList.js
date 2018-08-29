@@ -30,8 +30,6 @@ class SlidesList extends React.Component {
     slides = () => {
         const buffer = this.props.dataRef;
         const ipp = this.props.ipp;
-        const hidePage = { display: 'none' };
-        const showPage = { display: 'block' };
         const tileStyle = { width: this.props.vertical ? '100%' : 'calc(' + 100 / ipp + '% - 20px)' };
 
         let slides = [];
@@ -63,7 +61,7 @@ class SlidesList extends React.Component {
             }
 
             slides.push(
-                <div className="slide" style={this.state.currPage === i ? showPage : hidePage} key={i}>
+                this.state.currPage === i && <div className={this.state.currPage === i ? 'slide fadeIn' : 'slide'} key={i}>
                     {page}
                 </div>
             );

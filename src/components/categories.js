@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { switchCatAct, loadPageAct } from '../actions/dataActions';
-import { CATS, PAGES } from '../util/utils';
+import { togglePagesAct } from '../actions/uiActions';
+import { CATS, pageSettings } from '../util/utils';
+import { injectIntl } from "react-intl";
 
 class Categories extends React.Component {
   constructor(props) {
@@ -11,8 +13,8 @@ class Categories extends React.Component {
     this.state = {}
   }
 
-  render() {
-    const currCat = this.props.dataState.category;
+render() {
+    let currCat = this.props.dataState.category;
 
     return (
       <div className="categories">
@@ -49,9 +51,11 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   switchCatDispatch: (cat) => {
+    let ps = pageSettings();
+    dispatch(togglePagesAct(false));
     dispatch(switchCatAct(cat));
-    dispatch(loadPageAct(cat, PAGES.currPage, PAGES.startAt, PAGES.endAt));
+    dispatch(loadPageAct(cat, ps.currPage, ps.startAt, ps.endAt));
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories);
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(Categories));

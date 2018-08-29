@@ -42,7 +42,7 @@ class TileList extends React.Component {
             </div>
           </div>
         })}
-        {this.props.showPages && buffer && buffer.length && <Pages />}
+        {this.props.usePages && buffer && buffer.length && <Pages />}
       </div>
     )
   }

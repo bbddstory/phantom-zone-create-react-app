@@ -12,6 +12,7 @@ class CardList extends React.Component {
 
   render() {
     const buffer = this.props.dataRef;
+    const tglPages = this.props.uiState.tglPages;
 
     return (
       <div className="card-list">
@@ -26,13 +27,16 @@ class CardList extends React.Component {
             <h4 className="year">{buffer[key].year}</h4>
           </div>
         })}
-        {this.props.showPages && buffer && Object.keys(buffer).length && <Pages />}
+        <div className={tglPages ? 'pages-holder fadeIn' : 'pages-holder' }>
+          {tglPages && this.props.usePages && buffer && Object.keys(buffer).length && <Pages />}
+        </div>
       </div>
     )
   }
 }
 
 const mapStateToProps = (store) => ({
+  uiState: store.uiReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({

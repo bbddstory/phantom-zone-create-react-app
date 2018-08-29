@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { loadPageAct } from '../actions/dataActions';
-import { PAGES } from '../util/utils';
+import { togglePagesAct } from '../actions/uiActions';
+import { pageSettings } from '../util/utils';
 import Mousetrap from 'mousetrap';
 
 class Pages extends React.Component {
@@ -12,7 +13,8 @@ class Pages extends React.Component {
     }
 
     gotoPage(page) {
-        let currPage = PAGES.currPage, startAt = PAGES.startAt, endAt = PAGES.endAt;
+        let ps = pageSettings();
+        let currPage = ps.currPage, startAt = ps.startAt, endAt = ps.endAt, load = false;
         let data_currPage = this.props.dataState.pages.currPage,
             data_pageCnt = this.props.dataState.pages.pageCnt,
             data_startAt = this.props.dataState.pages.startAt,
@@ -26,6 +28,7 @@ class Pages extends React.Component {
                     currPage = 1;
                     startAt = 0;
                     endAt = data_ipp - 1;
+                    load = true;
                 }
                 break;
             case 'LAST':
@@ -33,6 +36,7 @@ class Pages extends React.Component {
                     currPage = data_pageCnt;
                     startAt = data_ipp * (data_pageCnt - 1);
                     endAt = data_itemCnt - 1;
+                    load = true;
                 }
                 break;
             case 'PREV':
@@ -40,6 +44,7 @@ class Pages extends React.Component {
                     currPage = data_currPage - 1;
                     startAt = data_startAt - data_ipp;
                     endAt = startAt + data_ipp - 1;
+                    load = true;
                 }
                 break;
             case 'NEXT':
@@ -50,6 +55,7 @@ class Pages extends React.Component {
                     if (endAt > (data_itemCnt - 1)) {
                         endAt = data_itemCnt - 1
                     }
+                    load = true;
                 }
                 break;
             default: // Go to specific page
@@ -57,11 +63,15 @@ class Pages extends React.Component {
                     currPage = page;
                     startAt = data_ipp * page - 1;
                     endAt = startAt + data_ipp - 1;
+                    load = true;
                 }
                 break;
         }
-
-        this.props.loadPageDispatch(this.props.dataState.category, currPage, startAt, endAt);
+            
+        if(load) {
+            this.props.togglePages(false);
+            this.props.loadPageDispatch(this.props.dataState.category, currPage, startAt, endAt);
+        }
     }
 
     setPageNum(e) {
@@ -109,6 +119,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    togglePages: (status) => dispatch(togglePagesAct(status)),
     loadPageDispatch: (category, currPage, startAt, endAt) => dispatch(loadPageAct(category, currPage, startAt, endAt))
 });
 
