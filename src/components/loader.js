@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { TOGGLE_LOADER } from '../actions/uiActions';
 
 class Loader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  hideLoader(e) {
+    this.props.loaderDispatch();
   }
 
   render() {
@@ -18,7 +23,7 @@ class Loader extends React.Component {
           <div className="double-bounce1"></div>
           <div className="double-bounce2"></div>
         </div>}
-        {uiState.showLoader && !uiState.loading && <button>OK</button>}
+        {!uiState.loading && <button onClick={e => this.hideLoader(e)}>OK</button>}
       </div>
     )
   }
@@ -29,6 +34,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  loaderDispatch: () => dispatch({ type: TOGGLE_LOADER, status: false })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Loader);

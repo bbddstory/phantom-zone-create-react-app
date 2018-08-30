@@ -11,12 +11,9 @@ class Login extends React.Component {
     super(props);
     this.state = { form: { email: 'leon@gmail.com', pwd: 'leon@gmail.com' } }
 
-    // TODO: If visit main.tsx directly, these interceptors DON'T initiated
     // Global Axios request interceptor
     axios.interceptors.request.use((config) => {
-      console.log('-- AXIOS request intercep');
-      console.log(this.props.loginState.token);
-      // let token = this.props.loginState.token;
+      console.log('-- Global Axios request intercep');
       
       config.headers.token = this.props.loginState.token;
       return config;
@@ -26,18 +23,21 @@ class Login extends React.Component {
     
     // Global Axios response interceptor
     axios.interceptors.response.use(null, err => {
+      console.log('-- Global Axios response intercep');
       console.log(err);
 
-      // For handling cookie expiration
-      if (err.response.status === 401 || err.response.status === 403) { // Not authorized
-        window.location.hash = '';
-      }
-      if (err.response.status === 406) { // Email not found / Email or password wrong
-        console.log('--', 123);
-        
-        // console.log(err.response);
-
-        this.props.loaderDispatch(err.response.data.data);
+      if (!err.response) { // err.toString() === 'Error: Network Error'
+        this.props.loaderDispatch('Network error: connection refused');
+      } else {
+        // For handling cookie expiration
+        if (err.response.status === 401 || err.response.status === 403) { // Not authorized
+          window.location.hash = '';
+        }
+        if (err.response.status === 406) { // Email not found / Email or password wrong
+          console.log(err.response);
+          
+          this.props.loaderDispatch(err.response.data.data);
+        }
       }
     });
   }
@@ -81,6 +81,7 @@ class Login extends React.Component {
 
 // Here store is the masterStore defined in index.tsx
 const mapStateToProps = (store) => ({
+  uiState: store.uiReducer,
   loginState: store.loginReducer,
 });
 

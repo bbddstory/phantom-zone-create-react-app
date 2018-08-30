@@ -4,9 +4,9 @@ import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { parseCookie, resetPages } from '../util/utils';
 import { setTokenAct, friendsAct } from '../actions/loginActions';
+import { TOGGLE_LOADER } from '../actions/uiActions';
 
 // Components
-import Loader from '../components/loader';
 import Header from '../components/header';
 import Categories from '../components/categories';
 // import Search from './components/search';
@@ -36,6 +36,8 @@ class Main extends React.Component {
 
     // Global Axios request interceptor
     axios.interceptors.request.use((config) => {
+      console.log('-- Global Axios request intercep');
+
       config.headers.token = this.props.loginState.token;
       return config;
     }, err => {
@@ -44,16 +46,22 @@ class Main extends React.Component {
 
     // Global Axios response interceptor
     axios.interceptors.response.use(null, err => {
+      console.log('-- Global Axios response intercep');
       console.log(err);
 
-      // For handling cookie expiration
-      if (err.response.status === 401 || err.response.status === 403) { // Not authorized
-        window.location.hash = '';
-      }
-      if (err.response.status === 406) { // Email not found / Email or password wrong
-        console.log('--', 'Email not found / Email or password wrong');
-        console.log(err.response);
-        this.props.loaderDispatch(err.response.data.data);
+      if (!err.response) { // err.toString() === 'Error: Network Error'
+        this.props.loaderDispatch('Network error: connection refused');
+      } else {
+        // For handling cookie expiration
+        if (err.response.status === 401 || err.response.status === 403) { // Not authorized
+          window.location.hash = '';
+        }
+        if (err.response.status === 406) { // Email not found / Email or password wrong
+          console.log('--', 'Email not found / Email or password wrong');
+          console.log(err.response);
+
+          this.props.loaderDispatch(err.response.data.data);
+        }
       }
     });
   }
@@ -99,7 +107,6 @@ class Main extends React.Component {
     return (
       <IntlProvider locale={uiState.locale} messages={lang[uiState.locale]} key="en">
         <div className='center'>
-          <Loader />
           <Header />
           <Categories />
           {/* <Search /> */}
@@ -127,7 +134,8 @@ const mapDispatchToProps = (dispatch) => ({
   loginDispatch: (token, email, user) => {
     dispatch(setTokenAct(token, email, user));
     dispatch(friendsAct(token, email));
-  }
+  },
+  loaderDispatch: (txt) => dispatch({ type: TOGGLE_LOADER, status: true, loading: false, loaderTxt: txt })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
