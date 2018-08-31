@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { loadPageAct } from '../actions/dataActions';
-import { togglePagesAct } from '../actions/uiActions';
+import { togglePagesAct, switchViewAct } from '../actions/uiActions';
 import { pageSettings } from '../util/utils';
 import Mousetrap from 'mousetrap';
 
@@ -100,14 +100,18 @@ class Pages extends React.Component {
         return (
             <div id="pages">
                 <div id="controls">
-                    <button className="first" onClick={e => this.gotoPage('FIRST')}>❬❬</button>
-                    <button onClick={e => this.gotoPage('PREV')}>❬</button>
-                    <div className="page-no">
-                        <input type="text" ref={this.numRef} className="page-num-input" placeholder={this.props.dataState.pages.currPage} onKeyUp={e => this.setPageNum(e)} />
-                        <span className="page-cnt">/&nbsp;{this.props.dataState.pages.pageCnt}</span>
+                    <button className="ctrl-wrap switch" onClick={e => this.props.switchView()}></button>
+                    <div className="ctrl-wrap">
+                        <button className="first" onClick={e => this.gotoPage('FIRST')}>❬❬</button>
+                        <button onClick={e => this.gotoPage('PREV')}>❬</button>
+                        <div className="page-no">
+                            <input type="text" ref={this.numRef} className="page-num-input" placeholder={this.props.dataState.pages.currPage} onKeyUp={e => this.setPageNum(e)} />
+                            <span className="page-cnt">/&nbsp;{this.props.dataState.pages.pageCnt}</span>
+                        </div>
+                        <button onClick={e => this.gotoPage('NEXT')}>❭</button>
+                        <button className="last" onClick={e => this.gotoPage('LAST')}>❭❭</button>
                     </div>
-                    <button onClick={e => this.gotoPage('NEXT')}>❭</button>
-                    <button className="last" onClick={e => this.gotoPage('LAST')}>❭❭</button>
+                    <button className="ctrl-wrap top" onClick={e => this.gotoPage('FIRST')}></button>
                 </div>
             </div>
         )
@@ -119,6 +123,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    switchView: () => dispatch(switchViewAct()),
     togglePages: (status) => dispatch(togglePagesAct(status)),
     loadPageDispatch: (category, currPage, startAt, endAt) => dispatch(loadPageAct(category, currPage, startAt, endAt))
 });

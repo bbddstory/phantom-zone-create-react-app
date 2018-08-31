@@ -3,6 +3,7 @@ export const LOCALE = 'LOCALE';
 export const TOGGLE_LOADER = 'TOGGLE_LOADER';
 export const TOGGLE_PAGES = 'TOGGLE_PAGES';
 export const TOGGLE_EDIT_DETAILS = 'TOGGLE_EDIT_DETAILS';
+export const SWITCH_VIEW = 'SWITCH_VIEW';
 
 // Action creators
 export function switchLocaleAct(locale) {
@@ -24,5 +25,11 @@ export function togglePagesAct(status) {
   return {
     type: TOGGLE_PAGES,
     status
+  }
+}
+
+export function switchViewAct() {
+  return {
+    type: SWITCH_VIEW
   }
 }

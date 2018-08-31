@@ -36,7 +36,7 @@ class Main extends React.Component {
 
     // Global Axios request interceptor
     axios.interceptors.request.use((config) => {
-      console.log('-- Global Axios request intercep');
+      // console.log('-- Global Axios request intercep');
 
       config.headers.token = this.props.loginState.token;
       return config;
@@ -46,7 +46,7 @@ class Main extends React.Component {
 
     // Global Axios response interceptor
     axios.interceptors.response.use(null, err => {
-      console.log('-- Global Axios response intercep');
+      // console.log('-- Global Axios response intercep');
       console.log(err);
 
       if (!err.response) { // err.toString() === 'Error: Network Error'

@@ -1,4 +1,4 @@
-import { LOCALE, TOGGLE_LOADER, TOGGLE_PAGES, TOGGLE_EDIT_DETAILS } from '../actions/uiActions';
+import { LOCALE, TOGGLE_LOADER, TOGGLE_PAGES, TOGGLE_EDIT_DETAILS, SWITCH_VIEW } from '../actions/uiActions';
 
 let init = {
   locale: 'en',
@@ -7,7 +7,8 @@ let init = {
   loaderTxt: '',
   loading: true,
   editDetails: false,
-  newRec: false
+  newRec: false,
+  view: 'card'
 }
 
 export function uiReducer(state = init, action) {
@@ -31,6 +32,14 @@ export function uiReducer(state = init, action) {
     case TOGGLE_EDIT_DETAILS:
       ns.editDetails = action.status;
       ns.newRec = action.newRec;
+      
+      return ns;
+    case SWITCH_VIEW:
+      if (ns.view === 'card') {
+        ns.view = 'tile'
+      } else {
+        ns.view = 'card'
+      }
       
       return ns;
     default:

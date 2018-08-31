@@ -1,59 +1,52 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { removeHomeListItemAct } from '../../actions/homeActions';
-import { loadDetailsAct } from '../../actions/detailsActions';
 import Pages from '../components/pages';
 import reel from '../images/posters/reel.png';
+import { resetPages } from '../util/utils';
 
-class TileList extends React.Component {
+class CardList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  delItem(e, key) {
-    e.preventDefault();
-    this.props.removeHomeListItemDispatch(this.props.list, key);
-  }
-
-  loadDetails(key, list) {
-    this.props.loadDetailsDispatch(key, list);
+  componentDidMount() {
+    resetPages();
   }
 
   render() {
     const buffer = this.props.dataRef;
+    const tglPages = this.props.uiState.tglPages;
 
     return (
-      <div className="tile-list">
+      <div className="view-list">
         {Object.keys(buffer).map((key) => {
           return <div className="tile" key={key}>
-            <Link to={'/main/details'} onClick={e => this.loadDetails(key, 'main')}>
-              {this.props.delBtn && <div className="del-item" title="Remove from the list" onClick={e => this.delItem(e, key)}></div>}
-              {buffer[key].poster && buffer[key].poster !== 'N/A' ?
-                <img alt="Poster" src={buffer[key].poster} /> : <img alt="Poster" src={reel} />}
-            </Link>
-            <div className="info">
-              <div className="title">{buffer[key].eng_title}</div>
-              <div className="details">
-                <span className="year">{buffer[key].year}</span><br />
-                {buffer[key].director || buffer[key].creator || buffer[key].prod}
-              </div>
+            <div className="tile-wrap">
+              <Link to={'/main/details/' + key}>
+                {buffer[key].poster && buffer[key].poster !== 'N/A' ?
+                  <img alt="Poster" src={buffer[key].poster} /> : <img alt="Poster not available" src={reel} />
+                }
+              </Link>
+              <h2 className="title">{buffer[key].eng_title}</h2>
+              <h4 className="year">{buffer[key].year}</h4>
             </div>
           </div>
         })}
-        {this.props.usePages && buffer && buffer.length && <Pages />}
+        <div className={tglPages ? 'pages-holder fadeIn' : 'pages-holder' } style={{marginTop:'30px'}}>
+          {tglPages && this.props.usePages && buffer && Object.keys(buffer).length && <Pages />}
+        </div>
       </div>
     )
   }
 }
 
 const mapStateToProps = (store) => ({
+  uiState: store.uiReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadDetailsDispatch: (key, list) => dispatch(loadDetailsAct(key, list, false)),
-  removeHomeListItemDispatch: (list, key) => dispatch(removeHomeListItemAct(list, key))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TileList);
+export default connect(mapStateToProps, mapDispatchToProps)(CardList);

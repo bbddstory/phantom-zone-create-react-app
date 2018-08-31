@@ -3,11 +3,16 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Pages from '../components/pages';
 import reel from '../images/posters/reel.png';
+import { resetPages } from '../util/utils';
 
 class CardList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentDidMount() {
+    resetPages();
   }
 
   render() {
@@ -19,12 +24,12 @@ class CardList extends React.Component {
         {Object.keys(buffer).map((key) => {
           return <div className="card" key={key}>
             <Link to={'/main/details/' + key}>
+            <h4>{buffer[key].year}</h4>
               {buffer[key].poster && buffer[key].poster !== 'N/A' ?
-                <img alt="Poster" src={buffer[key].poster} /> : <img alt="No poster available" src={reel} />
+                <img alt="Poster" src={buffer[key].poster} /> : <img alt="Poster not available" src={reel} />
               }
             </Link>
-            <h2 className="title">{buffer[key].eng_title}</h2>
-            <h4 className="year">{buffer[key].year}</h4>
+            <h2>{buffer[key].eng_title}</h2>
           </div>
         })}
         <div className={tglPages ? 'pages-holder fadeIn' : 'pages-holder' }>

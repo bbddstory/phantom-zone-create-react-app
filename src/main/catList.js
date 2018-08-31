@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { switchCatAct, syncCatAct, loadPageAct } from '../actions/dataActions';
 import CardList from './cardList';
+import TileList from './tileList';
 import { CATS } from '../util/utils';
 
 class CatList extends React.Component {
@@ -33,12 +34,15 @@ class CatList extends React.Component {
   
   render() {
     return (
-      <CardList dataRef={this.props.dataState.buffer} usePages={true} />
+      this.props.uiState.view === 'card' ? 
+      <CardList dataRef={this.props.dataState.buffer} usePages={true} /> : <TileList dataRef={this.props.dataState.buffer} usePages={true} />
+      // <CardList dataRef={this.props.dataState.buffer} usePages={true} />
     )
   }
 }
 
 const mapStateToProps = (store) => ({
+  uiState: store.uiReducer,
   dataState: store.dataReducer
 });
 

@@ -37,11 +37,11 @@ export function loadPageAct(category, currPage, startAt, endAt) {
         let itemCnt = res.data.cnt;
         dispatch({ type: GOTO_PAGE, buffer: res.data.data, itemCnt, currPage, startAt, endAt });
         dispatch({ type: TOGGLE_LOADER, status: false });
-        // 500ms is considered safe, or the UI may NOT finish rendering
-        setTimeout(() => {
+        // Pause for a moment, or the UI may NOT have finished rendering
+        // setTimeout(() => {
           dispatch({ type: TOGGLE_PAGES, status: true });
           resetPages();
-        }, 500);
+        // }, 200);
       }
     }).catch(err => console.log(err));
   }
