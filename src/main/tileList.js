@@ -5,7 +5,7 @@ import Pages from '../components/pages';
 import reel from '../images/posters/reel.png';
 import { resetPages } from '../util/utils';
 
-class CardList extends React.Component {
+class TileList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -20,21 +20,23 @@ class CardList extends React.Component {
     const tglPages = this.props.uiState.tglPages;
 
     return (
-      <div className="view-list">
+      <div className="tile-list">
         {Object.keys(buffer).map((key) => {
           return <div className="tile" key={key}>
             <div className="tile-wrap">
-              <Link to={'/main/details/' + key}>
+              <Link to={'/main/details/' + key} className="pulsing-load">
                 {buffer[key].poster && buffer[key].poster !== 'N/A' ?
                   <img alt="Poster" src={buffer[key].poster} /> : <img alt="Poster not available" src={reel} />
                 }
               </Link>
-              <h2 className="title">{buffer[key].eng_title}</h2>
-              <h4 className="year">{buffer[key].year}</h4>
+              <div className="info">
+                <h2 className="title">{buffer[key].eng_title}</h2>
+                <h4 className="year">{buffer[key].year}</h4>
+              </div>
             </div>
           </div>
         })}
-        <div className={tglPages ? 'pages-holder fadeIn' : 'pages-holder' } style={{marginTop:'30px'}}>
+        <div className={tglPages ? 'pages-holder fade-in' : 'pages-holder' } style={{marginTop:'30px'}}>
           {tglPages && this.props.usePages && buffer && Object.keys(buffer).length && <Pages />}
         </div>
       </div>
@@ -49,4 +51,4 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => ({
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardList);
+export default connect(mapStateToProps, mapDispatchToProps)(TileList);

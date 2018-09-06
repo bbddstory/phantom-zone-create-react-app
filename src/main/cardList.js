@@ -23,8 +23,8 @@ class CardList extends React.Component {
       <div className="card-list">
         {Object.keys(buffer).map((key) => {
           return <div className="card" key={key}>
-            <Link to={'/main/details/' + key}>
-            <h4>{buffer[key].year}</h4>
+            <Link to={'/main/details/' + key} className="pulsing-load">
+              <h4>{buffer[key].year}</h4>
               {buffer[key].poster && buffer[key].poster !== 'N/A' ?
                 <img alt="Poster" src={buffer[key].poster} /> : <img alt="Poster not available" src={reel} />
               }
@@ -32,7 +32,7 @@ class CardList extends React.Component {
             <h2>{buffer[key].eng_title}</h2>
           </div>
         })}
-        <div className={tglPages ? 'pages-holder fadeIn' : 'pages-holder' }>
+        <div className={tglPages ? 'pages-holder fade-in' : 'pages-holder' }>
           {tglPages && this.props.usePages && buffer && Object.keys(buffer).length && <Pages />}
         </div>
       </div>

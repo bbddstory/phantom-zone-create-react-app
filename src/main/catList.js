@@ -36,7 +36,6 @@ class CatList extends React.Component {
     return (
       this.props.uiState.view === 'card' ? 
       <CardList dataRef={this.props.dataState.buffer} usePages={true} /> : <TileList dataRef={this.props.dataState.buffer} usePages={true} />
-      // <CardList dataRef={this.props.dataState.buffer} usePages={true} />
     )
   }
 }

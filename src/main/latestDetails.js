@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-// import { toggleEditDetailsAct } from '../actions/uiActions';
 import { watchLaterAct, recommAct, commentAct } from '../actions/detailsActions';
 
 import closedCap from '../images/details/baseline_closed_caption_white_24dp.png';
@@ -80,7 +79,7 @@ class LatestDetails extends React.Component {
           <div className="latest-details">
             <div className="poster">
               {item.poster && item.poster !== 'N/A' ?
-                <img alt="Poster" src={item.poster} /> :
+                <img alt="Poster" className="pulsing-load" src={item.poster} /> :
                 <div className={'dummy-poster poster-' + item.category}></div>}
             </div>
 
@@ -100,9 +99,9 @@ class LatestDetails extends React.Component {
                 <div className="watch-later" title="Watch later" onClick={e => this.props.watchLaterDispatch(item.id)}></div>
                 <div className="recomm" title="Recommend to friends" onClick={e => this.toggleRecomm()}></div>
                 <a target="_blank" title="Search for subtitles on Subscene" href={'https://subscene.com/subtitles/title?q=' + item.eng_title.replace(' ', '+')}>
-                  <img src={closedCap} alt="CC" />
+                  <img src={closedCap} alt="Closed Caption" />
                 </a>
-                {recomm && <ul className={recomm ? 'fadeIn' : ''}>{this.friends(item.id)}</ul>}
+                {recomm && <ul className={recomm ? 'fade-in' : ''}>{this.friends(item.id)}</ul>}
               </div>
             </div>
 

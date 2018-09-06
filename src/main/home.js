@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 import { loadHomeListsAct } from '../actions/homeActions';
 import LatestDetails from './latestDetails';
 import RecommDetails from './recommDetails';
-import SlidesList from './slidesList';
+import SlideList from './slideList';
 
 class Home extends React.Component {
   constructor(props) {
@@ -30,14 +30,14 @@ class Home extends React.Component {
             </div>
             <div className="latest-list">
               {Object.keys(dataState.latest).length ?
-                <SlidesList dataRef={dataState.latest} link={true} load={true} vertical={false} del={false} info={false} dots={true} list="latest" ipp="6" />
+                <SlideList dataRef={dataState.latest} link={true} load={true} vertical={false} del={false} info={false} dots={true} list="latest" ipp="6" />
                 : <FormattedMessage id='home.empty' />}
             </div>
           </div>
           <div className="watch-later">
             <h1><FormattedMessage id='home.watch' /></h1>
             {Object.keys(dataState.watchLater).length ?
-              <SlidesList dataRef={dataState.watchLater} link={false} load={false} vertical={true} del={true} info={true} dots={true} list="main" ipp="4" />
+              <SlideList dataRef={dataState.watchLater} link={false} load={false} vertical={true} del={true} info={true} dots={true} list="main" ipp="4" />
               : <FormattedMessage id='home.empty' />}
           </div>
         </div>
@@ -50,7 +50,7 @@ class Home extends React.Component {
             </div>
             <div className="recomm-list">
               {Object.keys(dataState.recomm).length ?
-                <SlidesList dataRef={dataState.recomm} link={true} load={true} vertical={false} del={true} info={false} dots={true} list="recomm" ipp="8" />
+                <SlideList dataRef={dataState.recomm} link={true} load={true} vertical={false} del={true} info={false} dots={true} list="recomm" ipp="8" />
                 : <FormattedMessage id='home.empty' />}
             </div>
           </div>

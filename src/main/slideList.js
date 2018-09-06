@@ -4,7 +4,7 @@ import { removeHomeListItemAct } from '../actions/homeActions';
 import { loadDetailsAct } from '../actions/detailsActions';
 import reel from '../images/posters/reel.png';
 
-class SlidesList extends React.Component {
+class SlideList extends React.Component {
     constructor(props) {
         super(props);
         this.state = { currPage: 0 };
@@ -30,7 +30,7 @@ class SlidesList extends React.Component {
     slides = () => {
         const buffer = this.props.dataRef;
         const ipp = this.props.ipp;
-        const tileStyle = { width: this.props.vertical ? '100%' : 'calc(' + 100 / ipp + '% - 20px)' };
+        const slidesStyle = { width: this.props.vertical ? '100%' : 'calc(' + 100 / ipp + '% - 20px)' };
 
         let slides = [];
         let page = [];
@@ -41,8 +41,8 @@ class SlidesList extends React.Component {
 
                 if (el) {
                     page.push(
-                        <div className="tile" key={j + i * ipp} style={tileStyle}>
-                            <div className="thumbnail" onClick={e => this.loadDetails(el.id, this.props.list, !this.props.link)}>
+                        <div className="slide" key={j + i * ipp} style={slidesStyle}>
+                            <div className="thumbnail pulsing-load" onClick={e => this.loadDetails(el.id, this.props.list, !this.props.link)}>
                                 {this.props.del && <div className="del-item" title="Remove from the list" onClick={e => this.delItem(e, el.id)}></div>}
                                 {this.props.link && <div onClick={e => { e.stopPropagation(); this.loadDetails(el.id, 'main', true); }} className="link" title="Open full details"></div>}
                                 {el.poster && el.poster !== 'N/A' ?
@@ -61,7 +61,7 @@ class SlidesList extends React.Component {
             }
 
             slides.push(
-                this.state.currPage === i && <div className={this.state.currPage === i ? 'slide fadeIn' : 'slide'} key={i}>
+                this.state.currPage === i && <div className={this.state.currPage === i ? 'slides fade-in' : 'slides'} key={i}>
                     {page}
                 </div>
             );
@@ -94,7 +94,7 @@ class SlidesList extends React.Component {
 
     render() {
         return (
-            <div className="tile-list">
+            <div className="slide-list">
                 {this.slides()}
                 {this.dots()}
             </div>
@@ -110,4 +110,4 @@ const mapDispatchToProps = (dispatch) => ({
     removeHomeListItemDispatch: (list, key) => dispatch(removeHomeListItemAct(list, key))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SlidesList);
+export default connect(mapStateToProps, mapDispatchToProps)(SlideList);

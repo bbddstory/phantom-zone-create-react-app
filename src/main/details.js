@@ -108,7 +108,7 @@ class Details extends React.Component {
                   <img src={closedCap} alt="CC" />
                 </a>
                 <div className="edit" title="Edit details" onClick={e => this.props.editDetailsDispatch(true, false)}></div>
-                {recomm && <ul className={recomm ? 'fadeIn' : ''}>{this.friends(item.id)}</ul>}
+                {recomm && <ul className={recomm ? 'fade-in' : ''}>{this.friends(item.id)}</ul>}
               </div>
             </div>
 
