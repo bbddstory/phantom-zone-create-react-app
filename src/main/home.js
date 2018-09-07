@@ -30,7 +30,7 @@ class Home extends React.Component {
             </div>
             <div className="latest-list">
               {Object.keys(dataState.latest).length ?
-                <SlideList dataRef={dataState.latest} link={true} load={true} vertical={false} del={false} info={false} dots={true} list="latest" ipp="6" />
+                <SlideList dataRef={dataState.latest} link={true} load={true} vertical={false} del={false} info={false} dots={true} list="latest" ipp="6" carousel={true} />
                 : <FormattedMessage id='home.empty' />}
             </div>
           </div>
@@ -50,7 +50,7 @@ class Home extends React.Component {
             </div>
             <div className="recomm-list">
               {Object.keys(dataState.recomm).length ?
-                <SlideList dataRef={dataState.recomm} link={true} load={true} vertical={false} del={true} info={false} dots={true} list="recomm" ipp="8" />
+                <SlideList dataRef={dataState.recomm} link={true} load={true} vertical={false} del={true} info={false} dots={true} list="recomm" ipp="8" carousel={true} />
                 : <FormattedMessage id='home.empty' />}
             </div>
           </div>

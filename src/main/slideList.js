@@ -10,6 +10,18 @@ class SlideList extends React.Component {
         this.state = { currPage: 0 };
     }
 
+    componentDidMount() {
+        if(this.props.carousel) {
+            setInterval(() => {
+                if(this.state.currPage < Math.ceil(this.props.dataRef.length / this.props.ipp) - 1) {
+                    this.showSlide(this.state.currPage + 1);
+                } else {
+                    this.showSlide(0);
+                }
+            }, 5000);
+        }
+    }
+
     delItem(e, key) {
         e.preventDefault();
         this.props.removeHomeListItemDispatch(this.props.list, key);
@@ -42,7 +54,7 @@ class SlideList extends React.Component {
                 if (el) {
                     page.push(
                         <div className="slide" key={j + i * ipp} style={slidesStyle}>
-                            <div className="thumbnail pulsing-load" onClick={e => this.loadDetails(el.id, this.props.list, !this.props.link)}>
+                            <div className="poster pulsing-load" onClick={e => this.loadDetails(el.id, this.props.list, !this.props.link)}>
                                 {this.props.del && <div className="del-item" title="Remove from the list" onClick={e => this.delItem(e, el.id)}></div>}
                                 {this.props.link && <div onClick={e => { e.stopPropagation(); this.loadDetails(el.id, 'main', true); }} className="link" title="Open full details"></div>}
                                 {el.poster && el.poster !== 'N/A' ?

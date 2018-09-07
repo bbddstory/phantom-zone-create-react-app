@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-// import { toggleEditDetailsAct } from '../actions/uiActions';
 import { watchLaterAct, recommAct, commentAct } from '../actions/detailsActions';
 
 import closedCap from '../images/details/baseline_closed_caption_white_24dp.png';
 import imdb from '../images/details/imdb.svg';
 import douban from '../images/details/douban.png';
 import mtime from '../images/details/mtime.png';
+import reel from '../images/posters/reel.png';
 
 class RecommDetails extends React.Component {
   constructor(props) {
@@ -80,8 +80,7 @@ class RecommDetails extends React.Component {
           <div className="recomm-details">
             <div className="poster">
               {item.poster && item.poster !== 'N/A' ?
-                <img alt="Poster" src={item.poster} /> :
-                <div className={'dummy-poster poster-' + item.category}></div>}
+                <img alt="Poster" src={item.poster} /> : <img alt="Poster" src={reel} />}
             </div>
 
             <div className="info">

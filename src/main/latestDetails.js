@@ -6,6 +6,7 @@ import closedCap from '../images/details/baseline_closed_caption_white_24dp.png'
 import imdb from '../images/details/imdb.svg';
 import douban from '../images/details/douban.png';
 import mtime from '../images/details/mtime.png';
+import reel from '../images/posters/reel.png';
 
 class LatestDetails extends React.Component {
   constructor(props) {
@@ -77,10 +78,9 @@ class LatestDetails extends React.Component {
       return (
         <React.Fragment>
           <div className="latest-details">
-            <div className="poster">
+            <div className="poster pulsing-load">
               {item.poster && item.poster !== 'N/A' ?
-                <img alt="Poster" className="pulsing-load" src={item.poster} /> :
-                <div className={'dummy-poster poster-' + item.category}></div>}
+                <img alt="Poster" src={item.poster} /> : <img alt="Poster" src={reel} />}
             </div>
 
             <div className="info">

@@ -23,7 +23,15 @@
                 background: #00a651;
             }
         }
-        .switch {
+        .view-card {
+            border-radius: 2px;
+            margin-right: 10px;
+            background: #f2f2f2 url("../images/pages/baseline-view_column-24px_black.svg") 50% no-repeat;
+            &:hover {
+                background: #00a651 url("../images/pages/baseline-view_column-24px.svg") 50% no-repeat;
+            }
+        }
+        .view-tile {
             border-radius: 2px;
             margin-right: 10px;
             background: #f2f2f2 url("../images/pages/baseline-view_module-24px_black.svg") 50% no-repeat;
@@ -81,7 +89,7 @@
             -moz-box-shadow: 0px -3px 5px 0px rgba(#000, .5);
             box-shadow: 0px 0px 5px 3px rgba(#000, .3);
         }
-        .switch {
+        .view-card, .view-tile {
             border-top-left-radius: 5px !important;
             border-top-right-radius: 5px !important;
             border-bottom-left-radius: 0 !important;

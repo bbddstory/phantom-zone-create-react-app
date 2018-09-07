@@ -100,7 +100,7 @@ class Pages extends React.Component {
         return (
             <div id="pages">
                 <div id="controls">
-                    <button className="ctrl-wrap switch" onClick={e => this.props.switchView()}></button>
+                    <button className={"ctrl-wrap view-" + this.props.uiState.view} onClick={e => this.props.switchView()}></button>
                     <div className="ctrl-wrap">
                         <button className="first" onClick={e => this.gotoPage('FIRST')}>❬❬</button>
                         <button onClick={e => this.gotoPage('PREV')}>❬</button>
@@ -119,7 +119,8 @@ class Pages extends React.Component {
 }
 
 const mapStateToProps = (store) => ({
-    dataState: store.dataReducer
+    dataState: store.dataReducer,
+    uiState: store.uiReducer
 });
 
 const mapDispatchToProps = (dispatch) => ({

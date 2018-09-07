@@ -4,6 +4,7 @@ import { toggleEditDetailsAct } from '../actions/uiActions';
 import { saveDetailsAct } from '../actions/detailsActions';
 import { CATS, REGEX } from '../util/utils';
 import { Formik, Form } from 'formik';
+import Mousetrap from 'mousetrap';
 
 class EditDetails extends React.Component {
   constructor(props) {
@@ -13,6 +14,14 @@ class EditDetails extends React.Component {
 
   componentWillMount() {
     this.setState({details: Object.assign({}, this.props.dataState.details.main)})
+  }
+
+  componentDidMount() {
+    Mousetrap.bind('esc', e => this.props.editDetailsDispatch(false, false));
+  }
+
+  componentWillUnmount() {
+    Mousetrap.unbind('esc', e => this.props.editDetailsDispatch(false, false));
   }
 
   render() {
@@ -25,8 +34,6 @@ class EditDetails extends React.Component {
       item = this.state.details
     }
 
-    
-    
     return (
       <Formik
       initialValues = {item}

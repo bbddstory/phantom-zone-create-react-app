@@ -96,10 +96,12 @@ class Details extends React.Component {
                   '' : item.orig_title + ' (original title)'}
               </span>
               <span className="misc">
+                Type: Adventure, History<br />
                 Year: {item.year}<br />
                 Runtime: {item.runtime || 'N/A'}<br />
                 {item.director && item.director !== 'null' ? 'Directors: ' + (item.director || 'N/A') : 'Creators: ' + (item.creator || 'N/A')}<br />
-                Stars: {item.stars || 'N/A'}
+                Stars: {item.stars || 'N/A'}<br />
+                Language: English
               </span>
               <div className="actions">
                 <div className="watch-later" title="Watch later" onClick={e => this.props.watchLaterDispatch(item.id)}></div>
@@ -131,20 +133,38 @@ class Details extends React.Component {
             </div>
           </div>
 
-          {<div>
-            <h1>Trailer and featurette</h1>
-            <div className="videos">
-              {item.trailer === 'null' || item.trailer === '' || item.trailer === null ?
-                <div className="no-video">No video</div> : <iframe title="trailer" width="49%" height="275" 
-                src={'https://www.youtube.com/embed/' + item.trailer + '?rel=0&amp;showinfo=0'} frameBorder="0" allowFullScreen></iframe>}
-              {item.trailer === 'null' || item.trailer === '' || item.trailer === null ?
-                <div className="no-video">No video</div> : <iframe title="featurette" width="49%" height="275" 
-                src={'https://www.youtube.com/embed/' + item.featurette + '?rel=0&amp;showinfo=0'} frameBorder="0" allowFullScreen></iframe>}
+          <h1>Video Specs</h1>
+          <div className="tech-specs">
+            <span>File Name:</span>[TMD]_Shikabane_Hime_Kuro_-_01_[H264-720p][008210E4].mkv<br />
+
+            <div className="tech-details">
+              <div>
+                <span>Format:</span>mkv / mp4 / avi<br />
+                <span>Size:</span>1.5GB<br />
+              </div>
+              <div>
+                <span>Resolution:</span>1920 x 1280<br />
+                <span>Color:</span>Color / Black and White<br />
+              </div>
+              <div>
+                <span>Video Codec:</span>h264 / h265<br />
+                <span>Audio Codec:</span>aac / ac3 / dts
+              </div>
             </div>
-            <div className="youtube-lnk">
-              <a target="_blank" href={'https://www.youtube.com/results?search_query=' + item.eng_title}>More videos on YouTube</a>
-            </div>
-          </div>}
+          </div>
+
+          <h1>Trailer and featurette</h1>
+          <div className="videos">
+            {item.trailer === 'null' || item.trailer === '' || item.trailer === null ?
+              <div className="no-video">No video</div> : <iframe title="trailer" width="49%" height="275" 
+              src={'https://www.youtube.com/embed/' + item.trailer + '?rel=0&amp;showinfo=0'} frameBorder="0" allowFullScreen></iframe>}
+            {item.trailer === 'null' || item.trailer === '' || item.trailer === null ?
+              <div className="no-video">No video</div> : <iframe title="featurette" width="49%" height="275" 
+              src={'https://www.youtube.com/embed/' + item.featurette + '?rel=0&amp;showinfo=0'} frameBorder="0" allowFullScreen></iframe>}
+          </div>
+          <div className="youtube-lnk">
+            <a target="_blank" href={'https://www.youtube.com/results?search_query=' + item.eng_title}>More videos on YouTube</a>
+          </div>
 
           {/* <h1>Comments</h1>
 

@@ -7,7 +7,7 @@ $posterHeight: 134px;
         display: inline-block;
         margin: 35px 10px 0;
         border-radius: 2px;
-        .thumbnail {
+        .poster {
             display: block;
             position: relative;
             width: $posterWidth;
@@ -48,13 +48,6 @@ $posterHeight: 134px;
                     animation-fill-mode: forwards;
                 }
             }
-        }
-        .dummy-poster {
-            display: inline-block;
-            width: $posterWidth;
-            height: $posterHeight;
-            border-radius: 2px;
-            cursor: pointer;
         }
         .info {
             display: inline-block;

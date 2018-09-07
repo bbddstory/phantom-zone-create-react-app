@@ -6,7 +6,7 @@ import CardList from './cardList';
 class SearchList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { dummyPoster: 'images/posters/' + this.props.dataState.category + '.png' };
+    this.state = {};
   }
   
   loadPage() {
