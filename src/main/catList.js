@@ -1,9 +1,19 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { switchCatAct, syncCatAct, loadPageAct } from '../actions/dataActions';
-import CardList from './cardList';
-import TileList from './tileList';
-import { CATS } from '../util/utils';
+import { CATS, loadComp } from '../util/utils';
+import Loadable from 'react-loadable';
+
+// Code splitting
+const CardList = Loadable({
+  loader: () => import('./cardList'),
+  loading: loadComp
+});
+
+const TileList = Loadable({
+  loader: () => import('./tileList'),
+  loading: loadComp
+});
 
 class CatList extends React.Component {
   constructor(props) {

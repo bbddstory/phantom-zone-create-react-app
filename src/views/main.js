@@ -2,22 +2,16 @@ import axios from 'axios';
 import * as React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { parseCookie, resetPages } from '../util/utils';
+import { loadComp, parseCookie, resetPages } from '../util/utils';
 import { setTokenAct, friendsAct } from '../actions/loginActions';
-import { TOGGLE_LOADER } from '../actions/uiActions';
+import { toggleLoaderAct } from '../actions/uiActions';
+import Loadable from 'react-loadable';
 
 // Components
 import Header from '../components/header';
 import Categories from '../components/categories';
 // import Search from './components/search';
 import Footer from '../components/footer';
-
-// Main
-import Home from '../main/home';
-import SearchList from '../main/searchList';
-import CatList from '../main/catList';
-import Details from '../main/details';
-import EditDetails from '../main/editDetails';
 
 import { IntlProvider, addLocaleData } from 'react-intl';
 import lang from '../i18n/languages';
@@ -28,6 +22,32 @@ import * as ja from 'react-intl/locale-data/ja';
 addLocaleData(en);
 addLocaleData(zh);
 addLocaleData(ja);
+
+// Code splitting
+const Home = Loadable({
+  loader: () => import('../main/home'),
+  loading: loadComp,
+});
+
+const SearchList = Loadable({
+  loader: () => import('../main/searchList'),
+  loading: loadComp,
+});
+
+const CatList = Loadable({
+  loader: () => import('../main/catList'),
+  loading: loadComp,
+});
+
+const Details = Loadable({
+  loader: () => import('../main/details'),
+  loading: loadComp,
+});
+
+const EditDetails = Loadable({
+  loader: () => import('../main/editDetails'),
+  loading: loadComp,
+});
 
 class Main extends React.Component {
   constructor(props) {
@@ -50,7 +70,7 @@ class Main extends React.Component {
       console.log(err);
 
       if (!err.response) { // err.toString() === 'Error: Network Error'
-        this.props.loaderDispatch('Network error: connection refused');
+        this.props.toggleLoaderDispatch('Network error: connection refused');
       } else {
         // For handling cookie expiration
         if (err.response.status === 401 || err.response.status === 403) { // Not authorized
@@ -60,7 +80,7 @@ class Main extends React.Component {
           console.log('--', 'Email not found / Email or password wrong');
           console.log(err.response);
 
-          this.props.loaderDispatch(err.response.data.data);
+          this.props.toggleLoaderDispatch(err.response.data.data);
         }
       }
     });
@@ -135,7 +155,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setTokenAct(token, email, user));
     dispatch(friendsAct(token, email));
   },
-  loaderDispatch: (txt) => dispatch({ type: TOGGLE_LOADER, status: true, loading: false, loaderTxt: txt })
+  toggleLoaderDispatch: (txt) => dispatch(toggleLoaderAct(true, txt, false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

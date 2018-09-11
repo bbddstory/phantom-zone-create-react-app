@@ -1,7 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { syncCatAct, loadPageAct } from '../actions/dataActions';
-import CardList from './cardList';
+import Loadable from 'react-loadable';
+import { loadComp } from '../util/utils';
+
+// Code splitting
+const CardList = Loadable({
+  loader: () => import('./cardList'),
+  loading: loadComp,
+});
 
 class SearchList extends React.Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { TOGGLE_LOADER } from '../actions/uiActions';
+import { toggleLoaderAct } from '../actions/uiActions';
 
 class Loader extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Loader extends React.Component {
   }
 
   hideLoader(e) {
-    this.props.loaderDispatch();
+    this.props.toggleLoaderDispatch();
   }
 
   render() {
@@ -34,7 +34,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loaderDispatch: () => dispatch({ type: TOGGLE_LOADER, status: false })
+  toggleLoaderDispatch: () => dispatch(toggleLoaderAct(false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Loader);

@@ -33,3 +33,12 @@ export function switchViewAct() {
     type: SWITCH_VIEW
   }
 }
+
+export function toggleLoaderAct(status, loaderTxt, loading) {
+  return {
+    type: TOGGLE_LOADER,
+    status,
+    loaderTxt,
+    loading
+  }
+}

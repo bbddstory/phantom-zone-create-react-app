@@ -4,7 +4,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { loginAct } from '../actions/loginActions';
-import { TOGGLE_LOADER } from '../actions/uiActions';
+import { toggleLoaderAct } from '../actions/uiActions';
 
 class Login extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class Login extends React.Component {
       console.log(err);
 
       if (!err.response) { // err.toString() === 'Error: Network Error'
-        this.props.loaderDispatch('Network error: connection refused');
+        this.props.toggleLoaderDispatch('Network error: connection refused');
       } else {
         // For handling cookie expiration
         if (err.response.status === 401 || err.response.status === 403) { // Not authorized
@@ -36,7 +36,7 @@ class Login extends React.Component {
         if (err.response.status === 406) { // Email not found / Email or password wrong
           console.log(err.response);
           
-          this.props.loaderDispatch(err.response.data.data);
+          this.props.toggleLoaderDispatch(err.response.data.data);
         }
       }
     });
@@ -87,7 +87,7 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   loginDispatch: (form) => dispatch(loginAct(form)),
-  loaderDispatch: (txt) => dispatch({ type: TOGGLE_LOADER, status: true, loading: false, loaderTxt: txt })
+  toggleLoaderDispatch: (txt) => dispatch(toggleLoaderAct(true, txt, false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

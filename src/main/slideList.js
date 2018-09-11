@@ -8,11 +8,17 @@ class SlideList extends React.Component {
     constructor(props) {
         super(props);
         this.state = { currPage: 0 };
+        this.intervalId = null;
+    }
+
+    intervalHdlr() {
+        this.showSlides = false;
     }
 
     componentDidMount() {
         if(this.props.carousel) {
-            setInterval(() => {
+            this.intervalId = setInterval((showSlides) => {
+                clearInterval(showSlides);
                 if(this.state.currPage < Math.ceil(this.props.dataRef.length / this.props.ipp) - 1) {
                     this.showSlide(this.state.currPage + 1);
                 } else {
@@ -20,6 +26,10 @@ class SlideList extends React.Component {
                 }
             }, 5000);
         }
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.intervalId);
     }
 
     delItem(e, key) {

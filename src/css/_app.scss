@@ -118,11 +118,6 @@ button {
     animation-name: pulsingLoad;
     animation-duration: 1.2s;
     animation-iteration-count: infinite;
-    &:hover {
-        h4 {
-            background: #00a651;
-        }
-    }
 }
 
 @keyframes fadeInShadow {
@@ -183,4 +178,11 @@ button {
         color: #f2f2f2;
         background: rgba(gray, .5);
     }
+}
+
+.load-comp {
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    color: #fff;
 }

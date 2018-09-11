@@ -172,7 +172,7 @@ class EditDetails extends React.Component {
                         </div>
                         <div className="input-padding width-25">
                           <label>Category</label>
-                          <select name="cat" value={values.category} disabled={!this.props.uiState.newRec} onChange={handleChange} onBlur={handleBlur}>
+                          <select name="category" value={values.category} onChange={handleChange} onBlur={handleBlur}>
                             <option value={CATS.movie}>Movies</option>
                             <option value={CATS.tv}>TV</option>
                             <option value={CATS.doc}>Documentaries</option>
