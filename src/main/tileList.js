@@ -30,7 +30,7 @@ class TileList extends React.Component {
                 }
               </Link>
               <div className="info">
-                <h2 className="title">{buffer[key].eng_title}</h2>
+                <h2 className="title">{buffer[key].eng_title}<br /><span>Director Names</span></h2>
                 <h4 className="year">{buffer[key].year}</h4>
               </div>
             </div>

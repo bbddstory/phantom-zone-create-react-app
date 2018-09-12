@@ -13,14 +13,16 @@ $posterHeight: 134px;
             height: $posterHeight;
             background: rgba(0, 0, 0, .2);
             border-radius: 3px;
+            -webkit-transition: box-shadow .2s;
+            transition: box-shadow .2s;
             &:hover {
                 background: #00a651;
-                .info .year {
+                .info .year, .info span{
                     color: #fff;
                 }
                 box-shadow: 0px 8px 15px 0px rgba(#000, .5);
-                -webkit-transition: box-shadow .2s, margin-top .2s;
-                transition: box-shadow .2s, margin-top .2s;
+                -webkit-transition: box-shadow .2s;
+                transition: box-shadow .2s;
                 // animation-name: fadeInShadow;
                 // animation-duration: .2s;
                 // animation-fill-mode: forwards;
@@ -53,6 +55,12 @@ $posterHeight: 134px;
                 }
                 .year {
                     color: #717171;
+                }
+                span {
+                    color: #717171;
+                    margin-top: 5px;
+                    display: block;
+                    font-size: 12px;
                 }
             }
         }

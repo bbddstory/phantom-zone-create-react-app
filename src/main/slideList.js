@@ -73,8 +73,8 @@ class SlideList extends React.Component {
                             {this.props.info && <div className="info">
                                 <div className="title">{el.eng_title}</div>
                                 <div className="details">
-                                    <span className="year">{el.year}</span><br />
                                     {el.director || el.creator || el.prod}
+                                    <span className="year">2018{el.year}</span>
                                 </div>
                             </div>}
                         </div>

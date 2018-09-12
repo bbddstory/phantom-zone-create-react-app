@@ -6,16 +6,16 @@
         margin: 0 11px 45px;
         border-radius: 3px;
         vertical-align: top;
-        -webkit-transition: box-shadow .2s, margin-top .2s;
-        transition: box-shadow .2s, margin-top .2s;
+        -webkit-transition: box-shadow .2s;
+        transition: box-shadow .2s;
         &:hover {
             background: #00a651;
             h4 {
                 background: #00a651;
             }
             box-shadow: 0px 8px 15px 0px rgba(#000, .5);
-            -webkit-transition: box-shadow .2s, margin-top .2s;
-            transition: box-shadow .2s, margin-top .2s;
+            -webkit-transition: box-shadow .2s;
+            transition: box-shadow .2s;
             // animation-name: fadeInShadow;
             // animation-duration: .2s;
             // animation-fill-mode: forwards;
