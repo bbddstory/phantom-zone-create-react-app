@@ -100,4 +100,11 @@ export const resetPages = () => {
     if (exist('pages') && inView('pages')) {
         document.getElementById('controls').classList.remove('controls-fixed')
     }
+
+    if (exist('pages') && !inView('categories') && document.getElementById('back-to-top').classList.contains('hide-el')) {
+        document.getElementById('back-to-top').classList.remove('hide-el')
+    }
+    if (exist('pages') && inView('categories')) {
+        document.getElementById('back-to-top').classList.add('hide-el')
+    }
 }

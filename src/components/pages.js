@@ -82,6 +82,11 @@ class Pages extends React.Component {
         }
     }
 
+    backToTop() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+
     componentDidMount() {
         Mousetrap.bind('ctrl+left', e => this.gotoPage('FIRST'));
         Mousetrap.bind('ctrl+right', e => this.gotoPage('LAST'));
@@ -111,7 +116,7 @@ class Pages extends React.Component {
                         <button onClick={e => this.gotoPage('NEXT')}>❭</button>
                         <button className="last" onClick={e => this.gotoPage('LAST')}>❭❭</button>
                     </div>
-                    <button className="ctrl-wrap top" onClick={e => this.gotoPage('FIRST')}></button>
+                    <button id="back-to-top" className="ctrl-wrap top" onClick={e => this.backToTop()}></button>
                 </div>
             </div>
         )

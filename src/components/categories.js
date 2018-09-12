@@ -17,7 +17,7 @@ render() {
     let currCat = this.props.dataState.category;
 
     return (
-      <div className="categories">
+      <div id="categories" className="categories">
         <ol>
           <li>
             <Link to="/main/movies" className={currCat === CATS.movie ? 'active' : ''} onClick={e => this.props.switchCatDispatch(CATS.movie)}>
