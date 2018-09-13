@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { watchLaterAct, recommAct, commentAct } from '../actions/detailsActions';
+import { watchLaterAct, recommAct } from '../actions/detailsActions';
 
 import closedCap from '../images/details/baseline_closed_caption_white_24dp.png';
 import imdb from '../images/details/imdb.svg';
@@ -24,36 +24,36 @@ class RecommDetails extends React.Component {
     this.setState({ recomm: !this.state.recomm });
   }
 
-  commentFocus() {
-    this.setState({ showComment: true });
-  }
+  // commentFocus() {
+  //   this.setState({ showComment: true });
+  // }
 
-  cancelComment() {
-    this.setState({ title: '', comment: '', showComment: false });
-  }
+  // cancelComment() {
+  //   this.setState({ title: '', comment: '', showComment: false });
+  // }
 
-  titleChange(e) {
-    this.setState({ title: e.target.value });
-  }
+  // titleChange(e) {
+  //   this.setState({ title: e.target.value });
+  // }
 
-  commentChange(e) {
-    this.setState({ comment: e.target.value });
-  }
+  // commentChange(e) {
+  //   this.setState({ comment: e.target.value });
+  // }
 
-  submitComment() {
-    if (this.state.title && this.state.comment) {
-      let t = new Date();
-      this.props.commentDispatch({
-        [t.getTime()]: {
-          time: t.getFullYear() + '.' + (t.getMonth() + 1) + '.' + t.getDate(),
-          title: this.state.title,
-          txt: this.state.comment,
-          user: this.props.loginState.user
-        }
-      });
-      this.cancelComment();
-    }
-  }
+  // submitComment() {
+  //   if (this.state.title && this.state.comment) {
+  //     let t = new Date();
+  //     this.props.commentDispatch({
+  //       [t.getTime()]: {
+  //         time: t.getFullYear() + '.' + (t.getMonth() + 1) + '.' + t.getDate(),
+  //         title: this.state.title,
+  //         txt: this.state.comment,
+  //         user: this.props.loginState.user
+  //       }
+  //     });
+  //     this.cancelComment();
+  //   }
+  // }
 
   friends = (vid) => {
     const { loginState } = this.props;
@@ -146,7 +146,7 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => ({
   watchLaterDispatch: (id) => dispatch(watchLaterAct(id)),
   recommDispatch: (vid, friendEmail) => dispatch(recommAct(vid, friendEmail)),
-  commentDispatch: (values) => dispatch(commentAct(values))
+  // commentDispatch: (values) => dispatch(commentAct(values))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecommDetails);

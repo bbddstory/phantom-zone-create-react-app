@@ -66,37 +66,37 @@ export function recommAct(vid, friendEmail) {
   }
 }
 
-export function commentAct(values) {
-  return async (dispatch, getState) => {
-    let firebase = getState().loginReducer.firebase;
+// export function commentAct(values) {
+//   return async (dispatch, getState) => {
+//     let firebase = getState().loginReducer.firebase;
 
-    if (firebase.apps) {
-      dispatch({ type: TOGGLE_LOADER, status: true });
+//     if (firebase.apps) {
+//       dispatch({ type: TOGGLE_LOADER, status: true });
 
-      await firebase.database().ref(getState().dataReducer.category + '/' + getState().dataReducer.key + '/comments')
-        .update(values).then((snapshot) => {
-          dispatch({ type: TOGGLE_LOADER, status: false });
-          dispatch({ type: SAVE_COMMENT, values, isSearch: getState().uiReducer.isSearch });
-        });
-    }
-  }
-}
+//       await firebase.database().ref(getState().dataReducer.category + '/' + getState().dataReducer.key + '/comments')
+//         .update(values).then((snapshot) => {
+//           dispatch({ type: TOGGLE_LOADER, status: false });
+//           dispatch({ type: SAVE_COMMENT, values, isSearch: getState().uiReducer.isSearch });
+//         });
+//     }
+//   }
+// }
 
-export function delCommentAct(id) {
-  return async (dispatch, getState) => {
-    let firebase = getState().loginReducer.firebase;
+// export function delCommentAct(id) {
+//   return async (dispatch, getState) => {
+//     let firebase = getState().loginReducer.firebase;
 
-    if (firebase.apps) {
-      dispatch({ type: TOGGLE_LOADER, status: true });
+//     if (firebase.apps) {
+//       dispatch({ type: TOGGLE_LOADER, status: true });
 
-      await firebase.database().ref(getState().dataReducer.category + '/' + getState().dataReducer.key + '/comments/' + id)
-        .remove().then((snapshot) => {
-          dispatch({ type: TOGGLE_LOADER, status: false });
-          dispatch({ type: DEL_COMMENT, id, isSearch: getState().uiReducer.isSearch });
-        });
-    }
-  }
-}
+//       await firebase.database().ref(getState().dataReducer.category + '/' + getState().dataReducer.key + '/comments/' + id)
+//         .remove().then((snapshot) => {
+//           dispatch({ type: TOGGLE_LOADER, status: false });
+//           dispatch({ type: DEL_COMMENT, id, isSearch: getState().uiReducer.isSearch });
+//         });
+//     }
+//   }
+// }
 
 export function saveDetailsAct(values) {
   return (dispatch, getState) => {

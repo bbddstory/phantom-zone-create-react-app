@@ -4,12 +4,14 @@
         background: rgba(#000, 0.2);
         box-sizing: border-box;
         margin: 0 11px 45px;
-        border-radius: 3px;
         vertical-align: top;
+        border: 1px solid #444;
+        border-radius: 4px;
         -webkit-transition: box-shadow .2s;
         transition: box-shadow .2s;
         &:hover {
-            background: #00a651;
+            // background: #00a651;
+            border: 1px solid #00a651;
             h4 {
                 background: #00a651;
             }
@@ -27,18 +29,18 @@
     @media screen and (max-width: 1219px) {
         .card {
             width: calc(20% - 22px);
-            height: 295.11px;
+            height: 294.11px;
             a {
-                height: 261.97px;
+                height: 258.97px;
             }
         }
     }
     @media screen and (min-width: 1220px) {
         .card {
             width: calc(16.66% - 22px);
-            height: 294.97px;
+            height: 293.97px;
             a {
-                height: 262.11px;
+                height: 260.11px;
             }
         }
     }

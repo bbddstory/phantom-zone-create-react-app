@@ -4,7 +4,6 @@ $posterHeight: 134px;
 .tile-list {
     .tile {
         display: inline-block;
-        border-radius: 3px;
         height: $posterHeight;
         padding: 0 12px;
         margin-bottom: 15px;
@@ -12,11 +11,13 @@ $posterHeight: 134px;
             display: flex;
             height: $posterHeight;
             background: rgba(0, 0, 0, .2);
-            border-radius: 3px;
+            border: 1px solid #444;
+            border-radius: 4px;
             -webkit-transition: box-shadow .2s;
             transition: box-shadow .2s;
             &:hover {
-                background: #00a651;
+                // background: #00a651;
+                border: 1px solid #00a651;
                 .info .year, .info span{
                     color: #fff;
                 }
@@ -49,18 +50,19 @@ $posterHeight: 134px;
                 
                 .title {
                     width: 100%;
+                    font-size: 15px;
+                    line-height: 1.2;
                     color: #fff;
-                    font-size: 14px;
-                    line-height: 1.1;
+                }
+                .director {
+                    display: block;
+                    margin-top: 5px;
+                    font-size: 13px;
+                    color: #717171;
                 }
                 .year {
+                    font-size: 14px;
                     color: #717171;
-                }
-                span {
-                    color: #717171;
-                    margin-top: 5px;
-                    display: block;
-                    font-size: 12px;
                 }
             }
         }

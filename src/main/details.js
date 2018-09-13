@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { toggleEditDetailsAct } from '../actions/uiActions';
-import { watchLaterAct, recommAct, loadDetailsAct, commentAct } from '../actions/detailsActions';
+import { watchLaterAct, recommAct, loadDetailsAct } from '../actions/detailsActions';
 
 import closedCap from '../images/details/baseline_closed_caption_white_24dp.png';
 import imdb from '../images/details/imdb.svg';
@@ -29,42 +29,11 @@ class Details extends React.Component {
   toggleRecomm() {
     this.setState({ recomm: !this.state.recomm });
   }
-
-  commentFocus() {
-    this.setState({ showComment: true });
-  }
-
-  cancelComment() {
-    this.setState({ title: '', comment: '', showComment: false });
-  }
-
-  titleChange(e) {
-    this.setState({ title: e.target.value });
-  }
-
-  commentChange(e) {
-    this.setState({ comment: e.target.value });
-  }
-
-  submitComment() {
-    if (this.state.title && this.state.comment) {
-      let t = new Date();
-      this.props.commentDispatch({
-        [t.getTime()]: {
-          time: t.getFullYear() + '.' + (t.getMonth() + 1) + '.' + t.getDate(),
-          title: this.state.title,
-          txt: this.state.comment,
-          user: this.props.loginState.user
-        }
-      });
-      this.cancelComment();
-    }
-  }
-
+  
   friends = (vid) => {
     const { loginState } = this.props;
     let friends = [];
-
+    
     for (let i = 0; i < loginState.friends.length; i++) {
       friends.push(
         <li key={i} onClick={e => this.props.recommDispatch(vid, loginState.friends[i].email)}>
@@ -72,9 +41,40 @@ class Details extends React.Component {
         </li>
       )
     }
-
+    
     return friends;
   }
+  
+  // commentFocus() {
+  //   this.setState({ showComment: true });
+  // }
+
+  // cancelComment() {
+  //   this.setState({ title: '', comment: '', showComment: false });
+  // }
+
+  // titleChange(e) {
+  //   this.setState({ title: e.target.value });
+  // }
+
+  // commentChange(e) {
+  //   this.setState({ comment: e.target.value });
+  // }
+
+  // submitComment() {
+  //   if (this.state.title && this.state.comment) {
+  //     let t = new Date();
+  //     this.props.commentDispatch({
+  //       [t.getTime()]: {
+  //         time: t.getFullYear() + '.' + (t.getMonth() + 1) + '.' + t.getDate(),
+  //         title: this.state.title,
+  //         txt: this.state.comment,
+  //         user: this.props.loginState.user
+  //       }
+  //     });
+  //     this.cancelComment();
+  //   }
+  // }
 
   render() {
     const { recomm } = this.state;
@@ -140,7 +140,7 @@ class Details extends React.Component {
             <div className="tech-details">
               <div>
                 <span>Format:</span>mkv / mp4 / avi<br />
-                <span>Size:</span>1.5GB<br />
+                <span>File Size:</span>1.5GB<br />
               </div>
               <div>
                 <span>Resolution:</span>1920 x 1280<br />
@@ -205,7 +205,7 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => ({
   watchLaterDispatch: (id) => dispatch(watchLaterAct(id)),
   recommDispatch: (vid, friendEmail) => dispatch(recommAct(vid, friendEmail)),
-  commentDispatch: (values) => dispatch(commentAct(values)),
+  // commentDispatch: (values) => dispatch(commentAct(values)),
   // delCommentDispatch: (id) => dispatch(delCommentAct(id)),
   editDetailsDispatch: (status, newRec) => dispatch(toggleEditDetailsAct(status, newRec)),
   loadDetailsDispatch: (key, list) => dispatch(loadDetailsAct(key, list, true))
