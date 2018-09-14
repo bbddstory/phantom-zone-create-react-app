@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { toggleEditDetailsAct } from '../actions/uiActions';
 import { watchLaterAct, recommAct, loadDetailsAct } from '../actions/detailsActions';
+import Mousetrap from 'mousetrap';
 
 import closedCap from '../images/details/baseline_closed_caption_white_24dp.png';
 import imdb from '../images/details/imdb.svg';
@@ -24,6 +25,14 @@ class Details extends React.Component {
   componentWillMount() {
     const { match: { params } } = this.props;
     this.props.loadDetailsDispatch(params.id, 'main');
+  }
+
+  componentDidMount() {
+    Mousetrap.bind('f2', e => this.props.editDetailsDispatch(true, false));
+  }
+
+  componentWillUnmount() {
+    Mousetrap.unbind('f2', e => this.props.editDetailsDispatch(true, false));
   }
 
   toggleRecomm() {

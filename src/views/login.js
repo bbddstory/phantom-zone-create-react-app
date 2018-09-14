@@ -9,7 +9,8 @@ import { toggleLoaderAct } from '../actions/uiActions';
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { form: { email: 'leon@gmail.com', pwd: 'leon@gmail.com' } }
+    // this.state = { form: { email: 'leon@gmail.com', pwd: 'leon@gmail.com' } };
+    this.state = { form: { email: '', pwd: '' } };
 
     // Global Axios request interceptor
     axios.interceptors.request.use((config) => {
@@ -70,7 +71,7 @@ class Login extends React.Component {
         <input type="password" name="pwd" placeholder="Password" value={f.pwd}
           onChange={e => this.handleChange(e)} onKeyDown={e => this.handleChange(e)} />
         <span className="sign-up">
-          <Link to="register">Sign me up!</Link>
+          <Link to="register">Register</Link>
         </span>
         <input type="button" name="submit" value="Enter"
           onClick={e => this.handleChange(e)} />

@@ -32,9 +32,11 @@ class Register extends React.Component {
     return (
       <form className="register-form">
         <div className="logo"></div>
-        <input autoFocus type="text" name="firstName" placeholder="First name" value={f.firstName}
+        {/* <input autoFocus type="text" name="firstName" placeholder="First name" value={f.firstName}
           onChange={e => this.handleChange(e)} />
         <input type="text" name="lastName" placeholder="Last name" value={f.lastName}
+          onChange={e => this.handleChange(e)} /> */}
+        <input type="text" name="lastName" placeholder="Nickname" value={f.nickname}
           onChange={e => this.handleChange(e)} />
         <input type="email" name="email" placeholder="Email" value={f.email}
           onChange={e => this.handleChange(e)} />

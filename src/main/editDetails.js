@@ -71,7 +71,7 @@ class EditDetails extends React.Component {
                       <div className="flex">
                         <div className="input-padding width-50">
                           <label>English Title</label>
-                          <input type="text" name="eng_title" width="200" value={values.eng_title || ''} onChange={handleChange} onBlur={handleBlur} />
+                          <input type="text" name="eng_title" width="200" value={values.eng_title || ''} autoFocus onChange={handleChange} onBlur={handleBlur} />
                           {touched.eng_title && errors.eng_title && <span style={{color: 'red', marginTop: '0'}}>Contains invalid characters</span>}
                         </div>
                         <div className="input-padding width-50">
