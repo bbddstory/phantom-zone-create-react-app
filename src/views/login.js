@@ -9,8 +9,8 @@ import { toggleLoaderAct } from '../actions/uiActions';
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = { form: { email: 'leon@gmail.com', pwd: 'leon@gmail.com' } };
-    this.state = { form: { email: '', pwd: '' } };
+    this.state = { form: { email: 'leon@gmail.com', pwd: 'leon@gmail.com' } };
+    // this.state = { form: { email: '', pwd: '' } };
 
     // Global Axios request interceptor
     axios.interceptors.request.use((config) => {
