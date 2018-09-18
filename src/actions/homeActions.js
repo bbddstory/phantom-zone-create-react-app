@@ -19,32 +19,6 @@ export function loadHomeListsAct() {
         dispatch({ type: LOAD_HOME_LISTS, data: res.data });
       }
     }).catch(err => console.log(err));
-
-    // axios.post(NODE_URL() + '/home/latest', {
-    //   token: getState().loginReducer.token
-    // }).then(res => {
-    //   if (res.status === 200) {
-    //     dispatch({ type: LOAD_LATEST, data: res.data });
-    //   }
-    // }).catch(err => console.log(err));
-
-    // axios.post(NODE_URL() + '/home/watch_later', {
-    //   token: getState().loginReducer.token,
-    //   email: getState().loginReducer.email
-    // }).then(res => {
-    //   if (res.status === 200) {
-    //     dispatch({ type: LOAD_WATCH_LATER, data: res.data });
-    //   }
-    // }).catch(err => console.log(err));
-
-    // axios.post(NODE_URL() + '/home/recomm', {
-    //   token: getState().loginReducer.token,
-    //   email: getState().loginReducer.email
-    // }).then(res => {
-    //   if (res.status === 200) {
-    //     dispatch({ type: LOAD_RECOMM, data: res.data });
-    //   }
-    // }).catch(err => console.log(err));
   }
 }
 
