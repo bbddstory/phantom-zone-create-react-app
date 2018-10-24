@@ -22,29 +22,31 @@ class CardList extends React.Component {
     return (
       <div className="card-list">
         {Object.keys(buffer).map((key) => {
-          return <div className="card" key={key}>
-            <Link to={'/main/details/' + key} className="pulsing-load">
-              <h4>{buffer[key].year}</h4>
-              {buffer[key].poster && buffer[key].poster !== 'N/A' ?
-                <img alt="Poster" src={buffer[key].poster} /> : <img alt="Poster not available" src={reel} />
-              }
-            </Link>
-            <h2>{buffer[key].eng_title}</h2>
-          </div>
+          const card = (
+            <div className="card" key={key}>
+              <Link to={`/main/details/${key}`} className="pulsing-load">
+                <h4>{buffer[key].year}</h4>
+                {buffer[key].poster && buffer[key].poster !== 'N/A'
+                  ? <img alt="Poster" src={buffer[key].poster} /> : <img alt="Poster not available" src={reel} />
+                }
+              </Link>
+              <h2>{buffer[key].eng_title}</h2>
+            </div>
+          );
+          return card;
         })}
         <div className={tglPages ? 'pages-holder fade-in' : 'pages-holder' }>
           {tglPages && this.props.usePages && buffer && Object.keys(buffer).length && <Pages />}
         </div>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (store) => ({
-  uiState: store.uiReducer
+const mapStateToProps = store => ({
+  uiState: store.uiReducer,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-});
+const mapDispatchToProps = null;
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardList);

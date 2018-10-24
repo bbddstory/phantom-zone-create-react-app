@@ -15,15 +15,15 @@ class Login extends React.Component {
     // Global Axios request interceptor
     axios.interceptors.request.use((config) => {
       // console.log('-- Global Axios request intercep');
-      
+
       config.headers.token = this.props.loginState.token;
       return config;
-    }, err => {
+    }, (err) => {
       console.log(err);
     });
-    
+
     // Global Axios response interceptor
-    axios.interceptors.response.use(null, err => {
+    axios.interceptors.response.use(null, (err) => {
       // console.log('-- Global Axios response intercep');
       console.log(err);
 
@@ -36,11 +36,15 @@ class Login extends React.Component {
         }
         if (err.response.status === 406) { // Email not found / Email or password wrong
           console.log(err.response);
-          
+
           this.props.toggleLoaderDispatch(err.response.data.data);
         }
       }
     });
+  }
+
+  componentDidMount() {
+    document.body.className = '';
   }
 
   handleChange(e) {
@@ -50,14 +54,10 @@ class Login extends React.Component {
       this.setState({
         form: {
           ...this.state.form,
-          [e.target.name]: e.target.value
-        }
-      })
+          [e.target.name]: e.target.value,
+        },
+      });
     }
-  }
-
-  componentDidMount() {
-    document.body.className = '';
   }
 
   render() {
@@ -65,7 +65,7 @@ class Login extends React.Component {
 
     return (
       <form className="login-form">
-        <div className="logo"></div>
+        <div className="logo" />
         <input autoFocus type="email" name="email" placeholder="Email" value={f.email}
           onChange={e => this.handleChange(e)} onKeyDown={e => this.handleChange(e)} />
         <input type="password" name="pwd" placeholder="Password" value={f.pwd}
@@ -76,19 +76,19 @@ class Login extends React.Component {
         <input type="button" name="submit" value="Enter"
           onClick={e => this.handleChange(e)} />
       </form>
-    )
+    );
   }
 }
 
-// Here store is the masterStore defined in index.tsx
-const mapStateToProps = (store) => ({
+// Here store is the masterStore defined in index.js
+const mapStateToProps = store => ({
   uiState: store.uiReducer,
   loginState: store.loginReducer,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  loginDispatch: (form) => dispatch(loginAct(form)),
-  toggleLoaderDispatch: (txt) => dispatch(toggleLoaderAct(true, txt, false))
+const mapDispatchToProps = dispatch => ({
+  loginDispatch: form => dispatch(loginAct(form)),
+  toggleLoaderDispatch: txt => dispatch(toggleLoaderAct(true, txt, false)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -10,9 +10,6 @@ class EditDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {}
-  }
-
-  componentWillMount() {
     this.setState({details: Object.assign({}, this.props.dataState.details.main)})
   }
 

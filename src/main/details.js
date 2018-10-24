@@ -20,9 +20,6 @@ class Details extends React.Component {
       comment: '',
       showComment: false
     }
-  }
-
-  componentWillMount() {
     const { match: { params } } = this.props;
     this.props.loadDetailsDispatch(params.id, 'main');
   }

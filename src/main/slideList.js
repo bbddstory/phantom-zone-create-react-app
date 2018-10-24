@@ -9,10 +9,10 @@ class SlideList extends React.Component {
         super(props);
         this.state = { currPage: 0 };
         this.intervalId = null;
-    }
 
-    intervalHdlr() {
-        this.showSlides = false;
+        if(this.props.load) {
+            this.props.loadDetailsDispatch(this.props.dataRef[0].id, this.props.list);
+        }
     }
 
     componentDidMount() {
@@ -106,12 +106,6 @@ class SlideList extends React.Component {
                 {dots}
             </div>
         );
-    }
-
-    componentWillMount() {
-        if(this.props.load) {
-            this.props.loadDetailsDispatch(this.props.dataRef[0].id, this.props.list);
-        }
     }
 
     render() {

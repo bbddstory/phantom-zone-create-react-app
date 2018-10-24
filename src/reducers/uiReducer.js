@@ -1,6 +1,6 @@
 import { LOCALE, TOGGLE_LOADER, TOGGLE_PAGES, TOGGLE_EDIT_DETAILS, SWITCH_VIEW } from '../actions/uiActions';
 
-let init = {
+const init = {
   locale: 'en',
   showLoader: false,
   tglPages: false,
@@ -8,11 +8,11 @@ let init = {
   loading: true,
   editDetails: false,
   newRec: false,
-  view: 'card'
-}
+  view: 'card',
+};
 
-export function uiReducer(state = init, action) {
-  let ns = (Object).assign({}, state);
+export default function uiReducer(state = init, action) {
+  const ns = (Object).assign({}, state);
 
   switch (action.type) {
     case LOCALE:
@@ -22,7 +22,7 @@ export function uiReducer(state = init, action) {
     case TOGGLE_LOADER:
       ns.showLoader = action.status;
       ns.loaderTxt = action.loaderTxt || 'Loading data...';
-      ns.loading = action.hasOwnProperty('loading') ? action.loading : true;
+      ns.loading = Object.prototype.hasOwnProperty.call(action, 'loading') ? action.loading : true;
 
       return ns;
     case TOGGLE_PAGES:
@@ -32,15 +32,13 @@ export function uiReducer(state = init, action) {
     case TOGGLE_EDIT_DETAILS:
       ns.editDetails = action.status;
       ns.newRec = action.newRec;
-      
       return ns;
     case SWITCH_VIEW:
       if (ns.view === 'card') {
-        ns.view = 'tile'
+        ns.view = 'tile';
       } else {
-        ns.view = 'card'
+        ns.view = 'card';
       }
-      
       return ns;
     default:
       return state;

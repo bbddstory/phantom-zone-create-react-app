@@ -1,13 +1,13 @@
 import { LOGIN, SET_TOKEN, SET_FRIENDS } from '../actions/loginActions';
 
-let init = {
+const init = {
   token: '',
   user: '',
   email: '',
-  friends: {}
-}
+  friends: {},
+};
 
-export function loginReducer(state = init, action) {
+export default function loginReducer(state = init, action) {
   let ns = (Object).assign({}, state);
 
   switch (action.type) {

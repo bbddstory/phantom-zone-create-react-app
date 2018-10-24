@@ -4,9 +4,9 @@ import { LOAD_HOME_LISTS, REMOVE_HOME_LIST_ITEM } from '../actions/homeActions';
 import { LOAD_DETAILS, SAVE_COMMENT, DEL_COMMENT, SAVE_NEW, UPDATE_BUFFER_DETAILS } from '../actions/detailsActions';
 import { CATS, pageSettings } from '../util/utils';
 
-let ps = pageSettings();
+const ps = pageSettings();
 
-let init = {
+const init = {
   category: CATS.home,
   prevCat: CATS.home, // Previous category
   details: {},
@@ -21,33 +21,30 @@ let init = {
     ipp: ps.ipp, // Items per page
     currPage: ps.currPage,
     startAt: ps.startAt, // Start index of items on current page
-    endAt: ps.endAt // End index of items on current page
-  }
-}
+    endAt: ps.endAt, // End index of items on current page
+  },
+};
 
-export function dataReducer(state = init, action) {
-  let ns = (Object).assign({}, state);
+export default function dataReducer(state = init, action) {
+  const ns = (Object).assign({}, state);
+  const bufferObj = {};
+  const searchObj = {};
 
   switch (action.type) {
     case LOAD_HOME_LISTS:
-      ns.latest = action.data.data[0];
-      ns.watchLater = action.data.data[1];
-      ns.recomm = action.data.data[2];
+      [ns.latest, ns.watchLater, ns.recomm] = action.data.data;
       ns.prevCat = ns.category;
 
       return ns;
     case REMOVE_HOME_LIST_ITEM:
       delete ns[action.list][action.key];
-
       // let arr = [];
-
       // for (let i = 0; i < ns[action.list].length; i++) {
       //   if (ns[action.list][i].id !== action.key) {
       //     arr.push(ns[action.list][i])
       //   }
       // }
       // ns[action.list] = arr;
-
       return ns;
     case SWITCH_CAT:
       ns.category = action.cat;
@@ -55,18 +52,16 @@ export function dataReducer(state = init, action) {
       // Reset all pagination related values
       ns.pages.itemCnt = 0;
       ns.pages.pageCnt = 1;
-      ns.pages.ipp = ps.ipp
+      ns.pages.ipp = ps.ipp;
       ns.pages.currPage = ps.currPage;
       ns.pages.startAt = ps.startAt;
       ns.pages.endAt = ps.endAt;
 
       return ns;
     case GOTO_PAGE:
-      let bufferObj = {};
-
-      for (let i = 0; i < action.buffer.length; i++) {
-        bufferObj[action.buffer[i].id] = action.buffer[i]
-      }
+      Object.keys(action.buffer).forEach((key) => {
+        bufferObj[action.buffer[key].id] = action.buffer[key]
+      });
       ns.buffer = bufferObj;
 
       ns.pages.itemCnt = action.itemCnt;
@@ -92,7 +87,7 @@ export function dataReducer(state = init, action) {
       return ns;
     case UPDATE_BUFFER_DETAILS:
       if (action.isSearch) {
-        ns.search[state.key] = action.vc
+        ns.search[state.key] = action.vc;
         if (ns.buffer[state.key]) {
           ns.buffer[state.key] = action.vc;
         }
@@ -102,8 +97,7 @@ export function dataReducer(state = init, action) {
 
       return ns;
     case SAVE_COMMENT:
-      let ck = Object.keys(action.values)[0];
-      
+      const ck = Object.keys(action.values)[0];
       if (action.isSearch) {
         ns.search[state.key].comments[ck] = action.values[ck];
         if (ns.buffer[state.key]) {
@@ -126,11 +120,9 @@ export function dataReducer(state = init, action) {
 
       return ns;
     case SEARCH_RETURN:
-      let searchObj = {};
-
-      for (let i = 0; i < action.results.length; i++) {
-        searchObj[action.results[i].id] = action.results[i]
-      }
+      Object.keys(action.results).forEach((key) => {
+        searchObj[action.results[key].id] = action.results[key]
+      });
       ns.search = searchObj;
 
       return ns;

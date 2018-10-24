@@ -11,30 +11,30 @@ export const LOAD_RECOMM = 'LOAD_RECOMM';
 // Action creators
 export function loadHomeListsAct() {
   return (dispatch, getState) => {
-    axios.post(NODE_URL() + '/home/lists', {
+    axios.post(`${NODE_URL()}/home/lists`, {
       token: getState().loginReducer.token,
-      email: getState().loginReducer.email
-    }).then(res => {
+      email: getState().loginReducer.email,
+    }).then((res) => {
       if (res.status === 200) {
         dispatch({ type: LOAD_HOME_LISTS, data: res.data });
       }
     }).catch(err => console.log(err));
-  }
+  };
 }
 
 export function removeHomeListItemAct(list, key) {
   return (dispatch, getState) => {
-    axios.post(NODE_URL() + '/home/del_item', {
+    axios.post(`${NODE_URL()}/home/del_item`, {
       token: getState().loginReducer.token,
       email: getState().loginReducer.email,
-      key: key,
-      list: list
-    }).then(res => {
+      key,
+      list,
+    }).then((res) => {
       if (res.status === 200) {
-        dispatch({ type: REMOVE_HOME_LIST_ITEM, key: key, list: list });
+        dispatch({ type: REMOVE_HOME_LIST_ITEM, key, list });
       }
-    }).catch(err => {
+    }).catch((err) => {
       console.log(err);
     });
-  }
+  };
 }

@@ -15,55 +15,55 @@ export const SAVE_NEW = 'SAVE_NEW';
 export function loadDetailsAct(key, list, reload) {
   return (dispatch, getState) => {
     dispatch({ type: TOGGLE_LOADER, status: true });
-    axios.post(NODE_URL() + '/details/load', {
+    axios.post(`${NODE_URL()}/details/load`, {
       token: getState().loginReducer.token,
-      key: key
-    }).then(res => {
+      key,
+    }).then((res) => {
       if (res.status === 200) {
         // This is a temporary fix as all categories names in the Db are currently capitalised
         res.data.details.category = res.data.details.category.toLowerCase();
-        if(reload) {
+        if (reload) {
           getState().dataReducer.category = res.data.details.category;
           // getState().dataReducer.prevCat = res.data.details.category;
         }
 
-        dispatch({ type: LOAD_DETAILS, list: list, details: res.data.details });
+        dispatch({ type: LOAD_DETAILS, list, details: res.data.details });
         dispatch({ type: TOGGLE_LOADER, status: false });
       }
     }).catch(err => console.log(err));
-  }
+  };
 }
 
 export function watchLaterAct(id) {
   return (dispatch, getState) => {
-    axios.post(NODE_URL() + '/videos/watchlater', {
+    axios.post(`${NODE_URL()}/videos/watchlater`, {
       token: getState().loginReducer.token,
       email: getState().loginReducer.email,
-      key: id
-    }).then(res => {
+      key: id,
+    }).then((res) => {
       if (res.status === 201) {
         // dispatch({ type: LOAD_DETAILS, list: list, details: res.data.details });
         // dispatch({ type: TOGGLE_LOADER, status: false });
       }
     }).catch(err => console.log(err));
     // dispatch({ type: WATCH_LATER });
-  }
+  };
 }
 
 export function recommAct(vid, friendEmail) {
   return (dispatch, getState) => {
-    axios.post(NODE_URL() + '/videos/recomm', {
+    axios.post(`${NODE_URL()}/videos/recomm`, {
       token: getState().loginReducer.token,
-      vid: vid,
-      friendEmail: friendEmail
-    }).then(res => {
+      vid,
+      friendEmail,
+    }).then((res) => {
       if (res.status === 201) {
         // dispatch({ type: LOAD_DETAILS, list: list, details: res.data.details });
         // dispatch({ type: TOGGLE_LOADER, status: false });
       }
     }).catch(err => console.log(err));
     // dispatch({ type: WATCH_LATER });
-  }
+  };
 }
 
 // export function commentAct(values) {
@@ -101,17 +101,17 @@ export function recommAct(vid, friendEmail) {
 export function saveDetailsAct(values) {
   return (dispatch, getState) => {
     dispatch({ type: TOGGLE_LOADER, status: true });
-    axios.post(NODE_URL() + '/videos/update', {
+    axios.post(`${NODE_URL()}/videos/update`, {
       token: getState().loginReducer.token,
-      details: values
-    }).then(res => {
+      details: values,
+    }).then((res) => {
       if (res.status === 200) {
         // dispatch({ type: LOAD_DETAILS, list: list, details: res.data.details });
         // dispatch({ type: TOGGLE_LOADER, status: false });
         window.location.reload();
       }
     }).catch(err => console.log(err));
-  }
+  };
 
   // return async (dispatch, getState) => {
   //   let firebase = getState().loginReducer.firebase;

@@ -6,24 +6,24 @@ import { registerAct } from '../actions/loginActions';
 class Register extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { form: { firstName: '', lastName: '', email: '', pwd: '' } }
-  }
-
-  handleChange(e) {
-    if (e.target.name === 'submit') {
-      this.props.registerDispatch(this.state.form)
-    } else {
-      this.setState({
-        form: {
-          ...this.state.form,
-          [e.target.name]: e.target.value
-        }
-      })
-    }
+    this.state = { form: { firstName: '', lastName: '', email: '', pwd: '' } };
   }
 
   componentDidMount() {
     document.body.className = '';
+  }
+
+  handleChange(e) {
+    if (e.target.name === 'submit') {
+      this.props.registerDispatch(this.state.form);
+    } else {
+      this.setState({
+        form: {
+          ...this.state.form,
+          [e.target.name]: e.target.value,
+        },
+      });
+    }
   }
 
   render() {
@@ -31,7 +31,7 @@ class Register extends React.Component {
 
     return (
       <form className="register-form">
-        <div className="logo"></div>
+        <div className="logo" />
         {/* <input autoFocus type="text" name="firstName" placeholder="First name" value={f.firstName}
           onChange={e => this.handleChange(e)} />
         <input type="text" name="lastName" placeholder="Last name" value={f.lastName}
@@ -48,16 +48,15 @@ class Register extends React.Component {
         <input type="button" name="submit" value="Register"
           onClick={e => this.handleChange(e)} />
       </form>
-    )
+    );
   }
 }
 
-// Here store is the masterStore defined in index.tsx
-const mapStateToProps = (store) => ({
-});
+// Here store is the masterStore defined in index.js
+const mapStateToProps = null;
 
-const mapDispatchToProps = (dispatch) => ({
-  registerDispatch: (form) => dispatch(registerAct(form))
+const mapDispatchToProps = dispatch => ({
+  registerDispatch: form => dispatch(registerAct(form)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

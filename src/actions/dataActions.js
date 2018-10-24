@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-import { NODE_URL } from '../util/utils';
+import { NODE_URL, resetPages } from '../util/utils';
 import { TOGGLE_LOADER, TOGGLE_PAGES } from './uiActions';
-
-import { resetPages } from '../util/utils';
 
 // Action types
 export const GOTO_PAGE = 'GOTO_PAGE';
@@ -14,21 +12,21 @@ export const SWITCH_CAT = 'SWITCH_CAT';
 export function switchCatAct(cat) {
   return {
     type: SWITCH_CAT,
-    cat
-  }
+    cat,
+  };
 }
 
 export function syncCatAct() {
   return {
-    type: SYNC_CAT
-  }
+    type: SYNC_CAT,
+  };
 }
 
 export function loadPageAct(category, currPage, startAt, endAt) {
   return (dispatch, getState) => {
     dispatch({ type: TOGGLE_LOADER, status: true });
 
-    // fetch(NODE_URL() + '/videos/load_cat', {
+    // fetch(`${NODE_URL()}/videos/load_cat`, {
     //   method: 'POST',
     //   headers: {
     //     'Accept': 'application/json',
@@ -57,19 +55,20 @@ export function loadPageAct(category, currPage, startAt, endAt) {
     //     resetPages();
     //   }
     // }).catch(err => console.log(err));
-      
-    axios.post(NODE_URL() + '/videos/load_cat', {
+
+    axios.post(`${NODE_URL()}/videos/load_cat`, {
       token: getState().loginReducer.token,
       ipp: getState().dataReducer.pages.ipp,
-      category, currPage,
-    }).then(res => {
+      category,
+      currPage,
+    }).then((res) => {
       if (res.status === 200) {
-        let itemCnt = res.data.cnt;
+        const itemCnt = res.data.cnt;
         dispatch({ type: GOTO_PAGE, buffer: res.data.data, itemCnt, currPage, startAt, endAt });
         dispatch({ type: TOGGLE_LOADER, status: false });
         dispatch({ type: TOGGLE_PAGES, status: true });
         resetPages();
       }
     }).catch(err => console.log(err));
-  }
+  };
 }
