@@ -36,7 +36,15 @@ export const CATS = {
   anime: 'animations',
 };
 
-export const loadComp = () => <div className="load-comp">Loading components...</div>;
+export const loadComp = () => (
+  <div className="loader-mask">
+    <span className="loader-title">Loading components...</span>
+    <div className="spinner">
+      <div className="double-bounce1" />
+      <div className="double-bounce2" />
+    </div>
+  </div>
+);
 
 export const pageSettings = () => {
   if (window.innerWidth > 1219) {

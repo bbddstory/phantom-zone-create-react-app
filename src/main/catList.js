@@ -1,31 +1,35 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import Loadable from 'react-loadable';
 import { switchCatAct, syncCatAct, loadPageAct } from '../actions/dataActions';
 import { CATS, loadComp } from '../util/utils';
-import Loadable from 'react-loadable';
 
 // Code splitting
 const CardList = Loadable({
   loader: () => import('./cardList'),
-  loading: loadComp
+  loading: loadComp,
 });
 
 const TileList = Loadable({
   loader: () => import('./tileList'),
-  loading: loadComp
+  loading: loadComp,
 });
 
 class CatList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { dummyPoster: 'images/posters/' + this.props.dataState.category + '.png' };
+    this.state = { dummyPoster: `images/posters/${this.props.dataState.category}.png` };
   }
-  
+
+  componentDidMount() {
+    this.loadPage();
+  }
+
   loadPage() {
-    let hash = window.location.hash;
-    let idx = hash.lastIndexOf('/');
-    let cat = hash.substr(idx + 1, hash.length - idx);
-    
+    const { hash } = window.location;
+    const idx = hash.lastIndexOf('/');
+    const cat = hash.substr(idx + 1, hash.length - idx);
+
     if (this.props.dataState.category === CATS.home || this.props.dataState.category !== this.props.dataState.prevCat) {
       this.props.switchCatDispatch(cat);
       this.props.syncCat();
@@ -34,31 +38,27 @@ class CatList extends React.Component {
         this.props.dataState.pages.currPage,
         this.props.dataState.pages.startAt,
         this.props.dataState.pages.endAt
-      )
+      );
     }
   }
 
-  componentDidMount() {
-    this.loadPage();
-  }
-  
   render() {
     return (
-      this.props.uiState.view === 'card' ? 
-      <CardList dataRef={this.props.dataState.buffer} usePages={true} /> : <TileList dataRef={this.props.dataState.buffer} usePages={true} />
-    )
+      this.props.uiState.view === 'card'
+        ? <CardList dataRef={this.props.dataState.buffer} usePages={true} /> : <TileList dataRef={this.props.dataState.buffer} usePages={true} />
+    );
   }
 }
 
-const mapStateToProps = (store) => ({
+const mapStateToProps = store => ({
   uiState: store.uiReducer,
-  dataState: store.dataReducer
+  dataState: store.dataReducer,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   syncCat: () => dispatch(syncCatAct()),
   loadPageDispatch: (category, currPage, startAt, endAt) => dispatch(loadPageAct(category, currPage, startAt, endAt)),
-  switchCatDispatch: (cat) => dispatch(switchCatAct(cat))
+  switchCatDispatch: cat => dispatch(switchCatAct(cat)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CatList);

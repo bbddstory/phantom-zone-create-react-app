@@ -9,29 +9,29 @@ export const SWITCH_VIEW = 'SWITCH_VIEW';
 export function switchLocaleAct(locale) {
   return {
     type: LOCALE,
-    locale
-  }
+    locale,
+  };
 }
 
 export function toggleEditDetailsAct(status, newRec) {
   return {
     type: TOGGLE_EDIT_DETAILS,
     status,
-    newRec
-  }
+    newRec,
+  };
 }
 
 export function togglePagesAct(status) {
   return {
     type: TOGGLE_PAGES,
-    status
-  }
+    status,
+  };
 }
 
 export function switchViewAct() {
   return {
-    type: SWITCH_VIEW
-  }
+    type: SWITCH_VIEW,
+  };
 }
 
 export function toggleLoaderAct(status, loaderTxt, loading) {
@@ -39,6 +39,6 @@ export function toggleLoaderAct(status, loaderTxt, loading) {
     type: TOGGLE_LOADER,
     status,
     loaderTxt,
-    loading
-  }
+    loading,
+  };
 }

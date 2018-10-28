@@ -16,8 +16,8 @@ class CardList extends React.Component {
   }
 
   render() {
-    const buffer = this.props.dataRef;
-    const tglPages = this.props.uiState.tglPages;
+    const { dataRef: buffer } = this.props;
+    const tglPages = this.props.uiState;
 
     return (
       <div className="card-list">
@@ -35,7 +35,7 @@ class CardList extends React.Component {
           );
           return card;
         })}
-        <div className={tglPages ? 'pages-holder fade-in' : 'pages-holder' }>
+        <div className={tglPages ? 'pages-holder fade-in' : 'pages-holder'}>
           {tglPages && this.props.usePages && buffer && Object.keys(buffer).length && <Pages />}
         </div>
       </div>

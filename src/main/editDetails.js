@@ -9,8 +9,8 @@ import Mousetrap from 'mousetrap';
 class EditDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
-    this.setState({details: Object.assign({}, this.props.dataState.details.main)})
+    this.state = { details: this.props.dataState.details.main };
+    // this.setState({details: Object.assign({}, this.props.dataState.details.main)})
   }
 
   componentDidMount() {
@@ -30,35 +30,33 @@ class EditDetails extends React.Component {
     } else { // Existing record
       item = this.state.details
     }
+    console.log(item);
 
     return (
       <Formik
-      initialValues = {item}
-      validate = {values => {
-        let errors = {};
-        
-        for (let p in values) {
-          if (values[p] && !new RegExp(REGEX[p]).test(values[p])) {
-            errors[p] = 1; // or set to 'true'
+        initialValues={item}
+        validate={(values) => {
+          const errors = {};
+          for (let p in values) {
+            if (values[p] && !new RegExp(REGEX[p]).test(values[p])) {
+              errors[p] = 1; // or set to 'true'
+            }
+            if (values[p] === null) {
+              values[p] = ''
+            }
           }
-          if (values[p] === null) {
-            values[p] = ''
+          return errors;
+        }}
+        onSubmit={(values) => {
+          values.plot = values.plot.replace(/'/g, "\\'");
+          values.plot = values.plot.replace(/"/g, '\\"');
+          for(let p in values) {
+            values[p] = values[p].trim()
           }
-        }
-        return errors;
-      }}
-      onSubmit={values => {
-        values.plot = values.plot.replace(/'/g, "\\'");
-        values.plot = values.plot.replace(/"/g, '\\"');
-        
-        for(let p in values) {
-          values[p] = values[p].trim()
-        }
-        
-        this.props.saveDetailsDispatch(values);
-        this.props.editDetailsDispatch(false, false);
-      }}
-      render = {
+          this.props.saveDetailsDispatch(values);
+          this.props.editDetailsDispatch(false, false);
+        }}
+        render = {
           ({touched, errors, values, handleChange, handleBlur, handleSubmit}) => (
             <Form onSubmit={handleSubmit}>
               <div className="popup-bg">
@@ -200,7 +198,7 @@ class EditDetails extends React.Component {
             </Form>
           )}
       />
-    )
+    );
   }
 }
 

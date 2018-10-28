@@ -15,7 +15,7 @@ const lang = {
     'home.latest': 'Latest Videos',
     'home.watch': 'Watch Later',
     'home.recomm': 'Recommendations',
-    'home.empty': 'List is empty'
+    'home.empty': 'List is empty',
   },
   zh: {
     'cats.movies': '电影',
@@ -33,7 +33,7 @@ const lang = {
     'home.latest': '新增影视',
     'home.watch': '我的视频',
     'home.recomm': '朋友推荐',
-    'home.empty': '列表为空'
+    'home.empty': '列表为空',
   },
   ja: {
     'cats.movies': '映画',
@@ -51,7 +51,7 @@ const lang = {
     'home.latest': '新しいビデオ',
     'home.watch': '後で見る',
     'home.recomm': 'おすすめ',
-    'home.empty': '再生リストは空です'
+    'home.empty': '再生リストは空です',
   },
 };
 

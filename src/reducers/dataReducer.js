@@ -60,7 +60,7 @@ export default function dataReducer(state = init, action) {
       return ns;
     case GOTO_PAGE:
       Object.keys(action.buffer).forEach((key) => {
-        bufferObj[action.buffer[key].id] = action.buffer[key]
+        bufferObj[action.buffer[key].id] = action.buffer[key];
       });
       ns.buffer = bufferObj;
 
@@ -97,13 +97,14 @@ export default function dataReducer(state = init, action) {
 
       return ns;
     case SAVE_COMMENT:
-      const ck = Object.keys(action.values)[0];
       if (action.isSearch) {
+        const ck = Object.keys(action.values)[0];
         ns.search[state.key].comments[ck] = action.values[ck];
         if (ns.buffer[state.key]) {
           ns.buffer[state.key].comments[ck] = action.values[ck];
         }
       } else {
+        const ck = Object.keys(action.values)[0];
         ns.buffer[state.key].comments[ck] = action.values[ck];
       }
 
@@ -121,7 +122,7 @@ export default function dataReducer(state = init, action) {
       return ns;
     case SEARCH_RETURN:
       Object.keys(action.results).forEach((key) => {
-        searchObj[action.results[key].id] = action.results[key]
+        searchObj[action.results[key].id] = action.results[key];
       });
       ns.search = searchObj;
 

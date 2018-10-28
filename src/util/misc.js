@@ -59,7 +59,7 @@ const surrogate = http.createServer((req, res) => {
   console.log(req.url);
 
   console.log('RAW Response from the target', JSON.stringify(req.headers, true, 2));
-  
+
   if (req.method === 'OPTIONS') {
     console.log('1. ', req.method);
     res.writeHead(200, {

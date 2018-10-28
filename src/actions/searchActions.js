@@ -10,21 +10,20 @@ export const SET_SEARCH_FLAG = 'SET_SEARCH_FLAG';
 // Action creators
 export function searchAct(key) {
   return (dispatch, getState) => {
-
-    axios.post(NODE_URL() + '/search', {
+    axios.post(`${NODE_URL()}/search`, {
       token: getState().loginReducer.token,
-      key: key,
-      type: 1 // 0: fuzzy search, 1: exact search
-    }).then(res => {
-      let results = res.data.results;
+      key,
+      type: 1, // 0: fuzzy search, 1: exact search
+    }).then((res) => {
+      const { results } = res.data;
 
       if (res.status === 200) {
         dispatch({ type: SET_SEARCH_FLAG });
         dispatch({ type: SEARCH_RETURN, results });
         window.location.hash = '#/main/search';
       }
-    }).catch(err => {
+    }).catch((err) => {
       console.log(err);
     });
-  }
+  };
 }

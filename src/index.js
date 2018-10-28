@@ -17,19 +17,19 @@ const masterStore = createStore(masterReducer, applyMiddleware(thunk));
 
 // Log every state change
 // NOTE: subscribe() returns a function for unregistering the listener
-// const unsubscribe = 
+// const unsubscribe =
 masterStore.subscribe(() => console.log(masterStore.getState()));
 
 // Stop logging state changes
 // unsubscribe()
 
 ReactDOM.render(
-    <HashRouter>
-        <Provider store={masterStore}>
-            <App />
-        </Provider>
-    </HashRouter>,
-    document.getElementById('root')
+  <HashRouter>
+    <Provider store={masterStore}>
+      <App />
+    </Provider>
+  </HashRouter>,
+  document.getElementById('root'),
 );
 
 registerServiceWorker();

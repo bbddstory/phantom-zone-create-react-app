@@ -138,15 +138,22 @@ $posterHeight: 268px;
     border-radius: 2px;
     color: #fff;
     font-size: 14px;
+    .property {
+        margin-right: 15px;
+        color: #888;
+    }
     .tech-details {
         display: flex;
         justify-content: space-between;
-        margin-top: 25px;
+        margin-top: 10px;
         line-height: 2;
-    }
-    span {
-        color: #888;
-        margin-right: 15px;
+        .entry {
+            display: flex;
+            margin-top: 25px;
+            img {
+                margin-right: 10px;
+            }
+        }
     }
 }
 
@@ -164,9 +171,6 @@ $posterHeight: 268px;
         border-radius: 3px;
         background: #333;
     }
-    iframe {
-        border-radius: 3px;
-    }
 }
 
 .youtube-lnk {
@@ -176,7 +180,7 @@ $posterHeight: 268px;
     a {
         display: block;
         height: 24px;
-        padding-left: 38px;
+        padding-left: 40px;
         line-height: 24px;
         background: url("../images/details/youtube.png") no-repeat;
     }

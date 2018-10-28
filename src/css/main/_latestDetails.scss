@@ -144,6 +144,8 @@ $infoWidth: 230px;
     iframe {
         margin-right: 16px;
         background: #717171;
+        border: 1px solid #333;
+        box-sizing: border-box;
     }
 }
 

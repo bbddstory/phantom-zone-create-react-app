@@ -58,7 +58,7 @@ class Main extends React.Component {
     axios.interceptors.request.use((config) => {
       // console.log('-- Global Axios request intercep');
 
-      config.headers.token = this.props.loginState.token;
+      config.headers.token = props.loginState.token;
       return config;
     }, (err) => {
       console.log(err);
@@ -70,7 +70,7 @@ class Main extends React.Component {
       console.log(err);
 
       if (!err.response) { // err.toString() === 'Error: Network Error'
-        this.props.toggleLoaderDispatch('Network error: connection refused');
+        props.toggleLoaderDispatch('Network error: connection refused');
       } else {
         // For handling cookie expiration
         if (err.response.status === 401 || err.response.status === 403) { // Not authorized
@@ -87,10 +87,10 @@ class Main extends React.Component {
 
     // If this is a normal login, token should exist already
     const { token } = this.props.loginState;
-  
+
     if (!token) {
       const cookieArr = document.cookie.split(';');
-  
+
       if (cookieArr[0] === '' || cookieArr.length < 2) { // No user cookies found or not enough user info
         window.location.hash = '';
         window.location.reload();
