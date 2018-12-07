@@ -4,7 +4,7 @@ import Mousetrap from 'mousetrap';
 import { toggleEditDetailsAct } from '../actions/uiActions';
 import { watchLaterAct, recommAct, loadDetailsAct } from '../actions/detailsActions';
 
-import closedCap from '../images/details/baseline_closed_caption_white_24dp.png';
+import closedCap from '../images/details/ic_closed_caption_white_24px.svg';
 import imdb from '../images/details/imdb.svg';
 import douban from '../images/details/douban.png';
 import mtime from '../images/details/mtime.png';
